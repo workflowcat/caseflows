@@ -1,0 +1,696 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The Archive — Caseflows</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,300..600,30..100&family=Newsreader:ital,opsz,wght@0,6..72,400..600;1,6..72,400..500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --page:        #f4efe5;
+    --page-deep:   #ece5d3;
+    --ink:         #1c1814;
+    --ink-soft:    #4a443a;
+    --ink-faint:   #8a8270;
+    --rule:        #c8c0ac;
+    --rule-soft:   #ddd5c2;
+    --stamp:       #a83426;
+    --gilt:        #b8893a;
+    --display: 'Fraunces', 'Times New Roman', serif;
+    --body: 'Newsreader', Georgia, serif;
+    --mono: 'IBM Plex Mono', ui-monospace, monospace;
+  }
+  *,*::before,*::after{box-sizing:border-box}
+  html{background:var(--page)}
+  body{
+    margin:0;
+    background:var(--page);
+    color:var(--ink-soft);
+    font-family:var(--body);
+    font-size:16px;
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
+  }
+  a{color:inherit}
+  ::selection{background:var(--stamp);color:var(--page)}
+  button{font:inherit;color:inherit;background:none;border:none;padding:0;cursor:pointer}
+
+  .frame{max-width:1200px;margin:0 auto;padding:0 32px}
+
+  /* Quiet running head — like a library catalog plate */
+  .runhead{
+    border-bottom:1px solid var(--rule);
+    padding:14px 0;
+    font-family:var(--mono);
+    font-size:11px;
+    letter-spacing:.06em;
+    text-transform:uppercase;
+    color:var(--ink-soft);
+    display:flex;
+    justify-content:space-between;
+    gap:24px;
+    align-items:baseline;
+  }
+  .runhead .seal{
+    font-family:var(--display);
+    font-variation-settings:"opsz" 144,"SOFT" 80;
+    font-size:18px;
+    color:var(--ink);
+    letter-spacing:-.005em;
+    text-transform:none;
+    font-weight:500;
+  }
+  .runhead nav a{margin-left:18px;text-decoration:none;border-bottom:1px solid transparent;transition:border-color .15s,color .15s}
+  .runhead nav a:hover{color:var(--stamp);border-bottom-color:var(--stamp)}
+  .runhead nav a.cur{color:var(--ink)}
+
+  /* Compact title block */
+  .title{
+    padding:48px 0 32px;
+    display:grid;
+    grid-template-columns:1fr auto;
+    gap:32px;
+    align-items:end;
+    border-bottom:1px solid var(--ink);
+  }
+  .title h1{
+    font-family:var(--display);
+    font-variation-settings:"opsz" 144,"SOFT" 60;
+    font-weight:400;
+    font-size:46px;
+    line-height:1;
+    letter-spacing:-.018em;
+    color:var(--ink);
+    margin:0;
+  }
+  .title h1 em{font-style:italic;font-variation-settings:"opsz" 144,"SOFT" 100;color:var(--stamp)}
+  .title .strap{
+    font-family:var(--body);
+    font-style:italic;
+    font-size:17px;
+    color:var(--ink-soft);
+    margin:8px 0 0;
+    max-width:62ch;
+  }
+  .title .stats{
+    font-family:var(--mono);
+    font-size:11px;
+    letter-spacing:.06em;
+    text-transform:uppercase;
+    color:var(--ink-soft);
+    text-align:right;
+    line-height:1.7;
+    white-space:nowrap;
+  }
+  .title .stats b{color:var(--ink);font-weight:500}
+
+  /* Tool bar — search + filters + sort, all on one row */
+  .tools{
+    position:sticky;top:0;z-index:20;
+    background:var(--page);
+    border-bottom:1px solid var(--rule);
+    padding:14px 0;
+    display:grid;
+    grid-template-columns: minmax(220px, 320px) 1fr auto;
+    gap:24px;
+    align-items:center;
+  }
+  .search{
+    position:relative;
+    border-bottom:1px solid var(--ink);
+    padding:6px 0 6px 22px;
+    color:var(--ink);
+    font-family:var(--body);
+    font-size:16px;
+  }
+  .search::before{
+    content:"⌕";position:absolute;left:0;top:6px;
+    font-family:var(--display);font-size:16px;color:var(--ink-faint);
+  }
+  .search input{
+    width:100%;border:none;outline:none;background:transparent;
+    font:inherit;color:var(--ink);
+    padding:0;
+  }
+  .search input::placeholder{color:var(--ink-faint);font-style:italic}
+
+  .filters{
+    display:flex;gap:0;flex-wrap:wrap;align-items:center;
+    font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;
+  }
+  .filter-set{display:flex;align-items:center;gap:0;padding:0 12px;border-right:1px solid var(--rule);height:24px}
+  .filter-set:last-child{border-right:none;padding-right:0}
+  .filter-set:first-child{padding-left:0}
+  .filter-set .lab{color:var(--ink-faint);margin-right:8px}
+  .chip{
+    color:var(--ink-soft);
+    padding:3px 8px;
+    border:1px solid transparent;
+    transition:color .15s,border-color .15s,background .15s;
+  }
+  .chip:hover{color:var(--ink)}
+  .chip.on{
+    color:var(--ink);
+    border-color:var(--ink);
+  }
+  .chip .c{color:var(--ink-faint);margin-left:3px;font-size:10px}
+  .chip.on .c{color:var(--ink-soft)}
+
+  .sort{
+    font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;
+    color:var(--ink);
+    border-bottom:1px dotted var(--ink-faint);
+    padding-bottom:2px;
+  }
+  .sort:hover{color:var(--stamp);border-bottom-color:var(--stamp);border-bottom-style:solid}
+
+  /* Showing-counter */
+  .counter{
+    font-family:var(--mono);
+    font-size:11px;
+    letter-spacing:.06em;
+    text-transform:uppercase;
+    color:var(--ink-faint);
+    padding:14px 0 6px;
+    display:flex;
+    justify-content:space-between;
+    align-items:baseline;
+  }
+  .counter b{color:var(--ink);font-weight:500}
+  .counter .clear{
+    color:var(--ink-faint);
+    border-bottom:1px dotted var(--ink-faint);
+    padding-bottom:1px;
+    cursor:pointer;
+    visibility:hidden;
+  }
+  .counter .clear:hover{color:var(--stamp);border-bottom-color:var(--stamp)}
+  .counter.filtered .clear{visibility:visible}
+
+  /* Catalog list — dense, scannable rows */
+  .catalog{border-top:1px solid var(--rule)}
+  .row{
+    display:grid;
+    grid-template-columns: 36px minmax(0, 1.8fr) 130px 90px 110px 24px;
+    gap:18px;
+    padding:14px 8px;
+    border-bottom:1px solid var(--rule-soft);
+    align-items:baseline;
+    transition:background .12s;
+    cursor:pointer;
+    position:relative;
+  }
+  .row:hover{background:rgba(28,24,20,.03)}
+  .row:hover .marg{opacity:1}
+  .row.open{background:rgba(28,24,20,.04)}
+
+  .row .fol{
+    font-family:var(--mono);
+    font-size:11px;
+    color:var(--ink-faint);
+    letter-spacing:.04em;
+    padding-top:2px;
+  }
+  .row .name{
+    color:var(--ink);
+    font-family:var(--display);
+    font-variation-settings:"opsz" 24,"SOFT" 30;
+    font-weight:500;
+    font-size:18px;
+    line-height:1.25;
+    letter-spacing:-.005em;
+  }
+  .row .name em{font-style:italic;font-variation-settings:"opsz" 24,"SOFT" 100;color:var(--stamp);font-weight:500}
+  .row .strap{
+    font-family:var(--body);
+    font-style:italic;
+    font-size:14px;
+    color:var(--ink-soft);
+    line-height:1.4;
+    margin-top:2px;
+    max-width:64ch;
+  }
+  .row .forum{
+    font-family:var(--mono);
+    font-size:10px;
+    letter-spacing:.06em;
+    text-transform:uppercase;
+    color:var(--ink);
+  }
+  .row .forum .docket{display:block;color:var(--ink-faint);margin-top:2px}
+  .row .year{
+    font-family:var(--mono);
+    font-size:11px;
+    color:var(--ink-soft);
+    letter-spacing:.04em;
+  }
+  .row .right{
+    text-align:right;
+    font-family:var(--mono);
+    font-size:11px;
+    letter-spacing:.04em;
+  }
+  .row .right .amt{
+    font-family:var(--display);
+    font-variation-settings:"opsz" 36,"SOFT" 30;
+    font-weight:400;
+    font-size:18px;
+    color:var(--ink);
+    letter-spacing:-.012em;
+    line-height:1;
+    display:block;
+  }
+  .row .right .amt.gilt{color:var(--gilt)}
+  .row .right .amt.neg{color:var(--ink-faint)}
+  .row .right .stat{
+    color:var(--ink-faint);
+    font-size:10px;
+    letter-spacing:.06em;
+    text-transform:uppercase;
+    margin-top:4px;
+    display:block;
+  }
+  .row .right .stat.dot::before{
+    content:"";display:inline-block;width:5px;height:5px;border-radius:50%;
+    background:var(--ink-faint);margin-right:6px;vertical-align:middle;
+    margin-bottom:2px;
+  }
+  .row .right .stat.dot.pending::before{background:var(--stamp)}
+  .row .right .stat.dot.decided::before{background:var(--ink)}
+  .row .right .stat.dot.enforcing::before{background:var(--gilt)}
+  .row .arrow{
+    font-family:var(--display);
+    font-size:18px;
+    color:var(--ink-faint);
+    text-align:right;
+    transition:color .15s,transform .15s;
+    line-height:1;
+    align-self:center;
+  }
+  .row:hover .arrow{color:var(--stamp);transform:translateX(2px)}
+  .row.open .arrow{transform:rotate(90deg);color:var(--stamp)}
+
+  /* Hovered marginal note */
+  .row .marg{
+    grid-column: 2 / 3;
+    grid-row: 2;
+    font-family:var(--body);
+    font-style:italic;
+    font-size:13px;
+    line-height:1.4;
+    color:var(--ink-faint);
+    border-left:1px solid var(--gilt);
+    padding-left:10px;
+    margin-top:8px;
+    opacity:0;
+    transition:opacity .2s;
+    max-width:60ch;
+  }
+
+  /* Expanded panel */
+  .row .expand{
+    grid-column: 2 / 6;
+    grid-row: 3;
+    margin-top:14px;
+    padding:14px 0 6px;
+    border-top:1px dotted var(--rule);
+    display:none;
+  }
+  .row.open .expand{display:block}
+  .row .expand h4{
+    margin:0 0 8px;
+    font-family:var(--mono);
+    font-size:10px;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+    color:var(--ink-faint);
+    font-weight:500;
+  }
+  .row .expand .ms{
+    list-style:none;padding:0;margin:0 0 12px;
+    display:grid;grid-template-columns:repeat(2,1fr);gap:6px 24px;
+  }
+  .row .expand .ms li{
+    font-family:var(--mono);
+    font-size:11px;
+    color:var(--ink-soft);
+    padding-left:14px;
+    position:relative;
+    line-height:1.5;
+  }
+  .row .expand .ms li::before{
+    content:"";position:absolute;left:0;top:8px;width:6px;height:1px;background:var(--ink-faint);
+  }
+  .row .expand .ms li.stamp::before{background:var(--stamp);height:2px;top:7px}
+  .row .expand .ms li .d{color:var(--ink);font-weight:500;margin-right:6px}
+  .row .expand .note{
+    font-family:var(--body);
+    font-style:italic;
+    font-size:14px;
+    color:var(--ink-soft);
+    margin:8px 0 0;
+    max-width:64ch;
+  }
+  .row .expand .open-link{
+    display:inline-block;
+    margin-top:14px;
+    font-family:var(--mono);
+    font-size:11px;
+    letter-spacing:.06em;
+    text-transform:uppercase;
+    color:var(--stamp);
+    border-bottom:1px solid var(--stamp);
+    padding-bottom:1px;
+  }
+
+  /* Empty state */
+  .empty{
+    padding:96px 0;
+    text-align:center;
+    font-family:var(--body);
+    font-style:italic;
+    font-size:17px;
+    color:var(--ink-faint);
+  }
+  .empty span{
+    display:block;
+    font-family:var(--display);
+    font-size:48px;
+    color:var(--rule);
+    margin-bottom:14px;
+    font-style:normal;
+    font-weight:300;
+  }
+
+  /* Footer */
+  footer{
+    margin-top:64px;
+    border-top:1px solid var(--ink);
+    padding:32px 0 56px;
+    font-family:var(--mono);
+    font-size:11px;
+    letter-spacing:.06em;
+    text-transform:uppercase;
+    color:var(--ink-faint);
+    display:flex;
+    justify-content:space-between;
+    gap:24px;
+    flex-wrap:wrap;
+  }
+  footer a{text-decoration:none;color:var(--ink-soft);border-bottom:1px solid var(--rule);transition:border-color .15s,color .15s}
+  footer a:hover{color:var(--stamp);border-bottom-color:var(--stamp)}
+
+  /* Responsive */
+  @media (max-width:1080px){
+    .frame{padding:0 24px}
+    .tools{grid-template-columns:1fr;gap:14px}
+    .filters{order:2}
+    .row{grid-template-columns: 28px 1fr 90px 80px 24px;gap:12px}
+    .row .right{display:none}
+    .row .expand{grid-column: 2 / 6}
+  }
+  @media (max-width:680px){
+    .title{grid-template-columns:1fr}
+    .title .stats{text-align:left}
+    .title h1{font-size:36px}
+    .row{grid-template-columns: 1fr 24px;gap:6px}
+    .row .fol,.row .forum,.row .year{display:none}
+    .row .strap{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+  }
+</style>
+</head>
+<body>
+  <div class="frame">
+
+    <!-- Running head -->
+    <div class="runhead">
+      <div>
+        <span class="seal">caseflows</span>
+        &nbsp;·&nbsp; The Archive · Vol. I
+      </div>
+      <nav>
+        <a href="../index.html">Concept index</a>
+        <a href="01-lens-grid.html">Lens grid</a>
+        <a href="03-court-atlas.html">The Atlas →</a>
+      </nav>
+    </div>
+
+    <!-- Title -->
+    <header class="title">
+      <div>
+        <h1>The <em>Archive.</em></h1>
+        <p class="strap">Forty-one international legal cases between Ukraine and the Russian Federation, indexed for reading. Search, filter, click any folio for the structured record.</p>
+      </div>
+      <div class="stats">
+        <div><b>41</b> entries</div>
+        <div><b>11</b> forums · 9 jurisdictions</div>
+        <div><b>2014–2026</b></div>
+        <div style="color:var(--ink-faint);margin-top:8px">last revised 27 apr 2026</div>
+      </div>
+    </header>
+
+    <!-- Toolbar -->
+    <div class="tools">
+      <label class="search">
+        <input id="q" type="search" placeholder="search by case, party, place, treaty…" autocomplete="off" />
+      </label>
+
+      <div class="filters">
+        <div class="filter-set" data-group="forum">
+          <span class="lab">forum</span>
+          <button class="chip on" data-val="all">all <span class="c">41</span></button>
+          <button class="chip" data-val="ICJ">ICJ <span class="c">3</span></button>
+          <button class="chip" data-val="ECtHR">ECtHR <span class="c">5</span></button>
+          <button class="chip" data-val="ICC">ICC <span class="c">7</span></button>
+          <button class="chip" data-val="PCA">PCA <span class="c">11</span></button>
+          <button class="chip" data-val="SCC">arb <span class="c">3</span></button>
+          <button class="chip" data-val="Domestic">national <span class="c">11</span></button>
+          <button class="chip" data-val="ITLOS">other <span class="c">2</span></button>
+        </div>
+        <div class="filter-set" data-group="status">
+          <span class="lab">status</span>
+          <button class="chip on" data-val="all">any</button>
+          <button class="chip" data-val="pending">pending</button>
+          <button class="chip" data-val="decided">decided</button>
+          <button class="chip" data-val="enforcing">enforcing</button>
+        </div>
+        <div class="filter-set" data-group="theme">
+          <span class="lab">theme</span>
+          <button class="chip on" data-val="all">any</button>
+          <button class="chip" data-val="territory">territory</button>
+          <button class="chip" data-val="civilian">civilians</button>
+          <button class="chip" data-val="money">money</button>
+        </div>
+      </div>
+
+      <button class="sort" id="sort">most recent ↓</button>
+    </div>
+
+    <!-- Counter -->
+    <div class="counter" id="counter">
+      <span>showing <b id="shown">41</b> of <b>41</b> folios</span>
+      <button class="clear" id="clear">clear filters ✕</button>
+    </div>
+
+    <!-- Catalog -->
+    <section class="catalog" id="catalog"></section>
+
+    <!-- Footer -->
+    <footer>
+      <div>caseflows · v 0.2 concept · 27.iv.2026</div>
+      <div>
+        <a href="../cases.json">data ↧</a>
+        &nbsp;·&nbsp;
+        <a href="https://github.com/workflowcat/caseflows">github</a>
+      </div>
+      <div>fraunces · newsreader · ibm plex mono</div>
+    </footer>
+
+  </div>
+
+  <script>
+  // Compact dataset for the catalog row view
+  const CASES = [
+    {fol:1, name:"Allegations of Genocide", italic:"Ukraine v Russia · 32 intervening states", forum:"ICJ", forumLabel:"ICJ", docket:"GL 182", filed:"2022-02-26", year:"2022", status:"pending", statusLabel:"pending merits", theme:["civilian","territory"], amount:null, amountLbl:"", note:"32 states intervene — the largest in ICJ history.", milestones:[["2022-03-16","Provisional measures (13–2): suspend military operations",true],["2024-02-02","Preliminary objections — narrow jurisdiction",false],["2027-12-07","Rejoinder due",false]]},
+    {fol:2, name:"Ukraine v Russia (CERD + ICSFT)", italic:"Terrorism Financing & Racial Discrimination Conventions", forum:"ICJ", forumLabel:"ICJ", docket:"GL 166", filed:"2017-01-16", year:"2017", status:"decided", statusLabel:"merits 2024", theme:["civilian","territory"], amount:null, amountLbl:"", note:"First ICJ merits ruling on the war. No compensation awarded.", milestones:[["2017-04-19","Provisional measures (CERD)",false],["2024-01-31","Merits judgment",true]]},
+    {fol:3, name:"Russia v Australia & Netherlands", italic:"Article 84 appeal of the ICAO Council MH17 decision", forum:"ICJ", forumLabel:"ICJ", docket:"GL 201", filed:"2025-09-18", year:"2025", status:"pending", statusLabel:"preliminary phase", theme:["civilian"], amount:null, amountLbl:"", note:"First Article 84 case to be litigated to its end.", milestones:[["2025-09-18","Application filed",true]]},
+    {fol:4, name:"Ukraine v Russia (re Crimea) [GC]", italic:"Inter-state — occupation of Crimea since Feb 2014", forum:"ECtHR", forumLabel:"ECtHR", docket:"20958/14, 38334/18", filed:"2014-03-13", year:"2014", status:"decided", statusLabel:"violations found 2024", theme:["civilian","territory"], amount:null, amountLbl:"", note:"Articles 2, 3, 5, 6, 8–11, 14, 18, P1-1, P1-2, P4-2 all violated.", milestones:[["2021-01-14","Admissibility — jurisdiction confirmed",false],["2024-06-25","Merits judgment — unanimous",true]]},
+    {fol:5, name:"Ukraine and the Netherlands v Russia [GC]", italic:"Eastern Ukraine, MH17, and the full-scale invasion", forum:"ECtHR", forumLabel:"ECtHR", docket:"8019/16 et al.", filed:"2014-06-13", year:"2014", status:"decided", statusLabel:"satisfaction pending", theme:["civilian"], amount:null, amountLbl:"", note:"The largest human-rights case in European history.", milestones:[["2023-01-25","Admissibility",false],["2025-07-09","Merits — Russia liable for MH17",true]]},
+    {fol:6, name:"Ukraine v Russia (VIII)", italic:"The Kerch Strait incident (Nov 2018)", forum:"ECtHR", forumLabel:"ECtHR", docket:"55855/18", filed:"2018-11-29", year:"2018", status:"pending", statusLabel:"pending", theme:["territory"], amount:null, amountLbl:"", note:"", milestones:[["2018-11-29","Application filed",true]]},
+    {fol:7, name:"Ukraine v Russia (IX)", italic:"Targeted killings abroad — transnational repression", forum:"ECtHR", forumLabel:"ECtHR", docket:"10691/21", filed:"2021-02-19", year:"2021", status:"pending", statusLabel:"pending", theme:["civilian"], amount:null, amountLbl:"", note:"", milestones:[]},
+    {fol:8, name:"Russia v Ukraine", italic:"Counter-application, struck out after CoE expulsion", forum:"ECtHR", forumLabel:"ECtHR", docket:"36958/21", filed:"2021-07-22", year:"2021", status:"struck", statusLabel:"struck out 2023", theme:[], amount:null, amountLbl:"", note:"Russia ceased to be a Contracting Party.", milestones:[["2022-09-16","Russia expelled from CoE",false],["2023-07-18","Struck out",true]]},
+    {fol:9, name:"Situation in Ukraine", italic:"ICC investigation referred by 43 states parties", forum:"ICC", forumLabel:"ICC", docket:"Sit. UA", filed:"2022-03-02", year:"2022", status:"pending", statusLabel:"investigation active", theme:["civilian"], amount:null, amountLbl:"", note:"Six arrest warrants flow from this investigation.", milestones:[["2022-03-02","43 states parties refer situation",true]]},
+    {fol:10, name:"Prosecutor v Putin", italic:"Arrest warrant — President of the Russian Federation", forum:"ICC", forumLabel:"ICC", docket:"PTC II", filed:"2023-03-17", year:"2023", status:"pending", statusLabel:"warrant outstanding", theme:["civilian"], amount:null, amountLbl:"", note:"First ICC warrant against a sitting P5 head of state.", milestones:[["2023-03-17","Warrant issued",true]]},
+    {fol:11, name:"Prosecutor v Lvova-Belova", italic:"Russian Children's Commissioner", forum:"ICC", forumLabel:"ICC", docket:"PTC II", filed:"2023-03-17", year:"2023", status:"pending", statusLabel:"warrant outstanding", theme:["civilian"], amount:null, amountLbl:"", note:"Same charges as Putin: deportation and transfer of Ukrainian children.", milestones:[["2023-03-17","Warrant issued",true]]},
+    {fol:12, name:"Prosecutor v Kobylash", italic:"Russian Long-Range Aviation commander", forum:"ICC", forumLabel:"ICC", docket:"PTC", filed:"2024-03-05", year:"2024", status:"pending", statusLabel:"warrant outstanding", theme:["civilian"], amount:null, amountLbl:"", note:"", milestones:[["2024-03-05","Warrant issued",true]]},
+    {fol:13, name:"Prosecutor v Sokolov", italic:"Black Sea Fleet commander", forum:"ICC", forumLabel:"ICC", docket:"PTC", filed:"2024-03-05", year:"2024", status:"pending", statusLabel:"warrant outstanding", theme:["civilian"], amount:null, amountLbl:"", note:"", milestones:[["2024-03-05","Warrant issued",true]]},
+    {fol:14, name:"Prosecutor v Shoigu", italic:"Then-Minister of Defence", forum:"ICC", forumLabel:"ICC", docket:"PTC", filed:"2024-06-24", year:"2024", status:"pending", statusLabel:"warrant outstanding", theme:["civilian"], amount:null, amountLbl:"", note:"", milestones:[["2024-06-24","Warrant issued",true]]},
+    {fol:15, name:"Prosecutor v Gerasimov", italic:"Chief of the General Staff", forum:"ICC", forumLabel:"ICC", docket:"PTC", filed:"2024-06-24", year:"2024", status:"pending", statusLabel:"warrant outstanding", theme:["civilian"], amount:null, amountLbl:"", note:"", milestones:[["2024-06-24","Warrant issued",true]]},
+    {fol:16, name:"Detention of Ukrainian Naval Vessels", italic:"ITLOS provisional measures + Annex VII (PCA)", forum:"ITLOS", forumLabel:"ITLOS", docket:"ITLOS 26", filed:"2019-04-16", year:"2019", status:"pending", statusLabel:"merits pending", theme:["territory"], amount:null, amountLbl:"", note:"Russia's 'military activities' defence rejected.", milestones:[["2019-05-25","Provisional measures: Russia must release",false],["2019-09","Vessels and crew released",true],["2022-06-27","Annex VII Award on Preliminary Objections",false]]},
+    {fol:17, name:"Australia & Netherlands v Russia (MH17)", italic:"ICAO Council, Article 84", forum:"ICAO", forumLabel:"ICAO", docket:"Art. 84", filed:"2022-03-14", year:"2022", status:"decided", statusLabel:"decided · on appeal", theme:["civilian"], amount:null, amountLbl:"", note:"First Article 84 merits ruling in 80 years of ICAO history.", milestones:[["2025-05-12","Council vote — Russia responsible",false],["2025-06-30","Formal decision",true],["2025-09-18","Russia appeals to ICJ",false]]},
+    {fol:18, name:"Naftogaz v Gazprom — Supply", italic:"SCC Stockholm — gas supply contract", forum:"SCC", forumLabel:"SCC", docket:"V 2014-078", filed:"2014-06-01", year:"2014", status:"decided", statusLabel:"settled 2019", theme:["money"], amount:-2020000000, amountLbl:"−$2.02b", note:"Netted against the transit award.", milestones:[["2017-12-22","Final award",true]]},
+    {fol:19, name:"Naftogaz v Gazprom — Transit", italic:"SCC Stockholm — gas transit contract", forum:"SCC", forumLabel:"SCC", docket:"V 2014-129", filed:"2014-10-01", year:"2014", status:"decided", statusLabel:"settled 2019", theme:["money"], amount:4630000000, amountLbl:"$4.63b", note:"Net $2.56b after offset; ~$2.1b paid before settlement.", milestones:[["2018-02-28","Final award",true],["2019-12-20","Berlin trilateral settlement",false]]},
+    {fol:20, name:"Naftogaz v Gazprom (III)", italic:"ICC arbitration — Sokhranivka force-majeure transit", forum:"ICC arb", forumLabel:"ICC arb", docket:"27245/GL", filed:"2022-09-09", year:"2022", status:"decided", statusLabel:"final & confirmed", theme:["money"], amount:1370000000, amountLbl:"$1.37b", note:"First major arbitral win triggered by the full-scale invasion.", milestones:[["2025-06-20","Final award",true],["2026-03","Swiss Federal Tribunal confirms",false]]},
+    {fol:21, name:"Naftogaz et al. v Russia", italic:"PCA — Crimean oil & gas expropriation", forum:"PCA", forumLabel:"PCA", docket:"2017-16", filed:"2016-10-17", year:"2016", status:"enforcing", statusLabel:"enforcing in 5 jurisdictions", theme:["money","territory"], amount:5000000000, amountLbl:"$5.00b", gilt:true, note:"Paris, London, Helsinki, Vienna, US — five-front enforcement.", milestones:[["2019-02-22","Partial award — jurisdiction & merits",false],["2023-04-12","Final award",true],["2024-12-06","Hoge Raad confirms",false],["2025-04-01","Paris exequatur",false]]},
+    {fol:22, name:"Aeroport Belbek + Kolomoisky v Russia", italic:"PCA — Sevastopol airport", forum:"PCA", forumLabel:"PCA", docket:"2015-07", filed:"2015-01-13", year:"2015", status:"decided", statusLabel:"liability final, quantum pending", theme:["territory","money"], amount:null, amountLbl:"", note:"", milestones:[["2017-02-24","Award on jurisdiction",false],["2024-12-06","Hoge Raad confirms",true]]},
+    {fol:23, name:"PrivatBank + Finilon v Russia", italic:"PCA — Crimean banking operations", forum:"PCA", forumLabel:"PCA", docket:"2015-21", filed:"2015-04-13", year:"2015", status:"decided", statusLabel:"liability final, quantum pending", theme:["money","territory"], amount:1000000000, amountLbl:"$1.0b cl.", note:"Quantum claimed.", milestones:[["2019-02-04","Liability award",false],["2024-12-06","Hoge Raad confirms",true]]},
+    {fol:24, name:"Oschadbank v Russia", italic:"PCA · Paris-seated — Crimean banking branch", forum:"PCA", forumLabel:"PCA", docket:"2016-14", filed:"2016-01-20", year:"2016", status:"enforcing", statusLabel:"enforcing in France", theme:["money","territory"], amount:1100000000, amountLbl:"$1.10b", note:"~$99m of Russian assets seized in France.", milestones:[["2018-11-26","Award",true],["2022-12-07","Cour de cassation quashes earlier annulment",false],["2025-07-01","Paris CoA confirms award",false]]},
+    {fol:25, name:"Ukrnafta v Russia", italic:"PCA · Geneva — 16 petrol stations in Crimea", forum:"PCA", forumLabel:"PCA", docket:"2015-34", filed:"2015-06-15", year:"2015", status:"decided", statusLabel:"final and binding", theme:["money","territory"], amount:44455012, amountLbl:"$44.5m", note:"Swiss FT — first to confirm BIT covers Crimea-located investments.", milestones:[["2018-10-16","Swiss FT confirms jurisdiction",true],["2019-04-12","Final award",false]]},
+    {fol:26, name:"Stabil et al. v Russia", italic:"PCA · Geneva — 31 petrol stations", forum:"PCA", forumLabel:"PCA", docket:"2015-35", filed:"2015-06-15", year:"2015", status:"decided", statusLabel:"final and binding", theme:["money","territory"], amount:34600000, amountLbl:"$34.6m", note:"", milestones:[["2019-04-12","Final award",true]]},
+    {fol:27, name:"Everest Estate et al. v Russia", italic:"PCA — Crimean real estate", forum:"PCA", forumLabel:"PCA", docket:"2015-36", filed:"2015-06-19", year:"2015", status:"pending", statusLabel:"set-aside remanded", theme:["money","territory"], amount:159000000, amountLbl:"$159m", note:"Only Crimea case the Hoge Raad has remanded.", milestones:[["2018-05-02","Award on merits",false],["2024-12-06","Hoge Raad remands to Amsterdam",true]]},
+    {fol:28, name:"Lugzor et al. v Russia", italic:"PCA — Crimean real estate (5 claimants)", forum:"PCA", forumLabel:"PCA", docket:"2015-29", filed:"2015-05-26", year:"2015", status:"decided", statusLabel:"award rendered", theme:["money","territory"], amount:null, amountLbl:"undisc.", note:"", milestones:[["2022-10-04","Award",true]]},
+    {fol:29, name:"DTEK Krymenergo v Russia", italic:"PCA — Crimean electricity grid", forum:"PCA", forumLabel:"PCA", docket:"2018-41", filed:"2018-01-01", year:"2018", status:"pending", statusLabel:"UK enforcement stayed", theme:["money","territory"], amount:207800000, amountLbl:"$208m", note:"", milestones:[["2023-11-01","Final award",false],["2025-05-02","UK High Court stays enforcement",true]]},
+    {fol:30, name:"NEK Ukrenergo v Russia", italic:"PCA · Paris — Crimean transmission grid", forum:"PCA", forumLabel:"PCA", docket:"Paris-seated", filed:"2020-11-01", year:"2020", status:"pending", statusLabel:"merits phase", theme:["money","territory"], amount:580000000, amountLbl:"€527m cl.", note:"", milestones:[["2024-08-05","Award on jurisdiction confirmed",true]]},
+    {fol:31, name:"Energoatom v Russia (II)", italic:"Notice of dispute — Zaporizhzhia NPP", forum:"PCA", forumLabel:"PCA", docket:"TBD", filed:"2023-03-01", year:"2023", status:"pending", statusLabel:"pre-arbitration", theme:["money","territory"], amount:3000000000, amountLbl:"$3b cl.", note:"", milestones:[["2023-03","Notice of dispute",true]]},
+    {fol:32, name:"Ukrhydroenergo v Russia", italic:"Notice of dispute — Kakhovka HPP", forum:"PCA", forumLabel:"PCA", docket:"TBD", filed:"2024-06-06", year:"2024", status:"pending", statusLabel:"pre-arbitration paused", theme:["money","civilian"], amount:2500000000, amountLbl:"$2.5b cl.", note:"", milestones:[["2024-06-06","Notice of dispute",true],["2024-10","Tender cancelled",false]]},
+    {fol:33, name:"PPS v Girkin, Dubinskiy, Pulatov, Kharchenko", italic:"NL · The Hague — MH17 criminal trial", forum:"Domestic", forumLabel:"NL", docket:"ECLI:NL:RBDHA", filed:"2020-03-09", year:"2020", status:"decided", statusLabel:"verdicts irrevocable", theme:["civilian"], amount:null, amountLbl:"", note:"~€16m in damages joined to the criminal proceedings.", milestones:[["2022-11-17","Verdict — 3 convicted in absentia (life)",true],["2022-12-01","Prosecution declines to appeal Pulatov",false]]},
+    {fol:34, name:"JIT MH17 follow-on", italic:"NL · Joint Investigation Team", forum:"Domestic", forumLabel:"NL", docket:"JIT MH17", filed:"2014-08-01", year:"2014", status:"pending", statusLabel:"suspended", theme:["civilian"], amount:null, amountLbl:"", note:"Identified Putin's 'active role' but no immunity waiver.", milestones:[["2023-02-08","JIT suspends — leads exhausted",true]]},
+    {fol:35, name:"Russia v Naftogaz et al.", italic:"NL · Hoge Raad — set-aside cassation", forum:"Domestic", forumLabel:"NL · HR", docket:"HR:2024:1810", filed:"2023-01-01", year:"2023", status:"decided", statusLabel:"award stands", theme:["money"], amount:null, amountLbl:"", note:"", milestones:[["2024-12-06","Hoge Raad dismisses cassation",true]]},
+    {fol:36, name:"Russia v Belbek/Kolomoisky", italic:"NL · Hoge Raad — set-aside cassation", forum:"Domestic", forumLabel:"NL · HR", docket:"HR 2024", filed:"2022-01-01", year:"2022", status:"decided", statusLabel:"award stands", theme:["money"], amount:null, amountLbl:"", note:"", milestones:[["2024-12-06","Hoge Raad dismisses",true]]},
+    {fol:37, name:"Russia v PrivatBank/Finilon", italic:"NL · Hoge Raad — set-aside cassation", forum:"Domestic", forumLabel:"NL · HR", docket:"HR 2024", filed:"2022-01-01", year:"2022", status:"decided", statusLabel:"award stands", theme:["money"], amount:null, amountLbl:"", note:"", milestones:[["2024-12-06","Hoge Raad dismisses",true]]},
+    {fol:38, name:"Russia v Everest Estate", italic:"NL · Hoge Raad — remanded to Amsterdam CoA", forum:"Domestic", forumLabel:"NL · HR", docket:"HR 2024", filed:"2022-01-01", year:"2022", status:"pending", statusLabel:"remanded", theme:["money"], amount:null, amountLbl:"", note:"Only Crimea case the Hoge Raad partly opened up.", milestones:[["2024-12-06","Hoge Raad remands",true]]},
+    {fol:39, name:"Finland v Yan Petrovsky", italic:"FI · Helsinki — universal jurisdiction", forum:"Domestic", forumLabel:"FI", docket:"Helsinki", filed:"2024-12-01", year:"2024", status:"pending", statusLabel:"appeal pending", theme:["civilian"], amount:null, amountLbl:"", note:"First UJ conviction worldwide of a mercenary-group member for Ukraine war crimes.", milestones:[["2025-03-14","Conviction — life imprisonment",true]]},
+    {fol:40, name:"Lithuania v Gadzhimagomedov", italic:"LT · Vilnius — universal jurisdiction", forum:"Domestic", forumLabel:"LT", docket:"Vilnius", filed:"2025-10-30", year:"2025", status:"pending", statusLabel:"pre-trial detention", theme:["civilian"], amount:null, amountLbl:"", note:"First Ukrainian extradition to a third state for prosecution.", milestones:[["2025-10-28","Suspect transferred from Ukrainian custody",true]]},
+    {fol:41, name:"EU/Belgium · Russian Central Bank assets", italic:"€210bn immobilised at Euroclear", forum:"Domestic", forumLabel:"EU·BE", docket:"EU Council", filed:"2022-02-28", year:"2022", status:"pending", statusLabel:"frozen indefinitely", theme:["money"], amount:210000000000, amountLbl:"€210b", gilt:true, note:"The single largest pool of Russian state money under European control.", milestones:[["2024-05","Windfall profits regulation 2024/1469",false],["2025-12-12","EU agrees indefinite freeze",true]]}
+  ];
+
+  const forumBucket = c => {
+    if (c.forum === 'ICJ') return 'ICJ';
+    if (c.forum === 'ECtHR') return 'ECtHR';
+    if (c.forum === 'ICC') return 'ICC';
+    if (c.forum === 'PCA') return 'PCA';
+    if (c.forum === 'SCC' || c.forum === 'ICC arb') return 'SCC';
+    if (c.forum === 'ITLOS' || c.forum === 'ICAO') return 'ITLOS';
+    return 'Domestic';
+  };
+
+  const state = {forum:'all', status:'all', theme:'all', sort:'filed-desc', q:''};
+  const sortCycle = ['filed-desc','filed-asc','fol-asc','amount-desc'];
+  const sortLabels = {
+    'filed-desc':'most recent ↓',
+    'filed-asc':'oldest first ↑',
+    'fol-asc':'folio order',
+    'amount-desc':'by money $↓'
+  };
+
+  const formatDate = (iso) => {
+    if (!iso || iso.length < 7) return iso || '';
+    const d = new Date(iso);
+    if (isNaN(d.getTime())) return iso;
+    if (iso.length <= 7) return d.toLocaleString('en-GB',{month:'short',year:'numeric'});
+    return d.toLocaleString('en-GB',{day:'2-digit',month:'short',year:'numeric'});
+  };
+
+  const matchesQuery = (c, q) => {
+    if (!q) return true;
+    const hay = [c.name, c.italic, c.forumLabel, c.docket, c.note, c.statusLabel,
+                  ...c.milestones.map(m => m[1])].join(' ').toLowerCase();
+    return hay.includes(q.toLowerCase());
+  };
+
+  const render = () => {
+    let list = CASES.filter(c => {
+      if (state.forum !== 'all' && forumBucket(c) !== state.forum) return false;
+      if (state.status !== 'all') {
+        if (state.status === 'enforcing' && c.status !== 'enforcing') return false;
+        else if (state.status !== 'enforcing' && c.status !== state.status) return false;
+      }
+      if (state.theme !== 'all' && !(c.theme || []).includes(state.theme)) return false;
+      if (!matchesQuery(c, state.q)) return false;
+      return true;
+    });
+
+    if (state.sort === 'filed-desc') list.sort((a,b) => b.filed.localeCompare(a.filed));
+    if (state.sort === 'filed-asc')  list.sort((a,b) => a.filed.localeCompare(b.filed));
+    if (state.sort === 'fol-asc')    list.sort((a,b) => a.fol - b.fol);
+    if (state.sort === 'amount-desc')list.sort((a,b) => Math.abs(b.amount||0) - Math.abs(a.amount||0));
+
+    document.getElementById('shown').textContent = list.length;
+    const isFiltered = state.forum!=='all' || state.status!=='all' || state.theme!=='all' || state.q;
+    document.getElementById('counter').classList.toggle('filtered', isFiltered);
+
+    const cat = document.getElementById('catalog');
+    if (list.length === 0) {
+      cat.innerHTML = `<div class="empty"><span>∅</span>No folios match these filters.<br><br><button class="sort" onclick="window.__clear()">clear filters ✕</button></div>`;
+      return;
+    }
+    cat.innerHTML = list.map(c => rowHTML(c)).join('');
+    cat.querySelectorAll('.row').forEach(r => {
+      r.addEventListener('click', e => {
+        if (e.target.closest('.open-link')) return;
+        r.classList.toggle('open');
+      });
+    });
+  };
+
+  const rowHTML = (c) => {
+    const nameMarkup = c.name.replace(/ v /g,' <em>v</em> ');
+    const dotClass = c.status==='enforcing' ? 'enforcing' : c.status==='decided' ? 'decided' : c.status==='struck' ? '' : 'pending';
+    const amtClass = c.gilt ? 'gilt' : (c.amount && c.amount<0) ? 'neg' : '';
+    const ms = c.milestones.length ? `
+      <h4>Procedural milestones</h4>
+      <ul class="ms">
+        ${c.milestones.map(m => `<li class="${m[2]?'stamp':''}"><span class="d">${formatDate(m[0])}</span>${m[1]}</li>`).join('')}
+      </ul>` : '';
+    const note = c.note ? `<p class="note">¶ ${c.note}</p>` : '';
+    return `
+      <article class="row" data-fol="${c.fol}">
+        <div class="fol">${String(c.fol).padStart(2,'0')}</div>
+        <div>
+          <div class="name">${nameMarkup}</div>
+          <div class="strap">${c.italic}</div>
+          <div class="marg">¶ ${c.note || ''}</div>
+          <div class="expand">
+            ${ms}
+            ${note}
+            <a class="open-link" href="#fol-${c.fol}">open folio →</a>
+          </div>
+        </div>
+        <div class="forum">${c.forumLabel}<span class="docket">${c.docket}</span></div>
+        <div class="year">${c.year}</div>
+        <div class="right">
+          ${c.amount !== null ? `<span class="amt ${amtClass}">${c.amountLbl}</span>` : '<span class="amt neg" style="font-size:13px">—</span>'}
+          <span class="stat dot ${dotClass}">${c.statusLabel}</span>
+        </div>
+        <div class="arrow">›</div>
+      </article>`;
+  };
+
+  // Wiring
+  document.querySelectorAll('.filter-set').forEach(set => {
+    const group = set.dataset.group;
+    set.querySelectorAll('.chip').forEach(b => {
+      b.addEventListener('click', () => {
+        set.querySelectorAll('.chip').forEach(x => x.classList.toggle('on', x === b));
+        state[group] = b.dataset.val;
+        render();
+      });
+    });
+  });
+  document.getElementById('q').addEventListener('input', e => {
+    state.q = e.target.value.trim();
+    render();
+  });
+  document.getElementById('sort').addEventListener('click', () => {
+    const cur = sortCycle.indexOf(state.sort);
+    state.sort = sortCycle[(cur+1)%sortCycle.length];
+    document.getElementById('sort').textContent = sortLabels[state.sort];
+    render();
+  });
+  window.__clear = () => {
+    state.forum='all'; state.status='all'; state.theme='all'; state.q='';
+    document.getElementById('q').value='';
+    document.querySelectorAll('.filter-set').forEach(s => {
+      s.querySelectorAll('.chip').forEach((c,i) => c.classList.toggle('on', i===0));
+    });
+    render();
+  };
+  document.getElementById('clear').addEventListener('click', window.__clear);
+
+  render();
+  </script>
+</body>
+</html>
