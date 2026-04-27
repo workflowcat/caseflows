@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Caseflows — concepts</title>
+<style>
+  :root{--ink:#14171c;--ink-soft:#4a5060;--ink-faint:#8b91a0;--paper:#f5f2ec;--rule:#d9d3c5;--accent:#b9362c}
+  *,*::before,*::after{box-sizing:border-box}
+  html,body{margin:0;padding:0;background:var(--paper);color:var(--ink);font-family:'Inter','Helvetica Neue',sans-serif;line-height:1.5;-webkit-font-smoothing:antialiased}
+  .container{max-width:780px;margin:0 auto;padding:64px 32px 96px}
+  .wordmark{font-family:'Tiempos Headline','EB Garamond',Georgia,serif;font-size:22px;font-weight:500;letter-spacing:-.01em}
+  .wordmark span{color:var(--accent)}
+  h1{font-family:'Tiempos Headline','EB Garamond',Georgia,serif;font-weight:400;font-size:44px;line-height:1.05;letter-spacing:-.02em;margin:32px 0 16px;max-width:18ch}
+  p.dek{font-family:'Tiempos Text',Georgia,serif;font-size:18px;color:var(--ink-soft);max-width:60ch;margin:0 0 48px}
+  .label{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-faint);font-weight:600;margin:48px 0 12px;border-bottom:1px solid var(--rule);padding-bottom:10px}
+  .concept{display:block;text-decoration:none;color:inherit;padding:20px 0;border-bottom:1px solid var(--rule);transition:padding-left .12s}
+  .concept:hover{padding-left:8px}
+  .concept .num{font-family:'Tiempos Headline',Georgia,serif;font-size:14px;color:var(--ink-faint);letter-spacing:.06em}
+  .concept .name{font-family:'Tiempos Headline',Georgia,serif;font-size:24px;letter-spacing:-.01em;margin-top:2px}
+  .concept .desc{font-size:14px;color:var(--ink-soft);margin-top:6px;max-width:60ch}
+  .concept .arrow{float:right;font-family:Georgia,serif;color:var(--ink-faint);font-size:18px;margin-top:18px}
+  .concept:hover .arrow{color:var(--accent)}
+  .meta{margin-top:64px;font-size:13px;color:var(--ink-faint)}
+  .meta a{color:var(--ink-soft)}
+</style>
+</head>
+<body>
+  <div class="container">
+    <div class="wordmark">caseflows<span>.</span></div>
+    <h1>First-page concepts.</h1>
+    <p class="dek">A reader's guide to the international legal cases between Ukraine and Russia. We're sketching what the front door should look like before we build the database behind it.</p>
+
+    <div class="label">Live concepts</div>
+
+    <a class="concept" href="concepts/01-lens-grid.html">
+      <span class="arrow">→</span>
+      <div class="num">Concept 01</div>
+      <div class="name">Forty cases, five forums</div>
+      <div class="desc">Lens grid: a featured "start here" tile spanning 2×2, plus five forum tiles (ICJ · ECtHR · ICC · PCA · National courts). Editorial primer below.</div>
+    </a>
+
+    <div class="meta">
+      Compiled 2026-04-27 · 41 cases tracked across 11 forums.<br>
+      Source data: <a href="cases.json">cases.json</a>
+    </div>
+  </div>
+</body>
+</html>

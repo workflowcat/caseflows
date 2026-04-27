@@ -1,0 +1,739 @@
+{
+  "$schema": "Ukraine v Russia international cases dataset, compiled 2026-04-27",
+  "meta": {
+    "compiled": "2026-04-27",
+    "scope": "International and domestic legal proceedings between Ukrainian and Russian parties (state, SOEs, private), 2014-2026",
+    "total_cases": 41
+  },
+  "forums": {
+    "ICJ": "International Court of Justice, The Hague",
+    "ECtHR": "European Court of Human Rights, Strasbourg",
+    "ICC": "International Criminal Court, The Hague",
+    "ITLOS": "International Tribunal for the Law of the Sea, Hamburg",
+    "ICAO": "ICAO Council, Montreal",
+    "PCA": "Permanent Court of Arbitration, The Hague",
+    "SCC": "Stockholm Chamber of Commerce Arbitration",
+    "ICC_arb": "ICC International Court of Arbitration",
+    "DUTCH": "Dutch courts (District Court of The Hague, Court of Appeal, Hoge Raad)",
+    "SWISS_FT": "Swiss Federal Tribunal (Bundesgericht)",
+    "FR_CASS": "French Cour de cassation",
+    "UK_HC": "UK High Court / Supreme Court",
+    "FI": "Helsinki District Court",
+    "LT": "Vilnius Regional Court",
+    "DE": "OLG Frankfurt / Generalbundesanwalt"
+  },
+  "cases": [
+    {
+      "id": "icj-166",
+      "category": "international",
+      "cluster": "icj",
+      "name": "Ukraine v Russia (CERD + Terrorism Financing)",
+      "forum": "ICJ",
+      "docket": "General List No. 166",
+      "filed": "2017-01-16",
+      "status": "judgment_delivered",
+      "subject": "Russia's support to armed groups in eastern Ukraine (ICSFT) and racial discrimination against Crimean Tatars/Ukrainians in Crimea (CERD)",
+      "milestones": [
+        {"date": "2017-04-19", "event": "Provisional measures order (CERD measures granted)"},
+        {"date": "2019-11-08", "event": "Judgment on preliminary objections - jurisdiction confirmed"},
+        {"date": "2024-01-31", "event": "Merits judgment"}
+      ],
+      "outcome": "Russia found in violation of ICSFT Art. 9(1), CERD Art. 2(1)(a) and 5(e)(v); most claims rejected; no compensation",
+      "url": "https://www.icj-cij.org/case/166"
+    },
+    {
+      "id": "icj-182",
+      "category": "international",
+      "cluster": "icj",
+      "name": "Allegations of Genocide (Ukraine v Russia, 32 intervening states)",
+      "forum": "ICJ",
+      "docket": "General List No. 182",
+      "filed": "2022-02-26",
+      "status": "pending_merits",
+      "subject": "Ukraine seeks declaration it has not committed genocide and that Russia's invasion violates Genocide Convention",
+      "milestones": [
+        {"date": "2022-03-16", "event": "Provisional measures (13-2): Russia must suspend military operations"},
+        {"date": "2023-06-05", "event": "32 of 33 intervention declarations admissible"},
+        {"date": "2024-02-02", "event": "Preliminary objections judgment - narrow jurisdiction"},
+        {"date": "2025-12-05", "event": "Russian counter-claims declared admissible"},
+        {"date": "2027-12-07", "event": "Rejoinder due (scheduled)"}
+      ],
+      "outcome": "Provisional measures ignored by Russia; merits ongoing",
+      "url": "https://www.icj-cij.org/case/182"
+    },
+    {
+      "id": "icj-201",
+      "category": "international",
+      "cluster": "icj",
+      "name": "Russia v Australia and Netherlands (ICAO Council appeal)",
+      "forum": "ICJ",
+      "docket": "General List No. 201",
+      "filed": "2025-09-18",
+      "status": "pending",
+      "subject": "Russia's Article 84 appeal against ICAO MH17 Council decision",
+      "milestones": [
+        {"date": "2025-09-18", "event": "Application filed"}
+      ],
+      "outcome": "Pending preliminary phase",
+      "url": "https://www.icj-cij.org/case/201"
+    },
+    {
+      "id": "ecthr-crimea",
+      "category": "international",
+      "cluster": "ecthr",
+      "name": "Ukraine v Russia (re Crimea) [GC]",
+      "forum": "ECtHR",
+      "docket": "Apps 20958/14, 38334/18",
+      "filed": "2014-03-13",
+      "status": "judgment_delivered",
+      "subject": "Administrative practice of HR violations in Crimea since Feb 2014 (occupation, repression of Tatars/activists, language restrictions)",
+      "milestones": [
+        {"date": "2021-01-14", "event": "GC admissibility - Russia exercises jurisdiction in Crimea from 27 Feb 2014"},
+        {"date": "2024-06-25", "event": "GC merits judgment - violations of Arts 2, 3, 5, 6, 8-11, 14, 18, P1-1, P1-2, P4-2"}
+      ],
+      "outcome": "Russia found in unanimous violation across multiple ECHR articles",
+      "url": "https://www.echr.coe.int/w/ukraine-v-russia-re-crimea-nos-20958/14-and-38334/18-"
+    },
+    {
+      "id": "ecthr-eastern-mh17",
+      "category": "international",
+      "cluster": "ecthr",
+      "name": "Ukraine and the Netherlands v Russia [GC] (eastern Ukraine + MH17 + post-2022)",
+      "forum": "ECtHR",
+      "docket": "Apps 8019/16, 43800/14, 28525/20, 11055/22",
+      "filed": "2014-06-13",
+      "status": "judgment_delivered_satisfaction_pending",
+      "subject": "Administrative practice in eastern Ukraine, MH17 downing, child abductions, full-scale invasion violations",
+      "milestones": [
+        {"date": "2022-03-01", "event": "Interim measures - Russia not to attack civilians"},
+        {"date": "2023-01-25", "event": "GC admissibility - extensive jurisdictional findings"},
+        {"date": "2025-07-09", "event": "GC merits judgment - Russia liable incl. for downing of MH17"}
+      ],
+      "outcome": "Russia liable; just-satisfaction phase pending for MH17 application 28525/20",
+      "url": "https://hudoc.echr.coe.int/fre?i=002-14493"
+    },
+    {
+      "id": "ecthr-viii",
+      "category": "international",
+      "cluster": "ecthr",
+      "name": "Ukraine v Russia (VIII) - Kerch Strait",
+      "forum": "ECtHR",
+      "docket": "App 55855/18",
+      "filed": "2018-11-29",
+      "status": "pending",
+      "subject": "Russian seizure of 3 Ukrainian naval vessels and 24 servicemen in Kerch Strait, 25 Nov 2018",
+      "milestones": [],
+      "outcome": "Pending",
+      "url": "https://www.echr.coe.int/w/ukraine-v.-russia-viii-no.-55855/18-"
+    },
+    {
+      "id": "ecthr-ix",
+      "category": "international",
+      "cluster": "ecthr",
+      "name": "Ukraine v Russia (IX) - transnational repression",
+      "forum": "ECtHR",
+      "docket": "App 10691/21",
+      "filed": "2021-02-19",
+      "status": "pending",
+      "subject": "Targeted killings/assassination attempts by Russian state agents abroad against perceived opponents",
+      "milestones": [],
+      "outcome": "Pending"
+    },
+    {
+      "id": "ecthr-russia-v-ukraine",
+      "category": "international",
+      "cluster": "ecthr",
+      "name": "Russia v Ukraine",
+      "forum": "ECtHR",
+      "docket": "App 36958/21",
+      "filed": "2021-07-22",
+      "status": "struck_out",
+      "subject": "Russia's allegations of HR violations by Ukraine (incl. MH17 alleging Ukrainian airspace responsibility, Crimea canal cutoff)",
+      "milestones": [
+        {"date": "2022-09-16", "event": "Russia expelled from CoE"},
+        {"date": "2023-07-18", "event": "Struck out following expulsion"}
+      ],
+      "outcome": "Struck out",
+      "url": "https://www.echr.coe.int/w/russia-v.-ukraine-no.-36958/21-"
+    },
+    {
+      "id": "icc-situation",
+      "category": "international",
+      "cluster": "icc",
+      "name": "Situation in Ukraine",
+      "forum": "ICC",
+      "docket": "ICC Situation",
+      "filed": "2022-03-02",
+      "status": "investigation_active",
+      "subject": "War crimes, crimes against humanity, potentially genocide on Ukrainian territory from 21 Nov 2013",
+      "milestones": [
+        {"date": "2022-03-02", "event": "43 States Parties refer situation"}
+      ],
+      "outcome": "Active; 6 arrest warrants issued",
+      "url": "https://www.icc-cpi.int/situations/ukraine"
+    },
+    {
+      "id": "icc-putin",
+      "category": "international",
+      "cluster": "icc",
+      "name": "Prosecutor v Putin",
+      "forum": "ICC",
+      "docket": "Pre-Trial Chamber II warrant",
+      "filed": "2023-03-17",
+      "status": "warrant_outstanding",
+      "subject": "War crimes of unlawful deportation/transfer of Ukrainian children",
+      "milestones": [{"date": "2023-03-17", "event": "Arrest warrant issued"}],
+      "outcome": "Warrant outstanding",
+      "url": "https://www.icc-cpi.int/news/situation-ukraine-icc-judges-issue-arrest-warrants-against-vladimir-vladimirovich-putin-and"
+    },
+    {
+      "id": "icc-lvova-belova",
+      "category": "international",
+      "cluster": "icc",
+      "name": "Prosecutor v Lvova-Belova",
+      "forum": "ICC",
+      "docket": "Pre-Trial Chamber II warrant",
+      "filed": "2023-03-17",
+      "status": "warrant_outstanding",
+      "subject": "War crimes of unlawful deportation/transfer of Ukrainian children",
+      "milestones": [{"date": "2023-03-17", "event": "Arrest warrant issued"}],
+      "outcome": "Warrant outstanding",
+      "url": "https://www.icc-cpi.int/defendant/maria-alekseyevna-lvova-belova"
+    },
+    {
+      "id": "icc-kobylash",
+      "category": "international",
+      "cluster": "icc",
+      "name": "Prosecutor v Kobylash",
+      "forum": "ICC",
+      "docket": "warrant",
+      "filed": "2024-03-05",
+      "status": "warrant_outstanding",
+      "subject": "Missile strikes on Ukrainian energy infrastructure Oct 2022 - March 2023",
+      "milestones": [{"date": "2024-03-05", "event": "Arrest warrant"}],
+      "outcome": "Warrant outstanding"
+    },
+    {
+      "id": "icc-sokolov",
+      "category": "international",
+      "cluster": "icc",
+      "name": "Prosecutor v Sokolov",
+      "forum": "ICC",
+      "docket": "warrant",
+      "filed": "2024-03-05",
+      "status": "warrant_outstanding",
+      "subject": "Attacks on Ukrainian energy infrastructure",
+      "milestones": [{"date": "2024-03-05", "event": "Arrest warrant"}],
+      "outcome": "Warrant outstanding"
+    },
+    {
+      "id": "icc-shoigu",
+      "category": "international",
+      "cluster": "icc",
+      "name": "Prosecutor v Shoigu",
+      "forum": "ICC",
+      "docket": "warrant",
+      "filed": "2024-06-24",
+      "status": "warrant_outstanding",
+      "subject": "Russian missile-strike campaign vs Ukrainian energy infrastructure",
+      "milestones": [{"date": "2024-06-24", "event": "Arrest warrant"}],
+      "outcome": "Warrant outstanding"
+    },
+    {
+      "id": "icc-gerasimov",
+      "category": "international",
+      "cluster": "icc",
+      "name": "Prosecutor v Gerasimov",
+      "forum": "ICC",
+      "docket": "warrant",
+      "filed": "2024-06-24",
+      "status": "warrant_outstanding",
+      "subject": "Russian missile-strike campaign vs Ukrainian energy infrastructure",
+      "milestones": [{"date": "2024-06-24", "event": "Arrest warrant"}],
+      "outcome": "Warrant outstanding"
+    },
+    {
+      "id": "itlos-26",
+      "category": "international",
+      "cluster": "itlos",
+      "name": "Detention of Ukrainian Naval Vessels (Provisional Measures) + PCA Annex VII",
+      "forum": "ITLOS",
+      "docket": "ITLOS Case 26 / PCA 2019-28",
+      "filed": "2019-04-16",
+      "status": "merits_pending",
+      "subject": "Russian seizure of Berdyansk, Nikopol, Yani Kapu and 24 servicemen near Kerch Strait",
+      "milestones": [
+        {"date": "2019-05-25", "event": "ITLOS provisional measures - Russia must release"},
+        {"date": "2019-09", "event": "Vessels and servicemen released"},
+        {"date": "2022-06-27", "event": "PCA Annex VII Award on Preliminary Objections"}
+      ],
+      "outcome": "Provisional measures complied; merits before Annex VII tribunal",
+      "url": "https://www.itlos.org/en/main/cases/list-of-cases/case-concerning-the-detention-of-three-ukrainian-naval-vessels-ukraine-v-russian-federation-provisional-measures/"
+    },
+    {
+      "id": "icao-mh17",
+      "category": "international",
+      "cluster": "icao",
+      "name": "Australia and Netherlands v Russia (MH17, Article 84)",
+      "forum": "ICAO",
+      "docket": "Article 84 Application",
+      "filed": "2022-03-14",
+      "status": "decided_under_appeal",
+      "subject": "Russia's responsibility for MH17 downing under Chicago Convention Art. 3 bis",
+      "milestones": [
+        {"date": "2025-05-12", "event": "ICAO Council vote - Russia responsible"},
+        {"date": "2025-06-30", "event": "First-ever Article 84 merits decision"},
+        {"date": "2025-09-18", "event": "Russia appeals to ICJ"}
+      ],
+      "outcome": "Russia found in breach; remedies stage and ICJ appeal pending",
+      "url": "https://www.icao.int/news/icao-council-vote-flight-mh17-case"
+    },
+    {
+      "id": "naftogaz-supply",
+      "category": "arbitration_commercial",
+      "cluster": "naftogaz_gazprom",
+      "name": "Naftogaz v Gazprom - Gas Supply (SCC)",
+      "forum": "SCC",
+      "docket": "SCC V 2014-078",
+      "seat": "Stockholm",
+      "filed": "2014-06",
+      "status": "settled",
+      "subject": "Gas supply contract dispute (Swedish law)",
+      "amount_awarded_usd": -2020000000,
+      "milestones": [
+        {"date": "2017-05-31", "event": "Partial award on liability"},
+        {"date": "2017-12-22", "event": "Final award"}
+      ],
+      "outcome": "Naftogaz to pay Gazprom ~USD 2.02bn; netted against transit award; settled 2019"
+    },
+    {
+      "id": "naftogaz-transit",
+      "category": "arbitration_commercial",
+      "cluster": "naftogaz_gazprom",
+      "name": "Naftogaz v Gazprom - Gas Transit (SCC)",
+      "forum": "SCC",
+      "docket": "SCC V 2014-129",
+      "seat": "Stockholm",
+      "filed": "2014-10",
+      "status": "settled",
+      "subject": "Gas transit contract - minimum-volume breach",
+      "amount_awarded_usd": 4630000000,
+      "milestones": [
+        {"date": "2018-02-28", "event": "Final transit award"},
+        {"date": "2019-11-27", "event": "Svea Court of Appeal upholds"},
+        {"date": "2019-12-20", "event": "Berlin trilateral settlement"}
+      ],
+      "outcome": "Gazprom to pay USD 4.63bn; net USD 2.56bn after offset; ~USD 2.1bn paid pre-settlement"
+    },
+    {
+      "id": "naftogaz-icc-transit",
+      "category": "arbitration_commercial",
+      "cluster": "naftogaz_gazprom",
+      "name": "Naftogaz v Gazprom (III) - ICC Transit (post-2022)",
+      "forum": "ICC_arb",
+      "docket": "ICC 27245/GL",
+      "seat": "Zurich",
+      "filed": "2022-09-09",
+      "status": "final",
+      "subject": "Sokhranivka force-majeure transit dispute under 2019 Transit Contract",
+      "amount_awarded_usd": 1370000000,
+      "milestones": [
+        {"date": "2025-06-20", "event": "Final award - USD 1.37bn"},
+        {"date": "2026-03", "event": "Swiss Federal Tribunal rejects Gazprom set-aside"}
+      ],
+      "outcome": "Final and binding; enforcement underway",
+      "url": "https://www.brattle.com/insights-events/news/brattle-client-naftogaz-awarded-1-37-billion-in-icc-arbitration-in-transit-dispute-with-gazprom/"
+    },
+    {
+      "id": "pca-2017-16-naftogaz-crimea",
+      "category": "arbitration_BIT",
+      "cluster": "crimea_BIT",
+      "name": "Naftogaz et al. v Russia (Crimea expropriation)",
+      "forum": "PCA",
+      "docket": "PCA 2017-16",
+      "seat": "The Hague",
+      "filed": "2016-10-17",
+      "status": "final_enforcing",
+      "subject": "Expropriation of Crimean oil & gas assets (upstream, midstream, distribution, stored gas) under Russia-Ukraine BIT 1998",
+      "amount_awarded_usd": 5000000000,
+      "milestones": [
+        {"date": "2019-02-22", "event": "Partial award on jurisdiction & merits"},
+        {"date": "2023-04-12", "event": "Final award on quantum (~USD 5bn)"},
+        {"date": "2024-10-29", "event": "Hague Court of Appeal dismisses Russia's challenge"},
+        {"date": "2024-12-06", "event": "Hoge Raad confirms - cassation dismissed"},
+        {"date": "2023-12-19", "event": "UK High Court recognition order"},
+        {"date": "2024-10", "event": "Helsinki District Court asset freeze"},
+        {"date": "2025-04-01", "event": "Paris Judicial Court exequatur"},
+        {"date": "2025-07-11", "event": "Vienna District Court exequatur + 20 properties seized"}
+      ],
+      "outcome": "Final; enforcement campaign across UK/FR/FI/AT/US",
+      "url": "https://www.italaw.com/cases/4381"
+    },
+    {
+      "id": "pca-2015-07-belbek",
+      "category": "arbitration_BIT",
+      "cluster": "crimea_BIT",
+      "name": "Aeroport Belbek + Kolomoisky v Russia",
+      "forum": "PCA",
+      "docket": "PCA 2015-07",
+      "seat": "The Hague",
+      "filed": "2015-01-13",
+      "status": "liability_final_quantum_pending",
+      "subject": "Belbek Airport (Sevastopol) - occupation Feb 2014, nationalization June 2014",
+      "milestones": [
+        {"date": "2017-02-24", "event": "Interim/Partial Award on Jurisdiction"},
+        {"date": "2019-02", "event": "Partial Award on Merits - liability"},
+        {"date": "2022-07-19", "event": "Hague Court of Appeal dismisses set-aside"},
+        {"date": "2024-12-06", "event": "Hoge Raad confirms"}
+      ],
+      "outcome": "Liability final; quantum pending",
+      "url": "https://pca-cpa.org/en/cases/123/"
+    },
+    {
+      "id": "pca-2015-21-privatbank",
+      "category": "arbitration_BIT",
+      "cluster": "crimea_BIT",
+      "name": "PrivatBank + Finilon v Russia",
+      "forum": "PCA",
+      "docket": "PCA 2015-21",
+      "seat": "The Hague",
+      "filed": "2015-04-13",
+      "status": "liability_final_quantum_pending",
+      "subject": "Crimea banking operations, real estate, ATM network (~USD 1bn claimed)",
+      "amount_claimed_usd": 1000000000,
+      "milestones": [
+        {"date": "2017-03-27", "event": "Interim Award (jurisdiction)"},
+        {"date": "2019-02-04", "event": "Partial Award (liability)"},
+        {"date": "2024-12-06", "event": "Hoge Raad confirms"}
+      ],
+      "outcome": "Liability final; quantum pending"
+    },
+    {
+      "id": "pca-2016-14-oschadbank",
+      "category": "arbitration_BIT",
+      "cluster": "crimea_BIT",
+      "name": "Oschadbank v Russia",
+      "forum": "PCA",
+      "docket": "PCA 2016-14",
+      "seat": "Paris",
+      "filed": "2016-01-20",
+      "status": "final_enforcing",
+      "subject": "Crimean banking branch, expropriated assets",
+      "amount_awarded_usd": 1100000000,
+      "milestones": [
+        {"date": "2018-11-26", "event": "Award - USD 1.1bn (~USD 1.3bn with interest)"},
+        {"date": "2021-03-30", "event": "Paris CoA annulment (Russia wins)"},
+        {"date": "2022-12-07", "event": "Cour de cassation quashes annulment"},
+        {"date": "2025-07-01", "event": "Paris CoA on renvoi confirms award"},
+        {"date": "2026-01", "event": "Paris CoA dismisses arbitrator-independence claims"}
+      ],
+      "outcome": "Final; ~USD 99m of Russian assets seized in France"
+    },
+    {
+      "id": "pca-2015-34-ukrnafta",
+      "category": "arbitration_BIT",
+      "cluster": "crimea_BIT",
+      "name": "Ukrnafta v Russia",
+      "forum": "PCA",
+      "docket": "PCA 2015-34",
+      "seat": "Geneva",
+      "filed": "2015-06-15",
+      "status": "final",
+      "subject": "16 petrol stations and offices in Crimea",
+      "amount_awarded_usd": 44455012,
+      "milestones": [
+        {"date": "2017-06-26", "event": "Award on Jurisdiction"},
+        {"date": "2018-10-16", "event": "Swiss FT 4A_396/2017 - confirms BIT applies in Crimea"},
+        {"date": "2019-04-12", "event": "Final Award - USD 44.5m + costs/interest"},
+        {"date": "2019-12-12", "event": "Swiss FT 4A_244/2019 confirms final award"}
+      ],
+      "outcome": "Final and binding"
+    },
+    {
+      "id": "pca-2015-35-stabil",
+      "category": "arbitration_BIT",
+      "cluster": "crimea_BIT",
+      "name": "Stabil et al. v Russia",
+      "forum": "PCA",
+      "docket": "PCA 2015-35",
+      "seat": "Geneva",
+      "filed": "2015-06-15",
+      "status": "final",
+      "subject": "31 petrol stations in Crimea (11 Kolomoisky-affiliated companies)",
+      "amount_awarded_usd": 34600000,
+      "milestones": [
+        {"date": "2019-04-12", "event": "Final Award - USD 34.6m"},
+        {"date": "2019-12-12", "event": "Swiss FT confirms"}
+      ],
+      "outcome": "Final and binding; US confirmation petition filed 2022"
+    },
+    {
+      "id": "pca-2015-36-everest",
+      "category": "arbitration_BIT",
+      "cluster": "crimea_BIT",
+      "name": "Everest Estate et al. v Russia",
+      "forum": "PCA",
+      "docket": "PCA 2015-36",
+      "seat": "The Hague",
+      "filed": "2015-06-19",
+      "status": "set_aside_remanded",
+      "subject": "Real estate (hotels, apartments, commercial property) in Crimea - Everest + 18 companies",
+      "amount_awarded_usd": 159000000,
+      "milestones": [
+        {"date": "2017-03-19", "event": "First-ever BIT decision finding protection in occupied territory"},
+        {"date": "2018-05-02", "event": "Award on Merits & Quantum - USD 130m principal (~USD 159m with costs)"},
+        {"date": "2024-12-06", "event": "Hoge Raad REMANDS to Amsterdam CoA on limited evidentiary issues"}
+      ],
+      "outcome": "Liability/quantum awarded; set-aside remand pending - only Crimea case to be remanded"
+    },
+    {
+      "id": "pca-2015-29-lugzor",
+      "category": "arbitration_BIT",
+      "cluster": "crimea_BIT",
+      "name": "Lugzor et al. v Russia",
+      "forum": "PCA",
+      "docket": "PCA 2015-29",
+      "seat": "The Hague",
+      "filed": "2015-05-26",
+      "status": "award_rendered",
+      "subject": "Real estate investments in Crimea (5 claimants incl. DniproAzot)",
+      "milestones": [
+        {"date": "2022-10-04", "event": "Award - liability and undisclosed quantum"},
+        {"date": "2022-12-02", "event": "Corrected Award"}
+      ],
+      "outcome": "Award rendered; quantum confidential",
+      "url": "https://pca-cpa.org/en/cases/124/"
+    },
+    {
+      "id": "pca-2018-41-dtek",
+      "category": "arbitration_BIT",
+      "cluster": "crimea_BIT",
+      "name": "DTEK Krymenergo v Russia",
+      "forum": "PCA",
+      "docket": "PCA 2018-41",
+      "seat": "The Hague",
+      "filed": "2018",
+      "status": "set_aside_pending_enforcement_stayed",
+      "subject": "Crimean electricity grid distributor (Akhmetov / DTEK Energy B.V.)",
+      "amount_awarded_usd": 207800000,
+      "milestones": [
+        {"date": "2023-11-01", "event": "Final Award - USD 207.8m + ~USD 10.8m costs"},
+        {"date": "2025-05-02", "event": "UK High Court [2025] EWHC 1060 stays enforcement pending Dutch annulment"}
+      ],
+      "outcome": "Award rendered; UK enforcement stayed; Dutch set-aside ongoing"
+    },
+    {
+      "id": "pca-ukrenergo",
+      "category": "arbitration_BIT",
+      "cluster": "post_2022_BIT",
+      "name": "NEK Ukrenergo v Russia",
+      "forum": "PCA",
+      "docket": "PCA Paris-seated",
+      "seat": "Paris",
+      "filed": "2020-11",
+      "status": "merits_active",
+      "subject": "17+ HV substations and 1,300+ km transmission lines seized in Crimea",
+      "amount_claimed_usd": 580000000,
+      "milestones": [
+        {"date": "2024-08-05", "event": "Award on Jurisdiction - tribunal rejects cross-border requirement"}
+      ],
+      "outcome": "Jurisdiction confirmed; merits phase active"
+    },
+    {
+      "id": "pca-energoatom-zaporizhzhia",
+      "category": "arbitration_BIT",
+      "cluster": "post_2022_BIT",
+      "name": "Energoatom v Russia (II) - Zaporizhzhia NPP",
+      "forum": "PCA",
+      "docket": "TBD",
+      "seat": "TBD",
+      "filed": "2023-03",
+      "status": "pre_arbitration",
+      "subject": "Zaporizhzhia NPP and other assets in occupied Zaporizhzhia oblast (USD 3bn claimed)",
+      "amount_claimed_usd": 3000000000,
+      "milestones": [
+        {"date": "2023-03", "event": "Notice of dispute"}
+      ],
+      "outcome": "Pre-arbitration cooling-off triggered"
+    },
+    {
+      "id": "pca-ukrhydroenergo",
+      "category": "arbitration_BIT",
+      "cluster": "post_2022_BIT",
+      "name": "Ukrhydroenergo v Russia - Kakhovka HPP",
+      "forum": "PCA",
+      "docket": "TBD",
+      "filed": "2024-06-06",
+      "status": "pre_arbitration_paused",
+      "subject": "Destruction of Kakhovka HPP dam (June 2023) + 140 missile attacks (USD 2.5bn claimed)",
+      "amount_claimed_usd": 2500000000,
+      "milestones": [
+        {"date": "2024-06-06", "event": "Notice of dispute"},
+        {"date": "2024-10", "event": "Tender for legal counsel cancelled"}
+      ],
+      "outcome": "Paused pending coordination with Ukrainian government"
+    },
+    {
+      "id": "nl-mh17-criminal",
+      "category": "domestic",
+      "cluster": "mh17_domestic",
+      "name": "Public Prosecution Service v Girkin, Dubinskiy, Pulatov, Kharchenko",
+      "forum": "DUTCH",
+      "docket": "ECLI:NL:RBDHA:2022:14036-14040",
+      "seat": "The Hague (Schiphol JCS)",
+      "filed": "2020-03-09",
+      "status": "final",
+      "subject": "Causing crash of MH17 and murder of 298 with Buk missile from Pervomaiskyi",
+      "milestones": [
+        {"date": "2020-06", "event": "Indictments"},
+        {"date": "2022-11-17", "event": "Verdict - 3 convicted (life), Pulatov acquitted; ~EUR 16m damages"},
+        {"date": "2022-12-01", "event": "OM declines to appeal Pulatov acquittal"}
+      ],
+      "outcome": "Three convicted in absentia (life imprisonment); civil damages ~EUR 16m"
+    },
+    {
+      "id": "nl-jit-suspended",
+      "category": "domestic",
+      "cluster": "mh17_domestic",
+      "name": "JIT MH17 follow-on investigation",
+      "forum": "DUTCH",
+      "filed": "2014-08",
+      "status": "suspended",
+      "subject": "Identification of additional suspects in MH17 chain of command",
+      "milestones": [
+        {"date": "2023-02-08", "event": "JIT suspends - leads exhausted; identified Putin's active role but no immunity waiver"}
+      ],
+      "outcome": "Suspended (not formally closed)"
+    },
+    {
+      "id": "nl-hr-naftogaz",
+      "category": "domestic",
+      "cluster": "hoge_raad_crimea",
+      "name": "Russia v Naftogaz et al. (set-aside cassation)",
+      "forum": "DUTCH",
+      "docket": "ECLI:NL:HR:2024:1810",
+      "filed": "2023",
+      "status": "final",
+      "subject": "Russia's set-aside of PCA Naftogaz Crimea award",
+      "milestones": [{"date": "2024-12-06", "event": "Hoge Raad dismisses cassation"}],
+      "outcome": "Award stands"
+    },
+    {
+      "id": "nl-hr-belbek",
+      "category": "domestic",
+      "cluster": "hoge_raad_crimea",
+      "name": "Russia v Belbek/Kolomoisky (set-aside cassation)",
+      "forum": "DUTCH",
+      "filed": "2022",
+      "status": "final",
+      "subject": "Russia's set-aside of Belbek partial awards",
+      "milestones": [{"date": "2024-12-06", "event": "Hoge Raad dismisses cassation"}],
+      "outcome": "Award stands"
+    },
+    {
+      "id": "nl-hr-privatbank",
+      "category": "domestic",
+      "cluster": "hoge_raad_crimea",
+      "name": "Russia v PrivatBank/Finilon (set-aside cassation)",
+      "forum": "DUTCH",
+      "filed": "2022",
+      "status": "final",
+      "subject": "Russia's set-aside of PrivatBank partial awards",
+      "milestones": [{"date": "2024-12-06", "event": "Hoge Raad dismisses cassation"}],
+      "outcome": "Award stands"
+    },
+    {
+      "id": "nl-hr-everest",
+      "category": "domestic",
+      "cluster": "hoge_raad_crimea",
+      "name": "Russia v Everest Estate (set-aside cassation)",
+      "forum": "DUTCH",
+      "filed": "2022",
+      "status": "remanded",
+      "subject": "Russia's set-aside + revocation (alleged fraud) of Everest award",
+      "milestones": [{"date": "2024-12-06", "event": "Hoge Raad REMANDS to Amsterdam CoA"}],
+      "outcome": "Remand on narrow evidentiary/admissibility issues - only Crimea case remanded"
+    },
+    {
+      "id": "fi-petrovsky",
+      "category": "domestic",
+      "cluster": "universal_jurisdiction",
+      "name": "Finland v Yan Petrovsky (Voislav Torden)",
+      "forum": "FI",
+      "docket": "Helsinki District Court",
+      "filed": "2024",
+      "status": "appeal_pending",
+      "subject": "4 war crimes in Luhansk Sept 2014 - killing 22 Ukrainian soldiers; Rusich mercenary group deputy commander",
+      "milestones": [
+        {"date": "2024-12", "event": "Trial opens"},
+        {"date": "2025-03-14", "event": "Conviction - life sentence (first universal-jurisdiction conviction worldwide of mercenary-group member for Ukraine war crimes)"}
+      ],
+      "outcome": "Convicted; appeal pending"
+    },
+    {
+      "id": "lt-gadzhimagomedov",
+      "category": "domestic",
+      "cluster": "universal_jurisdiction",
+      "name": "Lithuania v Margen Gadzhimagomedov",
+      "forum": "LT",
+      "docket": "Vilnius",
+      "filed": "2025-10-30",
+      "status": "pre_trial",
+      "subject": "War crimes vs civilians/POWs in Melitopol filtration camp Mar-Sep 2022 (incl. Lithuanian victim)",
+      "milestones": [
+        {"date": "2025-10-28", "event": "Suspect transferred from Ukrainian custody (first such extradition)"},
+        {"date": "2025-10-30", "event": "Arrest order - 3-month detention"}
+      ],
+      "outcome": "Pre-trial detention; potential life sentence"
+    },
+    {
+      "id": "de-frankfurt-spy",
+      "category": "domestic",
+      "cluster": "universal_jurisdiction",
+      "name": "Germany v Vardges I., Robert A., Arman S. (espionage trial)",
+      "forum": "DE",
+      "docket": "OLG Frankfurt",
+      "filed": "2025-05-28",
+      "status": "trial_active",
+      "subject": "Intelligence activities for Russian service - surveilling former Ukrainian-army serviceman in Frankfurt for possible assassination plot",
+      "milestones": [
+        {"date": "2024-06-19", "event": "Arrests"},
+        {"date": "2025-05-28", "event": "Charges filed"},
+        {"date": "2025-12-09", "event": "Trial opens at OLG Frankfurt"}
+      ],
+      "outcome": "Active proceedings"
+    },
+    {
+      "id": "uk-unicredit-anti-suit",
+      "category": "domestic",
+      "cluster": "uk_commercial",
+      "name": "UniCredit v RusChemAlliance",
+      "forum": "UK_HC",
+      "docket": "[2024] UKSC 30",
+      "filed": "2023",
+      "status": "final",
+      "subject": "UniCredit performance bonds for Russian LNG facility (~EUR 10bn); permanent anti-suit injunction restraining Russian-court proceedings",
+      "milestones": [
+        {"date": "2024-09-18", "event": "UK Supreme Court reasoned judgment - anti-suit upheld"}
+      ],
+      "outcome": "Final; leading post-sanctions ASI precedent"
+    },
+    {
+      "id": "eu-cbr-immobilisation",
+      "category": "executive_legal",
+      "cluster": "asset_immobilisation",
+      "name": "EU/Belgium - Russian Central Bank asset immobilisation at Euroclear",
+      "forum": "EU/BE",
+      "filed": "2022-02-28",
+      "status": "frozen_indefinitely",
+      "subject": "~EUR 210bn Russian CBR assets at Euroclear; reparations loan negotiation",
+      "amount_claimed_usd": 210000000000,
+      "milestones": [
+        {"date": "2022-02-28", "event": "Initial freeze"},
+        {"date": "2024-05", "event": "Windfall profits regulation 2024/1469"},
+        {"date": "2025-12-12", "event": "EU agrees indefinite freeze; Russian CBR countersuit RUB 18.2tn"}
+      ],
+      "outcome": "Frozen; Belgium opposing outright confiscation"
+    }
+  ]
+}
