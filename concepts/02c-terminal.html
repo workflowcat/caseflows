@@ -1,0 +1,504 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>caseflows :: research terminal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,500;0,600;1,400&family=Newsreader:ital,opsz,wght@0,6..72,400..600;1,6..72,400..500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0d1218;
+    --bg-soft:#141a22;
+    --bg-dim:#0a0e13;
+    --rule:#202832;
+    --rule-soft:#1a2128;
+    --ink:#e8e2d4;
+    --ink-soft:#a89e88;
+    --ink-faint:#5d6470;
+    --amber:#d99923;
+    --amber-deep:#b07816;
+    --cyan:#5fb6c4;
+    --crimson:#cc4a4a;
+    --green:#7fae5a;
+    --mono:'JetBrains Mono', ui-monospace, 'Cascadia Mono', monospace;
+    --serif:'Newsreader', Georgia, serif;
+  }
+  *,*::before,*::after{box-sizing:border-box}
+  html{background:var(--bg);scroll-behavior:smooth}
+  body{
+    margin:0;background:var(--bg);color:var(--ink-soft);
+    font-family:var(--mono);
+    font-size:13px;
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+    /* CRT scan-line effect */
+    background-image: linear-gradient(rgba(255,255,255,.012) 50%, transparent 50%);
+    background-size: 100% 3px;
+  }
+  a{color:inherit}
+  button{font:inherit;color:inherit;background:none;border:none;padding:0;cursor:pointer}
+  ::selection{background:var(--amber);color:var(--bg)}
+  ::placeholder{color:var(--ink-faint);font-style:italic}
+
+  .frame{max-width:1320px;margin:0 auto;padding:0 24px}
+
+  /* ── Top status bar ──────────────────────────── */
+  .topbar{
+    border-bottom:1px solid var(--rule);
+    padding:8px 0;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    font-size:11px;
+    color:var(--ink-faint);
+    letter-spacing:.04em;
+    background:var(--bg-dim);
+  }
+  .topbar .left{display:flex;gap:18px;align-items:center}
+  .topbar .led{display:inline-block;width:8px;height:8px;background:var(--green);border-radius:50%;box-shadow:0 0 8px var(--green);margin-right:6px;animation:pulse 2.4s infinite}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.5}}
+  .topbar .right{display:flex;gap:14px}
+  .topbar a{text-decoration:none;color:var(--ink-soft);transition:color .15s}
+  .topbar a:hover{color:var(--amber)}
+
+  /* ── Banner / brand ──────────────────────────── */
+  .banner{padding:28px 0 14px;border-bottom:1px dashed var(--rule)}
+  .banner h1{
+    font-family:var(--mono);
+    font-size:32px;
+    color:var(--ink);
+    margin:0;
+    font-weight:600;
+    letter-spacing:-.01em;
+    line-height:1;
+  }
+  .banner h1 .cur{
+    display:inline-block;
+    width:.5em;height:1em;
+    background:var(--amber);
+    vertical-align:-2px;
+    margin-left:4px;
+    animation:blink 1s step-end infinite;
+  }
+  @keyframes blink{50%{opacity:0}}
+  .banner h1 .accent{color:var(--amber)}
+  .banner .meta{
+    margin-top:8px;
+    font-size:12px;
+    color:var(--ink-faint);
+    font-style:italic;
+    font-family:var(--serif);
+  }
+
+  /* ── Stat strip ──────────────────────────── */
+  .stats{
+    display:grid;
+    grid-template-columns:repeat(5,1fr);
+    gap:0;
+    border-bottom:1px solid var(--rule);
+  }
+  .stat{padding:14px 18px;border-right:1px solid var(--rule)}
+  .stat:last-child{border-right:none}
+  .stat .v{
+    font-family:var(--mono);
+    font-size:24px;
+    color:var(--ink);
+    font-weight:500;
+    letter-spacing:-.02em;
+    line-height:1;
+  }
+  .stat .v.am{color:var(--amber)}
+  .stat .v.cy{color:var(--cyan)}
+  .stat .l{
+    margin-top:6px;
+    font-size:10px;
+    letter-spacing:.1em;
+    text-transform:uppercase;
+    color:var(--ink-faint);
+  }
+
+  /* ── Query bar ──────────────────────────── */
+  .query{
+    background:var(--bg-soft);
+    border-bottom:1px solid var(--rule);
+    padding:14px 18px;
+    display:flex;
+    align-items:center;
+    gap:12px;
+    font-family:var(--mono);
+    font-size:13px;
+  }
+  .query .prompt{color:var(--amber);font-weight:500}
+  .query .verb{color:var(--cyan)}
+  .query input[type=text]{
+    flex:1;
+    background:transparent;border:none;outline:none;
+    font:inherit;color:var(--ink);
+    padding:2px 0;
+    border-bottom:1px dotted var(--rule);
+  }
+  .query input[type=text]:focus{border-bottom-color:var(--amber)}
+  .query .sort{
+    color:var(--ink-soft);
+    border-bottom:1px dotted var(--ink-faint);
+    padding-bottom:1px;
+  }
+  .query .sort:hover{color:var(--amber);border-bottom-color:var(--amber)}
+
+  /* Filter rail — flag chips */
+  .flags{
+    background:var(--bg-soft);
+    border-bottom:1px solid var(--rule);
+    padding:10px 18px;
+    display:flex;
+    flex-wrap:wrap;
+    align-items:center;
+    gap:6px 16px;
+    font-size:11px;
+  }
+  .flags .lab{color:var(--ink-faint)}
+  .flags .grp{display:flex;gap:4px;align-items:center}
+  .flags .chip{
+    padding:3px 8px;
+    border:1px solid var(--rule);
+    color:var(--ink-soft);
+    transition:color .15s,border-color .15s,background .15s;
+  }
+  .flags .chip:hover{color:var(--ink);border-color:var(--ink-faint)}
+  .flags .chip.on{
+    color:var(--bg);background:var(--amber);border-color:var(--amber);
+  }
+
+  /* Counter */
+  .counter{
+    padding:10px 18px;
+    font-size:11px;
+    color:var(--ink-faint);
+    letter-spacing:.04em;
+    background:var(--bg);
+    border-bottom:1px solid var(--rule);
+  }
+  .counter b{color:var(--amber);font-weight:500}
+
+  /* ── Result table ──────────────────────────── */
+  .results{padding:0;background:var(--bg)}
+  .row{
+    display:grid;
+    grid-template-columns: 56px 80px 96px 70px 1fr 130px 90px;
+    gap:12px;
+    padding:12px 18px;
+    border-bottom:1px solid var(--rule-soft);
+    align-items:center;
+    cursor:pointer;
+    transition:background .12s;
+    font-size:12px;
+  }
+  .row:hover{background:var(--bg-soft)}
+  .row.open{background:var(--bg-soft);border-left:2px solid var(--amber);padding-left:16px}
+  .row .fol{color:var(--amber);font-weight:500}
+  .row .forum{color:var(--cyan);font-weight:500}
+  .row .docket{color:var(--ink-faint);font-size:11px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .row .year{color:var(--ink-soft)}
+  .row .name{color:var(--ink);font-weight:500;font-size:13px}
+  .row .name .vp{color:var(--amber);font-style:italic;font-weight:500}
+  .row .name .strap{display:block;color:var(--ink-soft);font-style:italic;font-family:var(--serif);font-size:13px;margin-top:2px;font-weight:400;line-height:1.4;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .row .stat{
+    font-size:10px;
+    letter-spacing:.06em;
+    text-transform:uppercase;
+    color:var(--ink-soft);
+  }
+  .row .stat::before{content:"●";margin-right:5px;color:var(--ink-faint)}
+  .row .stat.pending::before{color:var(--crimson)}
+  .row .stat.decided::before{color:var(--green)}
+  .row .stat.enforcing::before{color:var(--amber)}
+  .row .amt{
+    text-align:right;
+    color:var(--ink);
+    font-weight:500;
+  }
+  .row .amt.gilt{color:var(--amber)}
+  .row .amt.neg{color:var(--ink-faint)}
+
+  /* Expanded panel */
+  .row .expand{
+    grid-column:1 / -1;
+    margin:14px 0 4px;
+    padding:14px 0 8px 80px;
+    border-top:1px dashed var(--rule);
+    display:none;
+  }
+  .row.open .expand{display:block}
+  .row .expand h4{
+    margin:0 0 10px;
+    color:var(--amber);
+    font-size:10px;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    font-weight:500;
+  }
+  .row .expand .ms{
+    list-style:none;padding:0;margin:0;
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:4px 24px;
+  }
+  .row .expand li{
+    font-size:11px;
+    color:var(--ink-soft);
+    padding-left:14px;
+    position:relative;
+    line-height:1.6;
+  }
+  .row .expand li::before{
+    content:"›";position:absolute;left:0;color:var(--ink-faint)
+  }
+  .row .expand li.s::before{content:"★";color:var(--amber)}
+  .row .expand li .d{color:var(--cyan);margin-right:6px}
+  .row .expand .note{
+    font-family:var(--serif);
+    font-style:italic;
+    font-size:13px;
+    color:var(--ink);
+    margin-top:10px;
+    line-height:1.5;
+    border-left:2px solid var(--amber);
+    padding-left:10px;
+  }
+  .row .expand .open-link{
+    display:inline-block;
+    margin-top:12px;
+    color:var(--amber);
+    font-size:11px;
+    border-bottom:1px solid var(--amber);
+    padding-bottom:1px;
+    text-transform:uppercase;
+    letter-spacing:.08em;
+    text-decoration:none;
+  }
+
+  /* Footer keyboard shortcuts */
+  .keys{
+    border-top:1px solid var(--rule);
+    background:var(--bg-dim);
+    padding:8px 18px;
+    display:flex;
+    gap:24px;
+    flex-wrap:wrap;
+    font-size:10px;
+    color:var(--ink-faint);
+    letter-spacing:.06em;
+    text-transform:uppercase;
+  }
+  .keys kbd{
+    background:var(--bg-soft);
+    border:1px solid var(--rule);
+    padding:1px 6px;
+    border-radius:2px;
+    color:var(--ink);
+    font-family:var(--mono);
+    font-size:10px;
+    margin-right:6px;
+  }
+  footer.bottom{padding:32px 18px 56px;font-size:10px;color:var(--ink-faint);letter-spacing:.06em;text-transform:uppercase;display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px}
+  footer.bottom a{color:var(--ink-soft);text-decoration:none;border-bottom:1px solid var(--rule);transition:color .15s,border-color .15s}
+  footer.bottom a:hover{color:var(--amber);border-bottom-color:var(--amber)}
+
+  .empty{padding:80px 0;text-align:center;color:var(--ink-faint);font-style:italic;font-family:var(--serif)}
+
+  @media(max-width:1080px){
+    .row{grid-template-columns:50px 70px 60px 1fr 110px;gap:10px}
+    .row .docket,.row .amt{display:none}
+    .row.open .expand{padding-left:60px}
+    .stats{grid-template-columns:repeat(3,1fr)}
+    .stats .stat:nth-child(n+4){border-top:1px solid var(--rule)}
+  }
+  @media(max-width:680px){
+    .row{grid-template-columns:1fr 90px;gap:8px}
+    .row .fol,.row .forum,.row .year{display:none}
+    .stats{grid-template-columns:1fr 1fr}
+  }
+</style>
+</head>
+<body>
+  <div class="frame">
+
+    <!-- Top status bar -->
+    <div class="topbar">
+      <div class="left">
+        <span><span class="led"></span>caseflows.terminal · v0.2 · session 27.iv.2026</span>
+        <span>indexed: 41 cases · 11 forums</span>
+      </div>
+      <div class="right">
+        <a href="../index.html">~/concepts</a>
+        <a href="02-archive.html">archive</a>
+        <a href="02b-newspaper.html">newspaper</a>
+        <a href="02d-editorial.html">editorial</a>
+      </div>
+    </div>
+
+    <!-- Banner -->
+    <div class="banner">
+      <h1>caseflows<span class="accent">::</span>terminal<span class="cur"></span></h1>
+      <div class="meta">A research console for international legal proceedings — <span style="color:var(--amber)">Ukraine v Russia</span>, 2014–2026.</div>
+    </div>
+
+    <!-- Stat strip -->
+    <div class="stats">
+      <div class="stat"><div class="v">41</div><div class="l">cases</div></div>
+      <div class="stat"><div class="v">11</div><div class="l">forums</div></div>
+      <div class="stat"><div class="v">9</div><div class="l">jurisdictions</div></div>
+      <div class="stat"><div class="v am">$7.5b</div><div class="l">awarded vs RU</div></div>
+      <div class="stat"><div class="v cy">€210b</div><div class="l">CBR frozen</div></div>
+    </div>
+
+    <!-- Query bar -->
+    <div class="query">
+      <span class="prompt">⟩</span>
+      <span class="verb">SELECT</span>
+      <span style="color:var(--ink)">case</span>
+      <span class="verb">FROM</span>
+      <span style="color:var(--ink)">archive</span>
+      <span class="verb">WHERE</span>
+      <input id="q" type="text" placeholder='match("naftogaz", "MH17", "putin", "kakhovka", "crimea"…)'>
+      <button class="sort" id="sort">order_by · filed_desc</button>
+    </div>
+
+    <!-- Filter flags -->
+    <div class="flags">
+      <span class="lab">--forum=</span>
+      <div class="grp" data-group="forum">
+        <button class="chip on" data-val="all">*</button>
+        <button class="chip" data-val="ICJ">icj</button>
+        <button class="chip" data-val="ECtHR">ecthr</button>
+        <button class="chip" data-val="ICC">icc</button>
+        <button class="chip" data-val="PCA">pca</button>
+        <button class="chip" data-val="SCC">scc/icc-arb</button>
+        <button class="chip" data-val="Domestic">national</button>
+        <button class="chip" data-val="ITLOS">itlos/icao</button>
+      </div>
+      <span class="lab" style="margin-left:18px">--status=</span>
+      <div class="grp" data-group="status">
+        <button class="chip on" data-val="all">*</button>
+        <button class="chip" data-val="pending">pending</button>
+        <button class="chip" data-val="decided">decided</button>
+        <button class="chip" data-val="enforcing">enforcing</button>
+      </div>
+      <span class="lab" style="margin-left:18px">--theme=</span>
+      <div class="grp" data-group="theme">
+        <button class="chip on" data-val="all">*</button>
+        <button class="chip" data-val="territory">territory</button>
+        <button class="chip" data-val="civilian">civilian</button>
+        <button class="chip" data-val="money">money</button>
+      </div>
+    </div>
+
+    <!-- Counter -->
+    <div class="counter">
+      ⟩ rows returned: <b id="shown">41</b>/41 · execution time: 0.0&thinsp;ms
+    </div>
+
+    <!-- Results -->
+    <div class="results" id="results"></div>
+
+    <!-- Keyboard shortcuts strip -->
+    <div class="keys">
+      <span><kbd>/</kbd>focus search</span>
+      <span><kbd>↑</kbd><kbd>↓</kbd>navigate rows</span>
+      <span><kbd>↵</kbd>open / close folio</span>
+      <span><kbd>F</kbd>cycle forum</span>
+      <span><kbd>S</kbd>cycle sort</span>
+      <span><kbd>esc</kbd>clear filters</span>
+    </div>
+
+    <footer class="bottom">
+      <div>caseflows.terminal · v0.2 · 27.iv.2026</div>
+      <div><a href="../cases.json">data ↧</a> · <a href="https://github.com/workflowcat/caseflows">source</a></div>
+      <div>set in JetBrains Mono · Newsreader</div>
+    </footer>
+
+  </div>
+
+<script src="data.js"></script>
+<script>
+const state={forum:'all',status:'all',theme:'all',q:'',sort:'filed-desc'};
+const sortCycle=['filed-desc','filed-asc','fol-asc','amount-desc'];
+const sortLabels={'filed-desc':'order_by · filed_desc','filed-asc':'order_by · filed_asc','fol-asc':'order_by · folio_asc','amount-desc':'order_by · amount_desc'};
+
+const matchQ=(c,q)=>!q||[c.name,c.italic,c.forumLabel,c.docket,c.note,c.statusLabel,...(c.milestones||[]).map(m=>m[1])].join(' ').toLowerCase().includes(q.toLowerCase());
+
+const render=()=>{
+  let list=window.CASES.filter(c=>{
+    if(state.forum!=='all'&&window.forumBucket(c)!==state.forum)return false;
+    if(state.status!=='all'&&c.status!==state.status)return false;
+    if(state.theme!=='all'&&!(c.theme||[]).includes(state.theme))return false;
+    return matchQ(c,state.q);
+  });
+  if(state.sort==='filed-desc')list.sort((a,b)=>b.filed.localeCompare(a.filed));
+  else if(state.sort==='filed-asc')list.sort((a,b)=>a.filed.localeCompare(b.filed));
+  else if(state.sort==='fol-asc')list.sort((a,b)=>a.fol-b.fol);
+  else if(state.sort==='amount-desc')list.sort((a,b)=>Math.abs(b.amount||0)-Math.abs(a.amount||0));
+  document.getElementById('shown').textContent=list.length;
+  const wrap=document.getElementById('results');
+  if(!list.length){wrap.innerHTML='<div class="empty">∅ no matches — try clearing filters</div>';return}
+  wrap.innerHTML=list.map(rowHTML).join('');
+  wrap.querySelectorAll('.row').forEach(r=>r.addEventListener('click',e=>{
+    if(e.target.closest('.open-link'))return;
+    r.classList.toggle('open');
+  }));
+};
+
+const rowHTML=(c)=>{
+  const dot=c.status==='enforcing'?'enforcing':c.status==='decided'?'decided':c.status==='struck'?'':'pending';
+  const nm=c.name.replace(/ v /g,' <span class="vp">v</span> ');
+  const amtCls=c.gilt?'gilt':(c.amount&&c.amount<0)?'neg':'';
+  const ms=(c.milestones||[]).map(m=>`<li class="${m[2]?'s':''}"><span class="d">${window.formatDate(m[0])}</span>${m[1]}</li>`).join('');
+  return `
+    <article class="row">
+      <span class="fol">[${String(c.fol).padStart(3,'0')}]</span>
+      <span class="forum">[${c.forumLabel}]</span>
+      <span class="docket">${c.docket}</span>
+      <span class="year">${c.year}</span>
+      <div class="name">${nm}<span class="strap">${c.italic}</span></div>
+      <span class="stat ${dot}">${c.statusLabel}</span>
+      <span class="amt ${amtCls}">${c.amount!==null?c.amountLbl:'—'}</span>
+      <div class="expand">
+        ${ms?`<h4>milestones [${(c.milestones||[]).length}]</h4><ul class="ms">${ms}</ul>`:''}
+        ${c.note?`<p class="note">¶ ${c.note}</p>`:''}
+        <a class="open-link" href="#fol-${c.fol}">⟩ open folio</a>
+      </div>
+    </article>`;
+};
+
+document.querySelectorAll('.flags .grp').forEach(set=>{
+  const g=set.dataset.group;
+  set.querySelectorAll('.chip').forEach(b=>b.addEventListener('click',()=>{
+    set.querySelectorAll('.chip').forEach(x=>x.classList.toggle('on',x===b));
+    state[g]=b.dataset.val;render();
+  }));
+});
+const $q=document.getElementById('q');
+$q.addEventListener('input',e=>{state.q=e.target.value.trim();render()});
+document.getElementById('sort').addEventListener('click',()=>{
+  const i=sortCycle.indexOf(state.sort);state.sort=sortCycle[(i+1)%sortCycle.length];
+  document.getElementById('sort').textContent=sortLabels[state.sort];render();
+});
+// keyboard shortcuts
+document.addEventListener('keydown',e=>{
+  if(e.target===$q&&e.key!=='Escape')return;
+  if(e.key==='/'){e.preventDefault();$q.focus()}
+  if(e.key==='Escape'){
+    state.forum='all';state.status='all';state.theme='all';state.q='';$q.value='';
+    document.querySelectorAll('.flags .grp').forEach(s=>s.querySelectorAll('.chip').forEach((c,i)=>c.classList.toggle('on',i===0)));
+    render();
+  }
+  if(e.key==='s'||e.key==='S'){
+    document.getElementById('sort').click();
+  }
+});
+render();
+</script>
+</body>
+</html>

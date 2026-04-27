@@ -1,0 +1,446 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Caseflows · Court Record — newspaper of record</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..700&family=Source+Serif+4:ital,opsz,wght@0,8..60,300..700;1,8..60,400..700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#fdfdfb;
+    --ink:#0a0a0a;
+    --ink-soft:#3a3633;
+    --ink-faint:#7a7570;
+    --rule:#1a1a1a;
+    --rule-faint:#cbc6bd;
+    --crimson:#a51820;
+    --display:'Bodoni Moda', 'Times New Roman', serif;
+    --body:'Source Serif 4', Georgia, serif;
+    --mono:'JetBrains Mono', ui-monospace, monospace;
+  }
+  *,*::before,*::after{box-sizing:border-box}
+  html{background:var(--paper)}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);font-size:15px;line-height:1.45;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;font-feature-settings:"onum","kern"}
+  a{color:inherit}
+  ::selection{background:var(--crimson);color:var(--paper)}
+  button{font:inherit;color:inherit;background:none;border:none;padding:0;cursor:pointer}
+
+  .frame{max-width:1280px;margin:0 auto;padding:0 36px}
+
+  /* ── Masthead — like a newspaper nameplate ───────────── */
+  .nameplate{
+    border-top:6px solid var(--ink);
+    border-bottom:1px solid var(--ink);
+    padding:18px 0 14px;
+    margin-top:14px;
+    text-align:center;
+    position:relative;
+  }
+  .nameplate .above{
+    font-family:var(--mono);
+    font-size:10px;
+    letter-spacing:.18em;
+    text-transform:uppercase;
+    color:var(--ink-soft);
+    margin-bottom:6px;
+  }
+  .nameplate h1{
+    font-family:var(--display);
+    font-variation-settings:"opsz" 96,"wght" 800;
+    font-weight:800;
+    font-size:clamp(56px,8vw,108px);
+    line-height:.92;
+    letter-spacing:.005em;
+    margin:0;
+    color:var(--ink);
+  }
+  .nameplate h1 em{
+    font-style:italic;
+    font-variation-settings:"opsz" 96,"wght" 700;
+    color:var(--crimson);
+  }
+  .nameplate .below{
+    margin-top:8px;
+    font-family:var(--body);
+    font-style:italic;
+    font-size:14px;
+    color:var(--ink-soft);
+  }
+  .nameplate .corner{
+    position:absolute;
+    font-family:var(--mono);
+    font-size:10px;
+    letter-spacing:.12em;
+    text-transform:uppercase;
+    color:var(--ink-soft);
+    top:18px;
+  }
+  .nameplate .corner.left{left:0;text-align:left;line-height:1.6}
+  .nameplate .corner.right{right:0;text-align:right;line-height:1.6}
+
+  /* Dateline strip */
+  .dateline{
+    border-bottom:1px solid var(--ink);
+    padding:8px 0;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    font-family:var(--mono);
+    font-size:10px;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:var(--ink);
+  }
+  .dateline .center{font-style:italic;font-family:var(--body);font-weight:400;letter-spacing:.04em;text-transform:none;color:var(--ink-soft);font-size:13px}
+  .dateline a{text-decoration:none;border-bottom:1px solid transparent;margin-left:18px;transition:border-color .15s,color .15s}
+  .dateline a:hover{color:var(--crimson);border-bottom-color:var(--crimson)}
+
+  /* ── Tools (filters, search, sort) styled as a contents bar ───── */
+  .tools{
+    display:grid;
+    grid-template-columns: 320px 1fr auto;
+    gap:24px;
+    align-items:center;
+    padding:14px 0;
+    border-bottom:1px solid var(--ink);
+    position:sticky;top:0;
+    background:var(--paper);z-index:30;
+  }
+  .search{
+    position:relative;
+    border-bottom:1px solid var(--ink);
+    padding:6px 0 5px 22px;
+  }
+  .search::before{content:"⌕";position:absolute;left:0;top:5px;font-family:var(--display);font-size:15px;color:var(--ink-soft)}
+  .search input{
+    width:100%;border:none;outline:none;background:transparent;
+    font-family:var(--body);font-size:15px;color:var(--ink);
+    padding:0;
+  }
+  .search input::placeholder{color:var(--ink-faint);font-style:italic}
+
+  .filters{display:flex;align-items:center;gap:0;flex-wrap:wrap;font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase}
+  .fset{display:flex;align-items:center;gap:6px;padding:0 14px;border-right:1px solid var(--rule-faint);height:24px}
+  .fset:first-child{padding-left:0}
+  .fset:last-child{border-right:none;padding-right:0}
+  .fset .lab{color:var(--ink-faint);margin-right:4px;font-style:italic;font-family:var(--body);text-transform:none;font-size:12px;letter-spacing:0}
+  .chip{padding:2px 6px;color:var(--ink-soft);transition:color .15s,background .15s,border-color .15s;border:1px solid transparent}
+  .chip:hover{color:var(--ink)}
+  .chip.on{color:var(--paper);background:var(--ink);border-color:var(--ink)}
+  .chip .c{margin-left:3px;color:var(--ink-faint);font-size:9px}
+  .chip.on .c{color:var(--rule-faint)}
+
+  .sort{
+    font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;
+    color:var(--ink);
+    border-bottom:1px solid var(--ink);
+    padding:2px 0;
+  }
+  .sort:hover{color:var(--crimson);border-bottom-color:var(--crimson)}
+
+  /* Counter */
+  .counter{
+    font-family:var(--mono);
+    font-size:10px;
+    letter-spacing:.12em;
+    text-transform:uppercase;
+    padding:10px 0 4px;
+    color:var(--ink-faint);
+    display:flex;
+    justify-content:space-between;
+  }
+  .counter b{color:var(--ink);font-weight:500}
+
+  /* ── Reports — multi-column list ──────────────── */
+  .reports{
+    column-count: 3;
+    column-gap: 36px;
+    column-rule: 1px solid var(--rule-faint);
+    padding:24px 0 8px;
+  }
+  @media(max-width:1080px){.reports{column-count:2}}
+  @media(max-width:640px){.reports{column-count:1;column-rule:none}}
+
+  .report{
+    break-inside: avoid;
+    page-break-inside: avoid;
+    padding:0 0 22px;
+    margin:0 0 22px;
+    border-bottom:1px solid var(--rule-faint);
+    cursor:pointer;
+    transition:background .12s;
+  }
+  .report:hover{background:rgba(10,10,10,.025)}
+  .report.lede{
+    border-bottom:2px solid var(--ink);
+    padding-bottom:24px;
+    margin-bottom:24px;
+  }
+
+  .report .smallcaps{
+    font-family:var(--mono);
+    font-size:10px;
+    letter-spacing:.12em;
+    text-transform:uppercase;
+    color:var(--ink);
+    margin:0 0 6px;
+    display:flex;
+    gap:10px;
+    align-items:baseline;
+    flex-wrap:wrap;
+  }
+  .report .smallcaps .forum{font-weight:500}
+  .report .smallcaps .docket{color:var(--ink-faint)}
+  .report .smallcaps .crimson{color:var(--crimson);font-weight:500}
+
+  .report h3{
+    font-family:var(--display);
+    font-variation-settings:"opsz" 32,"wght" 700;
+    font-weight:700;
+    font-size:21px;
+    line-height:1.12;
+    letter-spacing:-.005em;
+    margin:4px 0 6px;
+    color:var(--ink);
+  }
+  .report.lede h3{
+    font-size:32px;
+    font-variation-settings:"opsz" 60,"wght" 800;
+    line-height:1.05;
+  }
+  .report h3 em{font-style:italic;color:var(--crimson)}
+
+  .report .strap{
+    font-family:var(--body);
+    font-style:italic;
+    font-size:14px;
+    color:var(--ink-soft);
+    line-height:1.4;
+    margin:0 0 10px;
+  }
+  .report .lead{
+    font-family:var(--body);
+    font-size:14px;
+    line-height:1.55;
+    color:var(--ink);
+    margin:0;
+  }
+  .report.lede .lead{
+    font-size:15px;
+    line-height:1.6;
+  }
+  .report.lede .lead::first-letter{
+    font-family:var(--display);
+    font-variation-settings:"opsz" 96,"wght" 800;
+    font-size:62px;
+    line-height:.85;
+    float:left;
+    margin:4px 8px 0 0;
+    color:var(--crimson);
+  }
+
+  .report .footer{
+    margin-top:10px;
+    display:flex;
+    justify-content:space-between;
+    font-family:var(--mono);
+    font-size:9px;
+    letter-spacing:.12em;
+    text-transform:uppercase;
+    color:var(--ink-faint);
+  }
+  .report .footer .stat{color:var(--ink-soft)}
+  .report .footer .stat.dot::before{
+    content:"";display:inline-block;width:5px;height:5px;border-radius:50%;
+    margin-right:5px;vertical-align:middle;margin-bottom:1px;
+  }
+  .report .footer .stat.dot.pending::before{background:var(--crimson)}
+  .report .footer .stat.dot.decided::before{background:var(--ink)}
+  .report .footer .stat.dot.enforcing::before{background:var(--crimson)}
+  .report .footer .stat.dot.struck::before{background:var(--ink-faint)}
+  .report .footer .amt{
+    font-family:var(--display);
+    font-variation-settings:"opsz" 18,"wght" 600;
+    font-size:13px;
+    letter-spacing:0;
+    color:var(--ink);
+    text-transform:none;
+  }
+
+  /* Expanded panel */
+  .report .expand{display:none;margin-top:14px;padding-top:10px;border-top:1px dotted var(--rule-faint)}
+  .report.open .expand{display:block}
+  .report .expand h4{margin:0 0 6px;font-family:var(--mono);font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-faint);font-weight:500}
+  .report .expand ul{list-style:none;padding:0;margin:0 0 8px}
+  .report .expand li{font-family:var(--mono);font-size:11px;color:var(--ink-soft);padding:3px 0 3px 14px;position:relative;line-height:1.4}
+  .report .expand li::before{content:"";position:absolute;left:0;top:11px;width:8px;height:1px;background:var(--ink-faint)}
+  .report .expand li.s::before{background:var(--crimson);height:2px;top:10px}
+  .report .expand li .d{color:var(--ink);font-weight:500;margin-right:6px}
+  .report .expand .note{font-family:var(--body);font-style:italic;font-size:13px;color:var(--ink-soft);line-height:1.5;margin:6px 0 0}
+
+  /* Footer */
+  footer{
+    margin-top:48px;
+    border-top:6px solid var(--ink);
+    padding:22px 0 56px;
+    display:flex;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap:24px;
+    font-family:var(--mono);
+    font-size:10px;
+    letter-spacing:.12em;
+    text-transform:uppercase;
+    color:var(--ink-faint);
+  }
+  footer a{color:var(--ink-soft);text-decoration:none;border-bottom:1px solid var(--rule-faint);transition:color .15s,border-color .15s}
+  footer a:hover{color:var(--crimson);border-bottom-color:var(--crimson)}
+
+  /* Empty */
+  .empty{padding:80px 0;text-align:center;font-family:var(--body);font-style:italic;font-size:17px;color:var(--ink-faint);column-span:all}
+
+  @media (max-width:880px){
+    .frame{padding:0 22px}
+    .tools{grid-template-columns:1fr;gap:14px}
+    .nameplate .corner{display:none}
+  }
+</style>
+</head>
+<body>
+  <div class="frame">
+
+    <!-- Masthead -->
+    <div class="nameplate">
+      <div class="corner left">No. 041 ·<br>Vol. I</div>
+      <div class="above">— The Court Record —</div>
+      <h1>Case<em>flows</em></h1>
+      <div class="below">A newspaper of record · Ukraine v Russia in court · 2014–2026</div>
+      <div class="corner right">Established<br>27.iv.2026</div>
+    </div>
+
+    <!-- Dateline strip -->
+    <div class="dateline">
+      <div>The Hague · Strasbourg · Stockholm · Helsinki · Paris · London · Vilnius · Frankfurt</div>
+      <div class="center">"What courts will say of this war." — vol. I</div>
+      <div>
+        <a href="../index.html">Index</a>
+        <a href="02-archive.html">Archive</a>
+        <a href="02c-terminal.html">Terminal →</a>
+      </div>
+    </div>
+
+    <!-- Toolbar -->
+    <div class="tools">
+      <label class="search"><input id="q" type="search" placeholder="search reports — naftogaz, MH17, putin, kakhovka…" autocomplete="off"></label>
+      <div class="filters">
+        <div class="fset" data-group="forum">
+          <span class="lab">Forum</span>
+          <button class="chip on" data-val="all">all <span class="c">41</span></button>
+          <button class="chip" data-val="ICJ">icj</button>
+          <button class="chip" data-val="ECtHR">ecthr</button>
+          <button class="chip" data-val="ICC">icc</button>
+          <button class="chip" data-val="PCA">pca</button>
+          <button class="chip" data-val="SCC">arb</button>
+          <button class="chip" data-val="Domestic">national</button>
+        </div>
+        <div class="fset" data-group="status">
+          <span class="lab">Status</span>
+          <button class="chip on" data-val="all">any</button>
+          <button class="chip" data-val="pending">pending</button>
+          <button class="chip" data-val="decided">decided</button>
+          <button class="chip" data-val="enforcing">enforcing</button>
+        </div>
+      </div>
+      <button class="sort" id="sort">Most recent ↓</button>
+    </div>
+
+    <div class="counter">
+      <span>Showing <b id="shown">41</b> of <b>41</b> reports</span>
+      <span>Set in Bodoni Moda &amp; Source Serif 4</span>
+    </div>
+
+    <!-- Reports column -->
+    <div class="reports" id="reports"></div>
+
+    <footer>
+      <div>Caseflows · v 0.2 · concept</div>
+      <div><a href="../index.html">Concept index</a> · <a href="02-archive.html">Archive (eggshell)</a> · <a href="02c-terminal.html">Terminal</a> · <a href="02d-editorial.html">Editorial</a></div>
+      <div>Set 27.iv.2026 · The Hague</div>
+    </footer>
+  </div>
+
+  <script src="data.js"></script>
+  <script>
+    const state={forum:'all',status:'all',q:'',sort:'filed-desc'};
+    const sortCycle=['filed-desc','filed-asc','fol-asc','amount-desc'];
+    const sortLabels={'filed-desc':'Most recent ↓','filed-asc':'Oldest first ↑','fol-asc':'Folio order','amount-desc':'By money $↓'};
+
+    const matchQ=(c,q)=>!q||[c.name,c.italic,c.forumLabel,c.docket,c.note,c.statusLabel,...(c.milestones||[]).map(m=>m[1])].join(' ').toLowerCase().includes(q.toLowerCase());
+
+    const render=()=>{
+      let list=window.CASES.filter(c=>{
+        if(state.forum!=='all'&&window.forumBucket(c)!==state.forum) return false;
+        if(state.status!=='all'&&c.status!==state.status) return false;
+        return matchQ(c,state.q);
+      });
+      if(state.sort==='filed-desc')list.sort((a,b)=>b.filed.localeCompare(a.filed));
+      else if(state.sort==='filed-asc')list.sort((a,b)=>a.filed.localeCompare(b.filed));
+      else if(state.sort==='fol-asc')list.sort((a,b)=>a.fol-b.fol);
+      else if(state.sort==='amount-desc')list.sort((a,b)=>Math.abs(b.amount||0)-Math.abs(a.amount||0));
+      document.getElementById('shown').textContent=list.length;
+
+      const wrap=document.getElementById('reports');
+      if(!list.length){wrap.innerHTML='<div class="empty">No reports under these terms.</div>';return}
+
+      // Mark first 3 (or top by money) as ledes when relevant
+      const ledeIds=new Set([21,5,41,17].slice(0,3)); // Naftogaz Crimea, ECtHR MH17, EU CBR, ICAO
+      wrap.innerHTML=list.map((c,i)=>{
+        const isLede= state.q===''&& state.forum==='all'&& state.status==='all'&& ledeIds.has(c.fol);
+        return reportHTML(c,isLede);
+      }).join('');
+      wrap.querySelectorAll('.report').forEach(r=>r.addEventListener('click',()=>r.classList.toggle('open')));
+    };
+
+    const reportHTML=(c,lede)=>{
+      const dot=c.status==='enforcing'?'enforcing':c.status==='decided'?'decided':c.status==='struck'?'struck':'pending';
+      const nm=c.name.replace(/ v /g,' <em>v</em> ');
+      const ms=(c.milestones||[]).map(m=>`<li class="${m[2]?'s':''}"><span class="d">${window.formatDate(m[0])}</span>${m[1]}</li>`).join('');
+      return `
+        <article class="report ${lede?'lede':''}">
+          <div class="smallcaps">
+            <span class="forum">${c.forumLabel}</span>
+            <span class="docket">№ ${c.docket}</span>
+            <span class="crimson">filed ${window.formatDate(c.filed)}</span>
+          </div>
+          <h3>${nm}</h3>
+          <div class="strap">${c.italic}</div>
+          ${lede?`<p class="lead">${c.note||c.italic}</p>`:''}
+          <div class="footer">
+            <span class="stat dot ${dot}">${c.statusLabel}</span>
+            ${c.amount!==null?`<span class="amt">${c.amountLbl}</span>`:'<span></span>'}
+          </div>
+          <div class="expand">
+            ${ms?`<h4>Procedural milestones</h4><ul>${ms}</ul>`:''}
+            ${c.note?`<p class="note">¶ ${c.note}</p>`:''}
+          </div>
+        </article>`;
+    };
+
+    document.querySelectorAll('.fset').forEach(set=>{
+      const g=set.dataset.group;
+      set.querySelectorAll('.chip').forEach(b=>b.addEventListener('click',()=>{
+        set.querySelectorAll('.chip').forEach(x=>x.classList.toggle('on',x===b));
+        state[g]=b.dataset.val;render();
+      }));
+    });
+    document.getElementById('q').addEventListener('input',e=>{state.q=e.target.value.trim();render()});
+    document.getElementById('sort').addEventListener('click',()=>{
+      const i=sortCycle.indexOf(state.sort);state.sort=sortCycle[(i+1)%sortCycle.length];
+      document.getElementById('sort').textContent=sortLabels[state.sort];render();
+    });
+    render();
+  </script>
+</body>
+</html>
