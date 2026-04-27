@@ -4,212 +4,317 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Caseflows — Ukraine v Russia in court</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root {
-    --ink: #14171c;
-    --ink-soft: #4a5060;
-    --ink-faint: #8b91a0;
-    --paper: #f5f2ec;
-    --paper-warm: #ebe6dc;
-    --rule: #d9d3c5;
-    --accent: #b9362c;
-    --accent-deep: #7a1f18;
-    --gold: #b8893a;
+    --ink: #242323;
+    --ink-soft: #454545;
+    --ink-faint: #8a8a8a;
+    --paper: #ffffff;
+    --panel: #ebebeb;
+    --rule: #e5e5e5;
+    --red: #f32735;
+    --red-deep: #c41a26;
   }
   *,*::before,*::after{box-sizing:border-box}
-  html,body{margin:0;padding:0;background:var(--paper);color:var(--ink);font-family:'Inter','Helvetica Neue',sans-serif;font-feature-settings:"ss01","cv11"}
-  body{line-height:1.5;-webkit-font-smoothing:antialiased}
+  html,body{margin:0;padding:0;background:var(--paper);color:var(--ink-soft);font-family:'Inter','Circe','Helvetica Neue',sans-serif;font-size:18px;line-height:1.45}
+  body{-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
   a{color:inherit}
-  .container{max-width:1240px;margin:0 auto;padding:0 32px}
+
+  .container{max-width:1280px;margin:0 auto;padding:0 40px}
 
   /* Top bar */
-  .topbar{border-bottom:1px solid var(--rule);padding:18px 0;font-size:13px;letter-spacing:.04em}
-  .topbar .row{display:flex;align-items:center;justify-content:space-between}
-  .wordmark{font-family:'Tiempos Headline','EB Garamond',Georgia,serif;font-size:22px;font-weight:500;letter-spacing:-.01em}
-  .wordmark span{color:var(--accent)}
-  .topnav a{margin-left:28px;text-decoration:none;color:var(--ink-soft);font-weight:500}
-  .topnav a:hover{color:var(--ink)}
+  .topbar{padding:24px 0;background:#fff;position:sticky;top:0;z-index:50;border-bottom:1px solid transparent}
+  .topbar.scrolled{border-bottom-color:var(--rule)}
+  .topbar .row{display:flex;align-items:center;justify-content:space-between;gap:32px}
+  .brand{display:flex;align-items:center;gap:14px}
+  .brand .mark{width:42px;height:42px;background:var(--red);display:grid;place-items:center;color:#fff;font-weight:900;font-size:22px;letter-spacing:-1px;border-radius:2px}
+  .brand .marksub{width:42px;height:42px;background:#ebebeb;display:grid;place-items:center;color:var(--red);font-weight:900;font-size:18px;letter-spacing:0;border-radius:2px}
+  .brand .name{font-weight:700;font-size:14px;letter-spacing:.04em;text-transform:uppercase;color:var(--ink)}
+  .brand .tag{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-faint);margin-top:2px}
+  .topnav{display:flex;align-items:center;gap:32px}
+  .topnav a{text-decoration:none;color:var(--ink);font-weight:700;font-size:15px;text-transform:capitalize;transition:color .15s}
+  .topnav a:hover{color:var(--red)}
+  .lang{display:flex;gap:8px;font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-faint)}
+  .lang a.active{color:var(--ink)}
+  .pill{display:inline-flex;align-items:center;gap:8px;padding:14px 24px;background:var(--red);color:#fff;text-decoration:none;border-radius:999px;font-weight:700;font-size:15px;transition:background .15s,transform .15s}
+  .pill:hover{background:var(--red-deep)}
 
   /* Hero */
-  .hero{padding:64px 0 28px}
-  .hero h1{font-family:'Tiempos Headline','EB Garamond',Georgia,serif;font-weight:400;font-size:clamp(40px,5.6vw,68px);line-height:1.04;letter-spacing:-.02em;margin:0 0 24px;max-width:18ch}
-  .hero h1 em{color:var(--accent);font-style:italic}
-  .hero p.dek{font-family:'Tiempos Text',Georgia,serif;font-size:20px;line-height:1.5;color:var(--ink-soft);margin:0;max-width:62ch}
-  .hero .meta{margin-top:24px;display:flex;gap:36px;font-size:13px;color:var(--ink-faint);letter-spacing:.06em;text-transform:uppercase}
-  .hero .meta strong{color:var(--ink);font-weight:600;letter-spacing:.04em}
+  .hero{position:relative;padding:64px 0 96px;overflow:hidden}
+  .hero .est-rail{position:absolute;left:0;top:80px;writing-mode:vertical-rl;transform:rotate(180deg);font-size:12px;font-weight:700;letter-spacing:.36em;text-transform:uppercase;color:var(--ink)}
+  .hero .est-rail .dot{display:inline-block;width:5px;height:5px;background:var(--red);border-radius:50%;margin:0 14px;vertical-align:middle}
+  .hero h1{font-family:'Inter',sans-serif;font-weight:900;font-size:clamp(72px,14vw,196px);line-height:.92;letter-spacing:-.07em;text-transform:uppercase;color:var(--ink);margin:0;padding-left:64px;max-width:none}
+  .hero h1 .v{color:var(--red);font-style:italic;font-weight:900;letter-spacing:-.08em}
+  .hero h1 .row2{display:block}
 
-  /* Section title */
-  .section-title{display:flex;align-items:baseline;justify-content:space-between;margin:56px 0 20px}
-  .section-title h2{font-family:'Tiempos Headline',Georgia,serif;font-weight:400;font-size:24px;letter-spacing:-.01em;margin:0}
-  .section-title .hint{font-size:12px;color:var(--ink-faint);letter-spacing:.08em;text-transform:uppercase}
-  .rule{height:1px;background:var(--rule);margin:0 0 24px}
+  .hero .below{display:grid;grid-template-columns:1.4fr auto 1fr;gap:48px;align-items:end;margin-top:48px;padding-left:64px}
+  .hero .strap{font-size:14px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;line-height:1.4;color:var(--ink)}
+  .hero .strap .hash{color:var(--red)}
+  .hero .strap .small{display:block;color:var(--ink-faint);font-weight:500;letter-spacing:.16em;font-size:11px;margin-top:6px}
+
+  .hero-circle{justify-self:center;width:200px;height:200px;border-radius:50%;background:var(--red);color:#fff;display:grid;place-items:center;text-align:center;text-decoration:none;font-weight:700;font-size:14px;text-transform:uppercase;letter-spacing:.06em;line-height:1.3;padding:24px;transition:transform .2s,background .2s;flex-shrink:0}
+  .hero-circle:hover{background:var(--red-deep);transform:scale(1.04) rotate(-3deg)}
+  .hero-circle .arrow{display:block;font-size:24px;font-weight:400;margin-top:6px;letter-spacing:0}
+
+  .hero .photopanel{position:relative;height:280px}
+  .hero .photopanel .panel{position:absolute;inset:24px 0 0 24px;background:var(--panel)}
+  .hero .photopanel .photo{position:absolute;inset:0 24px 24px 0;background:linear-gradient(135deg,#1a1a1a 0%,#2a2a2a 50%,#0a0a0a 100%);filter:grayscale(1) contrast(1.1);overflow:hidden}
+  .hero .photopanel .photo::after{content:"the peace palace · the hague";position:absolute;left:14px;bottom:10px;color:#999;font-size:10px;letter-spacing:.18em;text-transform:uppercase;font-weight:600}
+  .hero .photopanel .photo::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 30% 30%, rgba(255,255,255,.08) 0%, transparent 70%)}
+
+  /* Stat strip */
+  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-top:1px solid var(--ink);border-bottom:1px solid var(--ink);background:#fff}
+  .stat{padding:32px 28px;border-right:1px solid var(--rule)}
+  .stat:last-child{border-right:none}
+  .stat .num{font-family:'Inter',sans-serif;font-size:64px;line-height:.95;font-weight:900;letter-spacing:-.04em;color:var(--ink)}
+  .stat .num.red{color:var(--red)}
+  .stat .lbl{margin-top:8px;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-faint);font-weight:700}
+
+  /* Section heading */
+  .sec{padding:96px 0 48px}
+  .sec-head{display:flex;align-items:flex-end;justify-content:space-between;gap:48px;margin-bottom:48px}
+  .sec h2{font-family:'Inter',sans-serif;font-weight:900;font-size:clamp(40px,5.6vw,80px);line-height:.95;letter-spacing:-.045em;text-transform:uppercase;color:var(--ink);margin:0;max-width:18ch}
+  .sec h2 .red{color:var(--red)}
+  .sec-head .meta{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-faint);font-weight:700;text-align:right;line-height:1.6;flex-shrink:0}
 
   /* Lens grid */
-  .lens-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:1px;background:var(--rule);border:1px solid var(--rule)}
-  .lens{background:var(--paper);padding:28px 24px 24px;display:flex;flex-direction:column;min-height:280px;cursor:pointer;transition:background .12s ease;text-decoration:none;color:inherit;position:relative}
-  .lens:hover{background:#fbf9f4}
-  .lens .num{font-family:'Tiempos Headline',Georgia,serif;font-size:46px;font-weight:400;line-height:1;letter-spacing:-.03em;color:var(--ink)}
-  .lens .num .of{font-size:14px;color:var(--ink-faint);letter-spacing:.04em;font-family:'Inter',sans-serif;margin-left:6px}
-  .lens .label{margin-top:14px;font-size:11px;color:var(--ink-faint);letter-spacing:.14em;text-transform:uppercase;font-weight:600}
-  .lens .name{margin-top:4px;font-family:'Tiempos Headline',Georgia,serif;font-size:22px;line-height:1.15;letter-spacing:-.01em;font-weight:400}
-  .lens .stake{margin-top:14px;font-size:14px;line-height:1.45;color:var(--ink-soft);max-width:30ch}
-  .lens .footnote{margin-top:auto;padding-top:18px;font-size:12px;color:var(--ink-faint);display:flex;justify-content:space-between;align-items:center}
-  .lens .footnote .arrow{font-family:Georgia,serif;font-size:18px;color:var(--ink-faint)}
-  .lens:hover .footnote .arrow{color:var(--accent);transform:translateX(2px)}
-  .lens.featured{grid-column:span 2;grid-row:span 2;background:var(--ink);color:var(--paper);padding:36px 32px 32px}
-  .lens.featured .num,.lens.featured .name{color:var(--paper)}
-  .lens.featured .label{color:var(--gold)}
-  .lens.featured .stake{color:#b9b6ad;max-width:40ch;font-size:16px;margin-top:18px}
-  .lens.featured .footnote{color:#7a7670;border-top:1px solid #2c2f35;margin-top:24px;padding-top:18px}
-  .lens.featured .footnote .arrow{color:var(--gold)}
-  .lens.featured:hover{background:#1a1d24}
-  .lens.featured .badge{position:absolute;top:24px;right:28px;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);font-weight:700}
-  .lens.featured .photoframe{margin-top:16px;height:148px;background:linear-gradient(135deg,#3a2419 0%,#1a0f08 60%,#000 100%);border:1px solid #2c2f35;position:relative;overflow:hidden}
-  .lens.featured .photoframe::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 30% 30%, rgba(184,137,58,.18) 0%, transparent 60%)}
-  .lens.featured .photoframe::after{content:"the icj great hall · the hague";position:absolute;bottom:8px;left:10px;font-size:10px;color:#5a5650;letter-spacing:.1em;text-transform:uppercase}
+  .lenses{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-top:1px solid var(--ink);border-left:1px solid var(--ink)}
+  .lens{padding:36px 32px 32px;border-right:1px solid var(--ink);border-bottom:1px solid var(--ink);background:#fff;display:flex;flex-direction:column;min-height:340px;text-decoration:none;color:inherit;transition:background .15s;position:relative}
+  .lens:hover{background:#fafafa}
+  .lens:hover .arrow-link{color:var(--red);transform:translateX(4px)}
+  .lens .num-line{display:flex;align-items:baseline;gap:10px;color:var(--ink)}
+  .lens .num-line .num{font-family:'Inter',sans-serif;font-weight:900;font-size:88px;line-height:.9;letter-spacing:-.05em}
+  .lens .num-line .of{font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-faint)}
+  .lens .label{margin-top:14px;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--red);font-weight:700}
+  .lens .name{margin-top:6px;font-family:'Inter',sans-serif;font-weight:900;font-size:24px;line-height:1.05;letter-spacing:-.025em;text-transform:uppercase;color:var(--ink)}
+  .lens .stake{margin-top:18px;font-size:15px;line-height:1.5;color:var(--ink-soft);max-width:34ch}
+  .lens .meta-row{margin-top:auto;padding-top:24px;display:flex;justify-content:space-between;align-items:center;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-faint);font-weight:700}
+  .lens .arrow-link{font-size:24px;color:var(--ink);font-weight:300;transition:color .15s,transform .15s}
 
-  /* Second screen — primer */
-  .primer{margin-top:72px;padding:48px 0;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);background:var(--paper-warm)}
-  .primer h2{font-family:'Tiempos Headline',Georgia,serif;font-weight:400;font-size:30px;letter-spacing:-.01em;margin:0 0 20px;max-width:24ch}
-  .primer .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:36px;margin-top:28px}
-  .primer .lesson{font-family:'Tiempos Text',Georgia,serif;font-size:16px;line-height:1.55;color:var(--ink)}
-  .primer .lesson .k{display:block;font-family:'Inter',sans-serif;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:10px}
-  .primer .lesson strong{font-weight:600}
+  .lens.featured{grid-column:span 2;background:var(--ink);color:#fff;min-height:380px;padding:40px}
+  .lens.featured:hover{background:#1a1919}
+  .lens.featured .label{color:var(--red)}
+  .lens.featured .name{color:#fff;font-size:36px;letter-spacing:-.03em;margin-top:10px;max-width:18ch}
+  .lens.featured .stake{color:#bbb;max-width:42ch;font-size:16px;margin-top:18px}
+  .lens.featured .meta-row{color:#888;border-top:1px solid #333;padding-top:20px;margin-top:24px}
+  .lens.featured .arrow-link{color:var(--red)}
+  .lens.featured .badge{display:inline-flex;align-items:center;gap:8px;background:var(--red);color:#fff;padding:6px 12px;font-size:10px;letter-spacing:.18em;text-transform:uppercase;font-weight:700;border-radius:0;align-self:flex-start;margin-bottom:16px}
 
-  /* Three big stories */
-  .stories{padding:64px 0 24px}
-  .story-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-top:8px}
-  .story{padding:28px 24px;border:1px solid var(--rule);background:var(--paper);cursor:pointer;transition:background .12s}
-  .story:hover{background:#fbf9f4}
-  .story .chapter{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-faint);font-weight:600}
-  .story h3{font-family:'Tiempos Headline',Georgia,serif;font-weight:400;font-size:24px;line-height:1.15;letter-spacing:-.01em;margin:8px 0 14px}
-  .story p{font-family:'Tiempos Text',Georgia,serif;font-size:15px;line-height:1.5;color:var(--ink-soft);margin:0 0 16px}
-  .story .case-list{list-style:none;padding:0;margin:0;border-top:1px solid var(--rule);padding-top:14px}
-  .story .case-list li{display:flex;justify-content:space-between;font-size:13px;padding:5px 0;color:var(--ink-soft)}
-  .story .case-list li .forum{color:var(--ink-faint);font-size:11px;letter-spacing:.06em;text-transform:uppercase}
+  /* Primer */
+  .primer{background:var(--panel);padding:96px 0}
+  .primer .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:48px;margin-top:56px}
+  .primer .lesson{position:relative;padding-top:40px}
+  .primer .lesson .num{position:absolute;top:-8px;left:0;font-family:'Inter',sans-serif;font-weight:900;font-size:80px;line-height:.85;letter-spacing:-.05em;color:var(--red);opacity:.16}
+  .primer .lesson .k{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--red);font-weight:700;display:block;margin-bottom:14px}
+  .primer .lesson h3{font-family:'Inter',sans-serif;font-weight:900;font-size:22px;line-height:1.2;letter-spacing:-.02em;text-transform:uppercase;color:var(--ink);margin:0 0 14px}
+  .primer .lesson p{font-size:16px;line-height:1.55;color:var(--ink-soft);margin:0;max-width:36ch}
+  .primer .lesson p strong{color:var(--ink);font-weight:700}
 
-  /* Methodology footer */
-  .meta-foot{padding:56px 0 80px;border-top:1px solid var(--rule);margin-top:64px;font-size:13px;color:var(--ink-soft)}
-  .meta-foot .row{display:grid;grid-template-columns:2fr 1fr 1fr;gap:48px}
-  .meta-foot h4{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-faint);font-weight:600;margin:0 0 12px}
-  .meta-foot p{margin:0 0 8px;line-height:1.55}
-  .meta-foot a{color:var(--accent-deep);text-decoration:none;border-bottom:1px solid var(--rule)}
-  .meta-foot a:hover{border-bottom-color:var(--accent)}
+  /* Stories */
+  .stories{padding:96px 0}
+  .story-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:48px}
+  .story{padding:32px 28px 28px;background:#fff;border:1px solid var(--ink);text-decoration:none;color:inherit;display:flex;flex-direction:column;transition:background .15s}
+  .story:hover{background:var(--panel)}
+  .story:hover .read-more{color:var(--red)}
+  .story .chapter-num{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.04em;color:var(--red);font-weight:500}
+  .story h3{font-family:'Inter',sans-serif;font-weight:900;font-size:28px;line-height:1.05;letter-spacing:-.03em;text-transform:uppercase;margin:12px 0 16px;color:var(--ink)}
+  .story p{font-size:15px;line-height:1.5;color:var(--ink-soft);margin:0 0 24px}
+  .story .case-list{list-style:none;padding:0;margin:0;border-top:1px solid var(--rule)}
+  .story .case-list li{display:flex;justify-content:space-between;align-items:center;padding:10px 0;font-size:13px;color:var(--ink);border-bottom:1px solid var(--rule);gap:12px}
+  .story .case-list li:last-child{border-bottom:none}
+  .story .case-list li .nm{font-weight:500;flex:1;line-height:1.3}
+  .story .case-list li .frm{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.04em;color:var(--ink-faint);font-weight:500;background:var(--panel);padding:3px 7px;flex-shrink:0}
+  .story .read-more{margin-top:18px;font-size:12px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:var(--ink);transition:color .15s}
 
-  @media (max-width: 980px){
-    .lens-grid{grid-template-columns:repeat(2,1fr)}
-    .lens.featured{grid-column:span 2;grid-row:auto}
-    .primer .grid{grid-template-columns:1fr}
+  /* Footer */
+  footer{background:var(--ink);color:#bbb;padding:80px 0 40px}
+  footer .grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px;align-items:start}
+  footer h4{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#fff;font-weight:700;margin:0 0 16px}
+  footer p{margin:0 0 8px;font-size:14px;line-height:1.55}
+  footer a{color:#bbb;text-decoration:none;border-bottom:1px solid #444;transition:color .15s,border-color .15s}
+  footer a:hover{color:#fff;border-bottom-color:var(--red)}
+  footer .colophon{margin-top:64px;padding-top:24px;border-top:1px solid #333;display:flex;justify-content:space-between;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#777}
+
+  /* Social strip */
+  .social-strip{background:var(--red);color:#fff;padding:32px 0}
+  .social-strip .row{display:flex;justify-content:space-between;align-items:center;gap:32px}
+  .social-strip h3{font-family:'Inter',sans-serif;font-weight:900;font-size:32px;letter-spacing:-.03em;text-transform:uppercase;margin:0;line-height:1}
+  .social-strip .links{display:flex;gap:24px;font-weight:700;font-size:14px;letter-spacing:.04em}
+  .social-strip a{color:#fff;text-decoration:none;border-bottom:1px solid rgba(255,255,255,.4);padding-bottom:2px}
+  .social-strip a:hover{border-bottom-color:#fff}
+
+  @media (max-width: 1080px){
+    .hero h1{padding-left:0}
+    .hero .est-rail{display:none}
+    .hero .below{padding-left:0;grid-template-columns:1fr;gap:32px}
+    .lenses{grid-template-columns:repeat(2,1fr)}
+    .lens.featured{grid-column:span 2}
+    .stats{grid-template-columns:repeat(2,1fr)}
+    .stat:nth-child(2){border-right:none}
+    .stat:nth-child(1),.stat:nth-child(2){border-bottom:1px solid var(--rule)}
+    .primer .grid{grid-template-columns:1fr;gap:64px}
     .story-grid{grid-template-columns:1fr}
-    .meta-foot .row{grid-template-columns:1fr}
+    footer .grid{grid-template-columns:1fr 1fr;gap:32px}
+  }
+  @media (max-width: 600px){
+    .container{padding:0 24px}
+    .lenses{grid-template-columns:1fr}
+    .lens.featured{grid-column:span 1}
+    .stats{grid-template-columns:1fr}
+    .stat{border-right:none;border-bottom:1px solid var(--rule)}
+    .stat:last-child{border-bottom:none}
+    footer .grid{grid-template-columns:1fr}
+    .social-strip .row{flex-direction:column;align-items:flex-start}
   }
 </style>
 </head>
 <body>
   <header class="topbar">
     <div class="container row">
-      <div class="wordmark">caseflows<span>.</span></div>
+      <div class="brand">
+        <div class="mark">C</div>
+        <div>
+          <div class="name">caseflows</div>
+          <div class="tag">Ukraine v Russia · in court</div>
+        </div>
+      </div>
       <nav class="topnav">
         <a href="#cases">All cases</a>
         <a href="#timeline">Timeline</a>
         <a href="#explainers">Primers</a>
         <a href="#about">About</a>
+        <a href="#" class="pill">Read the brief</a>
       </nav>
+      <div class="lang">
+        <a class="active">EN</a>
+        <a>UA</a>
+      </div>
     </div>
   </header>
 
-  <main class="container">
+  <main>
     <!-- Hero -->
-    <section class="hero">
-      <h1>Forty international legal cases between <em>Ukraine</em> and <em>Russia</em>.</h1>
-      <p class="dek">From the International Court of Justice in The Hague to a Dutch district court at Schiphol — what's been argued, what's been decided, and what is still pending. A reader's guide to the legal record of a war.</p>
-      <div class="meta">
-        <div><strong>41</strong> cases tracked</div>
-        <div><strong>11</strong> forums</div>
-        <div><strong>2014–2026</strong></div>
-        <div><strong>$7.5 bn+</strong> awarded against Russia so far</div>
+    <section class="hero container">
+      <div class="est-rail">est. 2014<span class="dot"></span>case no. 001 — 041</div>
+
+      <h1>
+        Ukraine <span class="v">v</span><br>
+        <span class="row2">Russia.</span>
+      </h1>
+
+      <div class="below">
+        <div class="strap">
+          The legal record of a war.<br>
+          Forty cases · eleven forums · twelve years.<br>
+          <span class="small">#NotAnotherTracker · since 2014</span>
+        </div>
+        <a class="hero-circle" href="#start">
+          Start with one case
+          <span class="arrow">→</span>
+        </a>
+        <div class="photopanel">
+          <div class="panel"></div>
+          <div class="photo"></div>
+        </div>
       </div>
     </section>
 
-    <!-- Lens grid -->
-    <section id="cases">
-      <div class="section-title">
-        <h2>Choose a courtroom</h2>
-        <span class="hint">five forums · one feature</span>
+    <!-- Stats strip -->
+    <div class="container">
+      <div class="stats">
+        <div class="stat">
+          <div class="num">41</div>
+          <div class="lbl">cases tracked</div>
+        </div>
+        <div class="stat">
+          <div class="num">11</div>
+          <div class="lbl">forums · 9 countries</div>
+        </div>
+        <div class="stat">
+          <div class="num red">$7.5<span style="font-size:32px;letter-spacing:0">B</span></div>
+          <div class="lbl">awarded against russia</div>
+        </div>
+        <div class="stat">
+          <div class="num">2014<span style="font-size:32px;color:var(--ink-faint)">→26</span></div>
+          <div class="lbl">period covered</div>
+        </div>
       </div>
-      <div class="rule"></div>
+    </div>
 
-      <div class="lens-grid">
-        <!-- Featured "start here" tile spans 2x2 -->
+    <!-- Lens grid -->
+    <section class="sec container" id="cases">
+      <div class="sec-head">
+        <h2>Choose a <span class="red">courtroom.</span></h2>
+        <div class="meta">five forums<br>one feature case<br>↓ click any tile</div>
+      </div>
+
+      <div class="lenses">
         <a class="lens featured" href="#">
           <span class="badge">★ Start here</span>
-          <span class="label">Featured case</span>
-          <span class="name">Allegations of Genocide<br>(Ukraine v Russia)</span>
-          <div class="photoframe"></div>
-          <p class="stake">Ukraine asks the World Court to declare that it has not committed genocide — and that Russia's invasion under that pretext violates the Genocide Convention. Thirty-two states intervene. The deepest case in international law that the war has produced.</p>
-          <div class="footnote">
-            <span>12 min read · ICJ · pending merits</span>
-            <span class="arrow">→</span>
+          <span class="label">Featured case · 12 min</span>
+          <span class="name">Allegations of Genocide<br>Ukraine v Russia</span>
+          <p class="stake">Ukraine asks the World Court to declare that it has not committed genocide — and that Russia's invasion under that pretext violates the Genocide Convention itself. Thirty-two states intervene. The deepest case in international law that the war has produced.</p>
+          <div class="meta-row">
+            <span>ICJ · The Hague · pending merits</span>
+            <span class="arrow-link">→</span>
           </div>
         </a>
 
-        <!-- ICJ -->
         <a class="lens" href="#">
-          <span class="num">3<span class="of">cases</span></span>
+          <span class="num-line"><span class="num">3</span><span class="of">cases</span></span>
           <span class="label">World Court</span>
           <span class="name">International Court of Justice</span>
           <p class="stake">State-vs-state. Genocide, racial discrimination, terrorism financing — and Russia's appeal of an aviation ruling.</p>
-          <div class="footnote">
+          <div class="meta-row">
             <span>2017 — pending</span>
-            <span class="arrow">→</span>
+            <span class="arrow-link">→</span>
           </div>
         </a>
 
-        <!-- ECtHR -->
         <a class="lens" href="#">
-          <span class="num">5<span class="of">cases</span></span>
+          <span class="num-line"><span class="num">5</span><span class="of">cases</span></span>
           <span class="label">Human-rights court</span>
           <span class="name">European Court of Human Rights</span>
           <p class="stake">Inter-state cases on Crimea, the Donbas, MH17 and the full-scale invasion. The largest human-rights case in European history.</p>
-          <div class="footnote">
+          <div class="meta-row">
             <span>Strasbourg · judgments delivered</span>
-            <span class="arrow">→</span>
+            <span class="arrow-link">→</span>
           </div>
         </a>
 
-        <!-- ICC -->
         <a class="lens" href="#">
-          <span class="num">7<span class="of">warrants</span></span>
+          <span class="num-line"><span class="num">7</span><span class="of">warrants</span></span>
           <span class="label">Criminal court</span>
           <span class="name">International Criminal Court</span>
           <p class="stake">Arrest warrants for Putin, Lvova‑Belova, and four military commanders — child deportations and strikes on civilian energy.</p>
-          <div class="footnote">
+          <div class="meta-row">
             <span>2023–2024 · all outstanding</span>
-            <span class="arrow">→</span>
+            <span class="arrow-link">→</span>
           </div>
         </a>
 
-        <!-- PCA / Arbitration -->
         <a class="lens" href="#">
-          <span class="num">14<span class="of">cases</span></span>
+          <span class="num-line"><span class="num">14</span><span class="of">cases</span></span>
           <span class="label">Arbitration</span>
           <span class="name">Investment & commercial tribunals</span>
           <p class="stake">Naftogaz vs Gazprom. Crimea expropriations under the 1998 BIT. Post-2022 claims for Zaporizhzhia, Kakhovka, the grid.</p>
-          <div class="footnote">
-            <span>PCA · SCC · ICC</span>
-            <span class="arrow">→</span>
+          <div class="meta-row">
+            <span>PCA · SCC · ICC arb</span>
+            <span class="arrow-link">→</span>
           </div>
         </a>
 
-        <!-- National courts -->
         <a class="lens" href="#">
-          <span class="num">11<span class="of">cases</span></span>
+          <span class="num-line"><span class="num">11</span><span class="of">cases</span></span>
           <span class="label">National courts</span>
           <span class="name">Domestic & enforcement</span>
           <p class="stake">The MH17 trial at Schiphol. The Hoge Raad's December 2024 cluster. Universal-jurisdiction trials in Finland, Lithuania, Germany.</p>
-          <div class="footnote">
+          <div class="meta-row">
             <span>NL · CH · FR · UK · FI · LT · DE</span>
-            <span class="arrow">→</span>
+            <span class="arrow-link">→</span>
           </div>
         </a>
       </div>
@@ -217,80 +322,108 @@
 
     <!-- Primer -->
     <section class="primer" id="explainers">
-      <div class="container" style="padding:0">
-        <h2>Before you click in: three things to know about international law.</h2>
+      <div class="container">
+        <div class="sec-head" style="margin-bottom:0">
+          <h2>Three things to <span class="red">know</span> first.</h2>
+          <div class="meta">a 90-second primer<br>before you click in</div>
+        </div>
+
         <div class="grid">
           <div class="lesson">
-            <span class="k">01 · Many Hague courts</span>
-            "The Hague" is not one building. The <strong>ICJ</strong> hears disputes between states. The <strong>ICC</strong> prosecutes individuals. The <strong>PCA</strong> hosts arbitrations between investors and states. They share a city — and almost nothing else.
+            <div class="num">01</div>
+            <span class="k">Many Hague courts</span>
+            <h3>"The Hague" is not one building.</h3>
+            <p>The <strong>ICJ</strong> hears disputes between states. The <strong>ICC</strong> prosecutes individuals. The <strong>PCA</strong> hosts arbitrations between investors and states. They share a city — and almost nothing else.</p>
           </div>
           <div class="lesson">
-            <span class="k">02 · Three layers of harm</span>
-            The cases roughly split into three stories: <strong>territory</strong> (Crimea, Donbas, the Sea of Azov), <strong>civilians</strong> (MH17, mass killings, deportations of children), and <strong>money</strong> (gas contracts, expropriated assets, frozen reserves).
+            <div class="num">02</div>
+            <span class="k">Three layers of harm</span>
+            <h3>Territory. Civilians. Money.</h3>
+            <p>The cases roughly split into three stories: <strong>territory</strong> (Crimea, Donbas, the Sea of Azov), <strong>civilians</strong> (MH17, mass killings, deportations of children), and <strong>money</strong> (gas contracts, expropriated assets, frozen reserves).</p>
           </div>
           <div class="lesson">
-            <span class="k">03 · A judgment is not the end</span>
-            Many of the most consequential rulings come <em>after</em> a tribunal speaks: the <strong>Hoge Raad</strong> upholding an award, a French court issuing <em>exequatur</em>, a Finnish bailiff freezing assets. Enforcement is its own story.
+            <div class="num">03</div>
+            <span class="k">Enforcement is its own war</span>
+            <h3>A judgment is not the end.</h3>
+            <p>Many of the most consequential rulings come <em>after</em> a tribunal speaks: the <strong>Hoge Raad</strong> upholding an award, a French court issuing <em>exequatur</em>, a Finnish bailiff freezing assets. Enforcement is its own story.</p>
           </div>
         </div>
       </div>
     </section>
 
     <!-- Three big stories -->
-    <section class="stories">
-      <div class="section-title">
-        <h2>Three big stories told in many courtrooms</h2>
-        <span class="hint">curated reading paths</span>
+    <section class="stories container" id="timeline">
+      <div class="sec-head">
+        <h2>Three big <span class="red">stories,</span> many courtrooms.</h2>
+        <div class="meta">curated reading paths<br>~25 min each</div>
       </div>
-      <div class="rule"></div>
+
       <div class="story-grid">
-        <div class="story">
-          <div class="chapter">Path 01 · 5 cases · ~22 min</div>
-          <h3>Territory and sovereignty</h3>
+        <a class="story" href="#">
+          <div class="chapter-num">PATH_01 · 5 cases · 22 min</div>
+          <h3>Territory & sovereignty</h3>
           <p>Whether the world's courts will treat Crimea, the Donbas and the occupied south as legally Russian — or refuse to, no matter what facts on the ground say.</p>
           <ul class="case-list">
-            <li><span>Ukraine v Russia (re Crimea)</span><span class="forum">ECtHR</span></li>
-            <li><span>Naftogaz v Russia — Crimea expropriation</span><span class="forum">PCA</span></li>
-            <li><span>Ukrnafta v Russia</span><span class="forum">PCA</span></li>
-            <li><span>Detention of Ukrainian Naval Vessels</span><span class="forum">ITLOS</span></li>
-            <li><span>Hoge Raad cluster on Crimea awards</span><span class="forum">NL</span></li>
+            <li><span class="nm">Ukraine v Russia (re Crimea)</span><span class="frm">ECTHR</span></li>
+            <li><span class="nm">Naftogaz v Russia — Crimea</span><span class="frm">PCA</span></li>
+            <li><span class="nm">Ukrnafta v Russia</span><span class="frm">PCA</span></li>
+            <li><span class="nm">Detention of Ukrainian Naval Vessels</span><span class="frm">ITLOS</span></li>
+            <li><span class="nm">Hoge Raad cluster on Crimea</span><span class="frm">NL</span></li>
           </ul>
-        </div>
-        <div class="story">
-          <div class="chapter">Path 02 · 6 cases · ~28 min</div>
+          <div class="read-more">Read the path →</div>
+        </a>
+
+        <a class="story" href="#">
+          <div class="chapter-num">PATH_02 · 6 cases · 28 min</div>
           <h3>Civilian harm</h3>
           <p>From the downing of MH17 to the deportation of Ukrainian children — the legal record of what happened to people, and to whom it has been attributed.</p>
           <ul class="case-list">
-            <li><span>Allegations of Genocide</span><span class="forum">ICJ</span></li>
-            <li><span>Ukraine and Netherlands v Russia (MH17)</span><span class="forum">ECtHR</span></li>
-            <li><span>Australia & Netherlands v Russia (MH17)</span><span class="forum">ICAO</span></li>
-            <li><span>Prosecutor v Putin & Lvova-Belova</span><span class="forum">ICC</span></li>
-            <li><span>Public Prosecutor v Girkin et al.</span><span class="forum">NL</span></li>
-            <li><span>Finland v Yan Petrovsky</span><span class="forum">FI</span></li>
+            <li><span class="nm">Allegations of Genocide</span><span class="frm">ICJ</span></li>
+            <li><span class="nm">Ukraine and NL v Russia (MH17)</span><span class="frm">ECTHR</span></li>
+            <li><span class="nm">Australia & NL v Russia (MH17)</span><span class="frm">ICAO</span></li>
+            <li><span class="nm">Prosecutor v Putin & Lvova-Belova</span><span class="frm">ICC</span></li>
+            <li><span class="nm">PPS v Girkin et al.</span><span class="frm">NL</span></li>
+            <li><span class="nm">Finland v Yan Petrovsky</span><span class="frm">FI</span></li>
           </ul>
-        </div>
-        <div class="story">
-          <div class="chapter">Path 03 · 5 cases · ~24 min</div>
-          <h3>Money and enforcement</h3>
+          <div class="read-more">Read the path →</div>
+        </a>
+
+        <a class="story" href="#">
+          <div class="chapter-num">PATH_03 · 5 cases · 24 min</div>
+          <h3>Money & enforcement</h3>
           <p>The gas contracts, the seized reserves, the buildings in Vienna and the bank accounts in Paris. Where awards turn — slowly — into recovered assets.</p>
           <ul class="case-list">
-            <li><span>Naftogaz v Gazprom — gas transit (SCC)</span><span class="forum">SCC</span></li>
-            <li><span>Naftogaz v Gazprom (III) — ICC transit</span><span class="forum">ICC arb</span></li>
-            <li><span>Oschadbank v Russia</span><span class="forum">PCA</span></li>
-            <li><span>DTEK Krymenergo v Russia</span><span class="forum">PCA</span></li>
-            <li><span>EU/Belgium — €210 bn Russian CBR freeze</span><span class="forum">EU</span></li>
+            <li><span class="nm">Naftogaz v Gazprom — gas transit</span><span class="frm">SCC</span></li>
+            <li><span class="nm">Naftogaz v Gazprom (III)</span><span class="frm">ICC</span></li>
+            <li><span class="nm">Oschadbank v Russia</span><span class="frm">PCA</span></li>
+            <li><span class="nm">DTEK Krymenergo v Russia</span><span class="frm">PCA</span></li>
+            <li><span class="nm">EU/Belgium — €210bn CBR freeze</span><span class="frm">EU</span></li>
           </ul>
+          <div class="read-more">Read the path →</div>
+        </a>
+      </div>
+    </section>
+
+    <!-- Social strip (UCU pattern) -->
+    <section class="social-strip">
+      <div class="container row">
+        <h3>Follow the docket.</h3>
+        <div class="links">
+          <a href="#">Bluesky</a>
+          <a href="#">Newsletter</a>
+          <a href="#">RSS</a>
+          <a href="#">GitHub</a>
         </div>
       </div>
     </section>
 
-    <!-- Methodology footer -->
-    <footer class="meta-foot" id="about">
-      <div class="row">
+    <!-- Footer -->
+    <footer id="about">
+      <div class="container grid">
         <div>
-          <h4>About this database</h4>
-          <p>Caseflows is a reader's guide to the international legal proceedings that have arisen between Ukraine and the Russian Federation since 2014. Each case has its own structured page: parties, forum, dates, key rulings, and a plain-language summary.</p>
-          <p>We track cases at <strong>international courts</strong> (ICJ, ECtHR, ICC, ITLOS, ICAO), <strong>arbitral tribunals</strong> (PCA, SCC, ICC), and <strong>national courts</strong> in the Netherlands, Switzerland, France, the UK, Finland, Lithuania and Germany.</p>
+          <h4>About caseflows</h4>
+          <p>A reader's guide to international legal proceedings between Ukraine and the Russian Federation, 2014–present. Each case has a structured page: parties, forum, dates, key rulings, plain-language summary.</p>
+          <p style="margin-top:14px">Caseflows is a reader project, not a legal-advice service. Where we summarise a ruling, we link the underlying judgment.</p>
         </div>
         <div>
           <h4>Sources</h4>
@@ -299,15 +432,34 @@
           <p><a href="https://www.icc-cpi.int">icc-cpi.int</a></p>
           <p><a href="https://pca-cpa.org">pca-cpa.org</a></p>
           <p><a href="https://www.italaw.com">italaw.com</a></p>
-          <p><a href="https://jusmundi.com">jusmundi.com</a></p>
         </div>
         <div>
-          <h4>Last updated</h4>
-          <p>27 April 2026</p>
-          <p style="margin-top:18px">Caseflows is a reader project, not a legal-advice service. Where we summarise a ruling we link the underlying judgment.</p>
+          <h4>Sections</h4>
+          <p><a href="#cases">All cases</a></p>
+          <p><a href="#timeline">Reading paths</a></p>
+          <p><a href="#explainers">Primers</a></p>
+          <p><a href="#about">Methodology</a></p>
         </div>
+        <div>
+          <h4>Contact</h4>
+          <p>au@bot-partners.com</p>
+          <p style="margin-top:14px">Last updated<br>27 April 2026</p>
+        </div>
+      </div>
+      <div class="container colophon">
+        <span>© caseflows 2026</span>
+        <span>typography · Inter · JetBrains Mono</span>
+        <span>v 0.1 · concept</span>
       </div>
     </footer>
   </main>
+
+  <script>
+    // Sticky topbar shadow on scroll
+    const tb = document.querySelector('.topbar');
+    window.addEventListener('scroll', () => {
+      tb.classList.toggle('scrolled', window.scrollY > 8);
+    });
+  </script>
 </body>
 </html>
