@@ -1,0 +1,475 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The Gallery — Caseflows</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@9..144,300..900,30..100,0..1&family=Newsreader:ital,opsz,wght@0,6..72,400..600;1,6..72,400..500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#f4efe5;
+    --paper-deep:#ebe3d0;
+    --paper-dark:#1c1814;
+    --ink:#1c1814;
+    --ink-soft:#4a443a;
+    --ink-faint:#8a8270;
+    --rule:#c8c0ac;
+    --stamp:#a83426;
+    --gilt:#b8893a;
+    --display:'Fraunces', serif;
+    --body:'Newsreader', Georgia, serif;
+    --mono:'IBM Plex Mono', ui-monospace, monospace;
+  }
+  *,*::before,*::after{box-sizing:border-box}
+  html{background:var(--paper)}
+  body{margin:0;background:var(--paper);color:var(--ink-soft);font-family:var(--body);font-size:18px;line-height:1.55;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;font-feature-settings:"onum","kern"}
+  a{color:inherit}
+  ::selection{background:var(--stamp);color:var(--paper)}
+
+  .frame{max-width:1100px;margin:0 auto;padding:0 36px}
+  .wide{max-width:1280px;margin:0 auto;padding:0 36px}
+
+  /* ── Running head ── */
+  .runhead{
+    border-bottom:1px solid var(--rule);
+    padding:14px 0;
+    font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft);
+    display:flex;justify-content:space-between;align-items:baseline;
+  }
+  .runhead .seal{font-family:var(--display);font-variation-settings:"opsz" 144,"SOFT" 80;font-size:18px;color:var(--ink);letter-spacing:-.005em;text-transform:none;font-weight:500}
+  .runhead a{margin-left:18px;text-decoration:none;border-bottom:1px solid transparent;transition:border-color .15s,color .15s}
+  .runhead a:hover{color:var(--stamp);border-bottom-color:var(--stamp)}
+
+  /* ── Hero ── */
+  .hero{
+    padding:120px 0 88px;
+    text-align:center;
+    border-bottom:2px solid var(--ink);
+  }
+  .hero .above{
+    font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--stamp);
+    margin-bottom:20px;font-weight:500;
+  }
+  .hero h1{
+    font-family:var(--display);
+    font-variation-settings:"opsz" 144,"SOFT" 60,"WONK" 0;font-weight:300;
+    font-size:clamp(72px,10vw,128px);line-height:.95;letter-spacing:-.025em;
+    color:var(--ink);margin:0;
+  }
+  .hero h1 em{
+    font-style:italic;
+    font-variation-settings:"opsz" 144,"SOFT" 100,"WONK" 1;
+    color:var(--stamp);font-weight:300;
+  }
+  .hero .strap{
+    font-family:var(--display);font-style:italic;font-size:24px;color:var(--ink-soft);
+    margin:24px auto 0;max-width:48ch;line-height:1.45;
+    font-variation-settings:"opsz" 36,"SOFT" 100;font-weight:300;
+  }
+  .hero .below{
+    font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-faint);
+    margin-top:36px;
+  }
+  .hero .below b{color:var(--ink);font-weight:500}
+
+  /* ── Section nameplate ── */
+  .plate{
+    display:grid;grid-template-columns:auto 1fr auto;gap:32px;align-items:baseline;
+    padding:64px 0 24px;border-bottom:1px solid var(--ink);margin-bottom:0;
+  }
+  .plate .num{
+    font-family:var(--display);font-variation-settings:"opsz" 144,"SOFT" 30;font-weight:300;
+    font-size:96px;line-height:.85;letter-spacing:-.03em;color:var(--stamp);
+  }
+  .plate .num em{font-style:italic;font-variation-settings:"opsz" 144,"SOFT" 100}
+  .plate h2{
+    font-family:var(--display);font-variation-settings:"opsz" 96,"SOFT" 60;font-weight:400;
+    font-size:54px;line-height:1;letter-spacing:-.02em;color:var(--ink);margin:0;
+  }
+  .plate h2 em{font-style:italic;font-variation-settings:"opsz" 96,"SOFT" 100;color:var(--stamp)}
+  .plate .meta{
+    font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-faint);
+    text-align:right;line-height:1.7;
+  }
+  .plate .meta b{color:var(--ink);font-weight:500}
+
+  /* ── Big number stones ── */
+  .stones{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:0;
+    border-bottom:1px solid var(--rule);
+  }
+  .stone{
+    padding:48px 32px;border-right:1px solid var(--rule);
+  }
+  .stone:last-child{border-right:none}
+  .stone .v{
+    font-family:var(--display);font-variation-settings:"opsz" 144,"SOFT" 30;font-weight:300;
+    font-size:88px;line-height:.92;letter-spacing:-.035em;color:var(--ink);
+  }
+  .stone .v em{font-style:italic;font-variation-settings:"opsz" 144,"SOFT" 100;color:var(--stamp);font-weight:300}
+  .stone .v.gilt{color:var(--gilt)}
+  .stone .l{
+    font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-faint);
+    margin-top:14px;
+  }
+  .stone p{
+    font-family:var(--body);font-style:italic;font-size:16px;line-height:1.5;color:var(--ink-soft);
+    margin:18px 0 0;max-width:40ch;
+  }
+
+  /* ── Two-column editorial spread ── */
+  .spread{padding:64px 0;display:grid;grid-template-columns:repeat(2,1fr);gap:64px}
+  .spread.three{grid-template-columns:repeat(3,1fr);gap:48px}
+  .spread .block{}
+  .spread .block .k{
+    font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--stamp);
+    margin-bottom:14px;font-weight:500;
+  }
+  .spread .block h3{
+    font-family:var(--display);font-variation-settings:"opsz" 60,"SOFT" 50;font-weight:400;
+    font-size:32px;line-height:1.05;letter-spacing:-.02em;color:var(--ink);margin:0 0 18px;
+    max-width:18ch;
+  }
+  .spread .block h3 em{font-style:italic;font-variation-settings:"opsz" 60,"SOFT" 100;color:var(--stamp)}
+  .spread .block p{
+    font-family:var(--body);font-size:17px;line-height:1.6;color:var(--ink);margin:0 0 16px;
+  }
+  .spread .block p strong{font-weight:600;color:var(--ink)}
+  .spread .block p em{font-style:italic}
+  .spread .block p::first-letter{
+    font-family:var(--display);font-variation-settings:"opsz" 96,"SOFT" 30;font-weight:300;
+    font-size:54px;line-height:.85;float:left;margin:6px 8px 0 0;color:var(--stamp);
+  }
+  .spread .block p:not(:first-of-type)::first-letter{float:none;font-size:inherit;color:inherit;font-family:var(--body);font-weight:400;line-height:inherit;margin:0}
+
+  /* ── Pullquote ── */
+  .pull{
+    padding:48px 0;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);
+    margin:48px auto;text-align:center;
+  }
+  .pull q{
+    font-family:var(--display);font-variation-settings:"opsz" 96,"SOFT" 80;font-style:italic;font-weight:300;
+    font-size:44px;line-height:1.15;letter-spacing:-.018em;color:var(--ink);
+    quotes:"“" "”" "‘" "’";display:block;max-width:24ch;margin:0 auto;
+  }
+  .pull q::before{content:open-quote;color:var(--stamp)}
+  .pull q::after{content:close-quote;color:var(--stamp)}
+  .pull .src{
+    font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-faint);
+    margin-top:24px;font-weight:500;
+  }
+
+  /* ── Listing of cases ── */
+  .listing{
+    padding:48px 0 24px;border-top:1px solid var(--ink);
+  }
+  .listing .toc-row{
+    display:grid;grid-template-columns: 80px 1fr 100px 90px;gap:24px;
+    padding:18px 0;border-bottom:1px solid var(--rule);
+    align-items:baseline;
+  }
+  .listing .toc-row .fol{
+    font-family:var(--mono);font-size:10px;letter-spacing:.14em;color:var(--ink-faint);text-transform:uppercase;
+  }
+  .listing .toc-row .nm{
+    font-family:var(--display);font-variation-settings:"opsz" 36,"SOFT" 50;font-weight:500;
+    font-size:24px;line-height:1.15;letter-spacing:-.012em;color:var(--ink);
+  }
+  .listing .toc-row .nm em{font-style:italic;font-variation-settings:"opsz" 36,"SOFT" 100;color:var(--stamp)}
+  .listing .toc-row .it{font-family:var(--body);font-style:italic;font-size:14px;color:var(--ink-soft);margin-top:4px}
+  .listing .toc-row .ru{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink);text-align:right}
+  .listing .toc-row .am{
+    font-family:var(--display);font-variation-settings:"opsz" 36,"SOFT" 30;font-weight:400;
+    font-size:22px;letter-spacing:-.012em;color:var(--ink);text-align:right;line-height:1;
+  }
+  .listing .toc-row .am.gilt{color:var(--gilt)}
+  .listing .toc-row .am.faint{color:var(--ink-faint);font-size:14px}
+
+  /* ── Dark inversion section ── */
+  .dark{
+    background:var(--ink);color:var(--paper-deep);
+    margin:80px -100vw 0;padding:96px calc(50vw - 540px);
+  }
+  .dark h2{color:var(--paper)}
+  .dark h2 em{color:var(--gilt)}
+  .dark .stone .v{color:var(--paper)}
+  .dark .stone .v em{color:var(--gilt)}
+  .dark .stone .l{color:#999086}
+  .dark .stone p{color:#b9b3a4}
+  .dark .stone{border-right-color:#3a342c}
+  .dark .stones{border-bottom-color:#3a342c}
+  .dark .spread .block h3{color:var(--paper)}
+  .dark .spread .block h3 em{color:var(--gilt)}
+  .dark .spread .block p{color:#d8d2c0}
+  .dark .spread .block p::first-letter{color:var(--gilt)}
+  .dark .spread .block .k{color:var(--gilt)}
+  .dark .pull{border-color:#3a342c}
+  .dark .pull q{color:var(--paper)}
+  .dark .pull .src{color:#999086}
+
+  /* ── Endmark ── */
+  .endmark{
+    text-align:center;padding:96px 0 32px;
+    font-family:var(--display);font-style:italic;
+    font-variation-settings:"opsz" 60,"SOFT" 100;
+    font-size:36px;color:var(--ink-faint);
+  }
+  .endmark::before{content:"❦  ";color:var(--stamp)}
+  .endmark::after{content:"  ❦";color:var(--stamp)}
+
+  footer{
+    border-top:1px solid var(--rule);padding:24px 0 56px;
+    font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-faint);
+    display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px;
+  }
+  footer a{color:var(--ink-soft);text-decoration:none;border-bottom:1px solid var(--rule);transition:color .15s,border-color .15s}
+  footer a:hover{color:var(--stamp);border-bottom-color:var(--stamp)}
+
+  @media(max-width:880px){
+    .frame,.wide{padding:0 22px}
+    .hero{padding:64px 0 56px}
+    .plate{grid-template-columns:1fr;gap:14px}
+    .stones{grid-template-columns:1fr}
+    .stone{border-right:none;border-bottom:1px solid var(--rule)}
+    .spread{grid-template-columns:1fr;gap:32px;padding:32px 0}
+    .spread.three{grid-template-columns:1fr}
+    .pull q{font-size:32px}
+    .listing .toc-row{grid-template-columns:60px 1fr 80px;gap:14px}
+    .listing .toc-row .am{display:none}
+  }
+</style>
+</head>
+<body>
+  <div class="frame">
+    <div class="runhead">
+      <div><span class="seal">caseflows</span> &nbsp;·&nbsp; The Gallery · sheet 06</div>
+      <div>
+        <a href="../index.html">⇐ Concepts</a>
+        <a href="06-subway.html">⇐ Subway</a>
+        <a href="07-treemap.html">⇐ Treemap</a>
+      </div>
+    </div>
+
+    <!-- Hero -->
+    <header class="hero">
+      <div class="above">— A reading room for a war —</div>
+      <h1>The legal record<br>of <em>this war.</em></h1>
+      <p class="strap">Forty-one international legal proceedings between Ukraine and the Russian Federation, indexed for reading. <em>What was done. What was ruled. What is owed.</em></p>
+      <div class="below">
+        <b>2014</b> — annexation &nbsp;·&nbsp; <b>2022</b> — invasion &nbsp;·&nbsp; <b>2026</b> — the present
+      </div>
+    </header>
+
+    <!-- ── ACT I — WHAT WAS DONE ────────────── -->
+    <section class="plate">
+      <div class="num">I</div>
+      <h2>What was <em>done.</em></h2>
+      <div class="meta">
+        <div>Act 01 / 03</div>
+        <div>The harms</div>
+      </div>
+    </section>
+
+    <div class="stones">
+      <div class="stone">
+        <div class="v">298</div>
+        <div class="l">people aboard MH17</div>
+        <p>Shot down by a Buk surface-to-air missile fired from a field near Pervomaiskyi, eastern Ukraine, on the 17<sup>th</sup> of July 2014.</p>
+      </div>
+      <div class="stone">
+        <div class="v">19,500<em>+</em></div>
+        <div class="l">Ukrainian children</div>
+        <p>Identified as deported or forcibly transferred to the Russian Federation from occupied territories. The basis of the ICC's first warrant against a sitting P5 head of state.</p>
+      </div>
+      <div class="stone">
+        <div class="v gilt">12</div>
+        <div class="l">years &middot; territory occupied</div>
+        <p>Crimea has been under Russian control since February 2014. The Donbas since the spring of the same year. Most of the south since 2022.</p>
+      </div>
+    </div>
+
+    <div class="spread">
+      <div class="block">
+        <div class="k">on territory</div>
+        <h3>The <em>annexation</em> that began everything.</h3>
+        <p>In February 2014 Russian forces seized the Crimean peninsula. By March they had organised a referendum. By summer the Donbas was burning. The international legal cases that began that year — at the ECtHR, at the PCA, at the SCC arbitration in Stockholm — never ended; they multiplied.</p>
+        <p>By 2026 there are <strong>at least eleven distinct PCA arbitrations</strong> arising from Crimea alone, all under the 1998 Russia–Ukraine BIT. Together they form the largest single cluster of investor-state arbitration in the history of any treaty.</p>
+      </div>
+      <div class="block">
+        <div class="k">on the body</div>
+        <h3>The <em>missiles,</em> the dam, the children.</h3>
+        <p>The full-scale invasion of February 2022 brought new categories of harm into court: the missile campaign against the Ukrainian energy grid, the destruction of the Kakhovka hydroelectric dam, the seizure of the Zaporizhzhia nuclear plant, the deportation of children.</p>
+        <p>Six ICC arrest warrants flow from this period. Putin and Lvova-Belova for the children. <strong>Kobylash, Sokolov, Shoigu, Gerasimov</strong> for the strikes on civilian infrastructure. None of them, as of April 2026, has been served.</p>
+      </div>
+    </div>
+
+    <div class="pull">
+      <q>The first ICC warrant ever issued against a sitting permanent-five head of state.</q>
+      <div class="src">— On Putin, March 2023</div>
+    </div>
+
+
+    <!-- ── ACT II — WHAT WAS RULED ───────────── -->
+    <section class="plate">
+      <div class="num"><em>II</em></div>
+      <h2>What was <em>ruled.</em></h2>
+      <div class="meta">
+        <div>Act 02 / 03</div>
+        <div>The judgments</div>
+      </div>
+    </section>
+
+    <div class="stones">
+      <div class="stone">
+        <div class="v">3</div>
+        <div class="l">major ICJ rulings</div>
+        <p>The 2024 CERD/ICSFT merits judgment. The 2022 provisional measures order in Genocide. The provisional measures in the Crimea case. The world court has not stood quiet.</p>
+      </div>
+      <div class="stone">
+        <div class="v">7<em>—0</em></div>
+        <div class="l">unanimous violations &middot; ECtHR</div>
+        <p>In the Crimea Grand Chamber judgment of June 2024, every article — 2, 3, 5, 6, 8, 9, 10, 11, 14, 18, P1-1, P1-2, P4-2 — was violated. Without a single dissent.</p>
+      </div>
+      <div class="stone">
+        <div class="v gilt">1<em>st</em></div>
+        <div class="l">Article 84 in 80 years</div>
+        <p>In May 2025, the ICAO Council made the first merits ruling under Article 84 of the Chicago Convention in its eighty-year history — finding Russia responsible for the downing of MH17.</p>
+      </div>
+    </div>
+
+    <div class="spread three">
+      <div class="block">
+        <div class="k">the world court</div>
+        <h3>Genocide, in <em>reverse.</em></h3>
+        <p>In Allegations of Genocide, Ukraine asks the ICJ to declare not that Russia committed genocide, but that <em>its invocation of the Genocide Convention as pretext for war is itself a violation of that Convention</em>.</p>
+        <p>It is one of the most legally inventive applications ever filed. Thirty-two states have intervened — the largest intervention in the Court's history.</p>
+      </div>
+      <div class="block">
+        <div class="k">the european court</div>
+        <h3>The largest case in <em>European history.</em></h3>
+        <p>Ukraine and the Netherlands v. Russia bundles four inter-state applications — the Donbas, MH17, the post-2022 invasion, the abductions of children — into one Grand Chamber proceeding.</p>
+        <p>The merits judgment came down in July 2025. Russia is liable for the downing of MH17, among everything else.</p>
+      </div>
+      <div class="block">
+        <div class="k">the dutch supreme court</div>
+        <h3>Six December, <em>2024.</em></h3>
+        <p>On a single day, the Hoge Raad confirmed three of the four Crimea BIT awards Russia had challenged. The Naftogaz, PrivatBank, and Belbek awards stand. Only the Everest case — on a narrow evidentiary point — was remanded.</p>
+        <p>The most consequential set of rulings in international arbitration in a decade.</p>
+      </div>
+    </div>
+
+
+    <!-- ── ACT III — WHAT IS OWED ──────────── -->
+    <section class="plate">
+      <div class="num">III</div>
+      <h2>What is <em>owed.</em></h2>
+      <div class="meta">
+        <div>Act 03 / 03</div>
+        <div>The money</div>
+      </div>
+    </section>
+
+    <div class="stones">
+      <div class="stone">
+        <div class="v gilt">€210<em>bn</em></div>
+        <div class="l">frozen at Euroclear, Brussels</div>
+        <p>The single largest pool of Russian state money under European control. As of December 2025, frozen indefinitely. The reparations-loan structure remains under negotiation.</p>
+      </div>
+      <div class="stone">
+        <div class="v">$5<em>bn</em></div>
+        <div class="l">awarded to Naftogaz, PCA</div>
+        <p>For the expropriation of the Naftogaz group's Crimean oil and gas assets. Final award rendered April 2023; confirmed by the Hoge Raad in December 2024; enforcement underway in five jurisdictions.</p>
+      </div>
+      <div class="stone">
+        <div class="v">$1.37<em>bn</em></div>
+        <div class="l">awarded in Naftogaz <em>v</em> Gazprom (III)</div>
+        <p>The first major arbitral win triggered by the full-scale invasion. Final award June 2025; confirmed by the Swiss Federal Tribunal in March 2026.</p>
+      </div>
+    </div>
+
+    <div class="pull">
+      <q>Awarded does not mean collected.</q>
+      <div class="src">— Estimated $300m physically attached, of $7.5bn awarded</div>
+    </div>
+
+
+    <!-- ── DARK SECTION — five mostly-unrelated big numbers ── -->
+  </div>
+
+  <div class="dark">
+    <div class="frame" style="margin:0 auto;padding:0">
+      <section class="plate">
+        <div class="num"><em>iv</em></div>
+        <h2>And, <em>finally:</em></h2>
+        <div class="meta">
+          <div>Coda</div>
+          <div>Five things to remember</div>
+        </div>
+      </section>
+      <div class="spread three">
+        <div class="block">
+          <div class="k">forums</div>
+          <h3>Eleven different <em>courtrooms</em></h3>
+          <p>From the World Court at the Peace Palace to the Schiphol criminal courthouse. From the SCC in Stockholm to a Lithuanian district court in Vilnius. The legal record is dispersed across eleven kinds of bench.</p>
+        </div>
+        <div class="block">
+          <div class="k">enforcement</div>
+          <h3>Five jurisdictions <em>chasing</em> assets</h3>
+          <p>Naftogaz alone is now enforcing its Crimea award in France, the United Kingdom, Finland, Austria, and the United States. The Dutch Supreme Court, the Swiss Federal Tribunal, and the French Cour de cassation have all refused Russia's challenges.</p>
+        </div>
+        <div class="block">
+          <div class="k">unfinished</div>
+          <h3>The cases <em>not yet</em> filed</h3>
+          <p>Energoatom has put Russia on notice over the Zaporizhzhia plant. Ukrhydroenergo over Kakhovka. The Special Tribunal for the Crime of Aggression begins sitting in 2027. The legal record of this war is, by any measure, not yet written.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="frame">
+
+    <!-- ── Closing listing ── -->
+    <section class="listing">
+      <h3 style="font-family:var(--display);font-variation-settings:'opsz' 96,'SOFT' 60;font-weight:400;font-size:42px;letter-spacing:-.02em;color:var(--ink);margin:48px 0 24px;line-height:1">Forty-one folios, in order.</h3>
+      <p style="font-family:var(--body);font-style:italic;font-size:17px;color:var(--ink-soft);max-width:60ch;margin:0 0 36px">A complete index of the cases referenced above. Hover for the docket; every folio has its own page in the Archive.</p>
+      <div id="toc"></div>
+    </section>
+
+    <div class="endmark">caseflows</div>
+
+    <footer>
+      <div>caseflows · the gallery · v 0.4</div>
+      <div>
+        <a href="../index.html">concept index</a> ·
+        <a href="02-archive.html">archive</a> ·
+        <a href="06-subway.html">subway</a> ·
+        <a href="07-treemap.html">treemap</a>
+      </div>
+      <div>fraunces · newsreader · ibm plex mono</div>
+    </footer>
+  </div>
+
+  <script src="data.js"></script>
+  <script>
+  (() => {
+    const toc = document.getElementById('toc');
+    toc.innerHTML = window.CASES.map(c => {
+      const nm = c.name.replace(/ v /g,' <em>v</em> ');
+      const amtCls = c.gilt ? 'gilt' : (!c.amount || Math.abs(c.amount) < 1) ? 'faint' : '';
+      return `
+        <a class="toc-row" href="#fol-${c.fol}" style="text-decoration:none;color:inherit">
+          <div class="fol">FOL.&nbsp;${String(c.fol).padStart(2,'0')}</div>
+          <div>
+            <div class="nm">${nm}</div>
+            <div class="it">${c.italic}</div>
+          </div>
+          <div class="ru">${c.forumLabel}<br><span style="color:var(--ink-faint);font-size:10px">${window.formatDate(c.filed)}</span></div>
+          <div class="am ${amtCls}">${c.amountLbl || '—'}</div>
+        </a>`;
+    }).join('');
+  })();
+  </script>
+</body>
+</html>

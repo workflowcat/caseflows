@@ -1,0 +1,480 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The Subway — Caseflows</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,300..700,30..100&family=Hanken+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#f8f5ee;
+    --paper-deep:#ece5d3;
+    --ink:#1c1814;
+    --ink-soft:#4a443a;
+    --ink-faint:#8a8270;
+    --rule:#c8c0ac;
+    --display:'Fraunces', serif;
+    --sans:'Hanken Grotesk', system-ui, sans-serif;
+    --mono:'IBM Plex Mono', ui-monospace, monospace;
+
+    --line-mh17:    #d6452f;
+    --line-crimea:  #2f6cd6;
+    --line-children:#d4a045;
+    --line-genocide:#7a4ed6;
+    --line-naval:   #2fa898;
+    --line-gas:     #5e9c3d;
+    --line-strikes: #e07c2f;
+    --line-cbr:     #b8893a;
+  }
+  *,*::before,*::after{box-sizing:border-box}
+  html{background:var(--paper)}
+  body{margin:0;background:var(--paper);color:var(--ink-soft);font-family:var(--sans);font-size:15px;line-height:1.5;-webkit-font-smoothing:antialiased}
+  a{color:inherit}
+  ::selection{background:var(--ink);color:var(--paper)}
+  button{font:inherit;color:inherit;background:none;border:none;padding:0;cursor:pointer}
+
+  .frame{max-width:1320px;margin:0 auto;padding:0 32px}
+
+  .runhead{
+    border-bottom:1px solid var(--rule);
+    padding:14px 0;
+    font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft);
+    display:flex;justify-content:space-between;align-items:baseline;
+  }
+  .runhead .seal{font-family:var(--display);font-variation-settings:"opsz" 144,"SOFT" 80;font-size:18px;color:var(--ink);letter-spacing:-.005em;text-transform:none;font-weight:500}
+  .runhead a{margin-left:18px;text-decoration:none;border-bottom:1px solid transparent;transition:border-color .15s,color .15s}
+  .runhead a:hover{color:var(--line-mh17);border-bottom-color:var(--line-mh17)}
+
+  .title{padding:48px 0 20px;display:grid;grid-template-columns:1fr auto;gap:32px;align-items:end;border-bottom:1px solid var(--ink)}
+  .title h1{font-family:var(--display);font-variation-settings:"opsz" 144,"SOFT" 60;font-weight:400;font-size:54px;line-height:1;letter-spacing:-.02em;color:var(--ink);margin:0}
+  .title h1 em{font-style:italic;font-variation-settings:"opsz" 144,"SOFT" 100;color:var(--line-mh17)}
+  .title .strap{font-family:var(--display);font-style:italic;font-size:18px;color:var(--ink-soft);margin:8px 0 0;max-width:62ch;font-variation-settings:"opsz" 36,"SOFT" 100}
+  .title .stats{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft);text-align:right;line-height:1.7;white-space:nowrap}
+  .title .stats b{color:var(--ink);font-weight:500}
+
+  /* Toolbar */
+  .toolbar{
+    padding:14px 0;border-bottom:1px solid var(--rule);
+    display:flex;justify-content:space-between;align-items:center;
+    font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft);
+    flex-wrap:wrap;gap:14px;
+  }
+  .toolbar .grp{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+  .toolbar .lab{color:var(--ink-faint);margin-right:4px}
+  .toolbar .line-chip{
+    padding:4px 10px 4px 22px;
+    border:1px solid var(--rule);
+    color:var(--ink);
+    cursor:pointer;
+    position:relative;
+    font-family:var(--sans);
+    font-size:11px;
+    letter-spacing:.04em;
+    text-transform:none;
+    font-weight:500;
+    transition:all .15s;
+  }
+  .toolbar .line-chip::before{
+    content:"";position:absolute;left:7px;top:50%;transform:translateY(-50%);
+    width:9px;height:9px;border-radius:50%;background:var(--c);
+  }
+  .toolbar .line-chip:hover{background:var(--paper-deep)}
+  .toolbar .line-chip.dim{opacity:.45}
+
+  /* Subway canvas */
+  .canvas-wrap{
+    position:relative;background:var(--paper);
+    margin:8px 0 24px;border:1px solid var(--rule);overflow:hidden;
+  }
+  .canvas-svg{display:block;width:100%}
+
+  /* SVG */
+  .land{fill:#f0e9d6;stroke:none}
+  .ua{fill:#e8d8c7;stroke:var(--ink);stroke-width:.6;opacity:.9}
+  .country-label{font-family:var(--display);font-style:italic;font-size:13px;fill:var(--ink-faint);text-transform:uppercase;letter-spacing:.18em;font-variation-settings:"opsz" 24,"SOFT" 100;font-weight:400}
+
+  .line{fill:none;stroke-linecap:round;stroke-linejoin:round}
+  .line.dim{opacity:.12}
+
+  .station{cursor:pointer;transition:transform .12s}
+  .station-hub circle{fill:var(--paper);stroke:var(--ink);stroke-width:2.5}
+  .station-hub.major circle{stroke-width:3}
+  .station-pin circle{fill:var(--paper);stroke:var(--ink);stroke-width:1.6}
+  .harm-pin circle{fill:var(--line-mh17);stroke:var(--paper);stroke-width:1.5}
+
+  .station-label{font-family:var(--sans);font-size:11px;font-weight:600;fill:var(--ink);pointer-events:none}
+  .station-label.major{font-size:13px;font-weight:700}
+  .station-sub{font-family:var(--mono);font-size:9px;letter-spacing:.06em;text-transform:uppercase;fill:var(--ink-soft);pointer-events:none}
+  .harm-label{font-family:var(--mono);font-size:9px;letter-spacing:.08em;text-transform:uppercase;fill:var(--line-mh17);font-weight:500;pointer-events:none}
+
+  /* Tooltip */
+  #tt{
+    position:fixed;pointer-events:none;
+    background:var(--ink);color:var(--paper);
+    padding:10px 14px;
+    font-family:var(--sans);font-size:12px;
+    line-height:1.45;border-radius:1px;
+    z-index:50;display:none;max-width:300px;
+  }
+  #tt b{color:#fff;font-weight:700;font-size:13px;display:block;margin-bottom:4px}
+  #tt .l{display:flex;align-items:center;gap:8px;margin-top:6px;font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:#bbb}
+  #tt .l::before{content:"";display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--c)}
+  #tt .ti{font-style:italic;color:#d8d2c0;font-family:var(--display);font-variation-settings:"opsz" 24,"SOFT" 100;font-size:13px;display:block;margin-top:2px}
+
+  /* Lines panel */
+  .lines-panel{
+    display:grid;grid-template-columns:repeat(4,1fr);gap:0;
+    border-top:1px solid var(--ink);border-bottom:1px solid var(--rule);
+    margin-bottom:24px;
+  }
+  .line-row{
+    padding:18px 22px;
+    border-right:1px solid var(--rule);
+    cursor:pointer;
+    transition:background .12s;
+  }
+  .line-row:nth-child(4n){border-right:none}
+  .line-row:nth-child(n+5){border-top:1px solid var(--rule)}
+  .line-row:hover{background:var(--paper-deep)}
+  .line-row .name{
+    display:flex;align-items:center;gap:10px;
+    font-family:var(--sans);font-size:14px;font-weight:600;color:var(--ink);
+  }
+  .line-row .name::before{
+    content:"";display:inline-block;width:14px;height:14px;border-radius:3px;background:var(--c);
+  }
+  .line-row .stops{
+    font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-faint);margin-top:6px;
+  }
+  .line-row .desc{
+    font-family:var(--display);font-style:italic;font-size:14px;color:var(--ink-soft);margin-top:8px;line-height:1.4;
+    font-variation-settings:"opsz" 18,"SOFT" 100;
+  }
+  .line-row .ct{font-family:var(--mono);font-size:10px;color:var(--ink-faint);margin-top:6px;letter-spacing:.04em}
+
+  footer{
+    margin-top:32px;border-top:1px solid var(--ink);
+    padding:24px 0 56px;
+    font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;
+    color:var(--ink-faint);display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px;
+  }
+  footer a{color:var(--ink-soft);text-decoration:none;border-bottom:1px solid var(--rule);transition:color .15s,border-color .15s}
+  footer a:hover{color:var(--line-mh17);border-bottom-color:var(--line-mh17)}
+
+  @media(max-width:1080px){.lines-panel{grid-template-columns:repeat(2,1fr)}.line-row:nth-child(2n){border-right:none}.line-row:nth-child(n+3){border-top:1px solid var(--rule)}}
+  @media(max-width:680px){.frame{padding:0 16px}.title h1{font-size:38px}.lines-panel{grid-template-columns:1fr}.line-row{border-right:none;border-top:1px solid var(--rule)}}
+</style>
+</head>
+<body>
+  <div class="frame">
+
+    <div class="runhead">
+      <div><span class="seal">caseflows</span> &nbsp;·&nbsp; The Subway · sheet 04</div>
+      <div>
+        <a href="../index.html">⇐ Concepts</a>
+        <a href="03-atlas.html">Atlas</a>
+        <a href="07-treemap.html">Treemap →</a>
+      </div>
+    </div>
+
+    <header class="title">
+      <div>
+        <h1>The <em>Subway.</em></h1>
+        <p class="strap">Eight legal "lines" running between harm sites in Ukraine and the courts of Europe. The Hague is the megahub. To read a line is to follow a single conflict through every venue that has heard it.</p>
+      </div>
+      <div class="stats">
+        <div><b>8</b> lines</div>
+        <div><b>21</b> stations</div>
+        <div><b>1</b> megahub</div>
+        <div style="color:var(--ink-faint);margin-top:8px">after H. Beck, 1933</div>
+      </div>
+    </header>
+
+    <div class="toolbar">
+      <div class="grp">
+        <span class="lab">isolate a line</span>
+        <button class="line-chip" data-line="mh17"     style="--c:var(--line-mh17)">MH17</button>
+        <button class="line-chip" data-line="crimea"   style="--c:var(--line-crimea)">Crimea Awards</button>
+        <button class="line-chip" data-line="genocide" style="--c:var(--line-genocide)">Genocide</button>
+        <button class="line-chip" data-line="children" style="--c:var(--line-children)">Children</button>
+        <button class="line-chip" data-line="strikes"  style="--c:var(--line-strikes)">Strikes</button>
+        <button class="line-chip" data-line="naval"    style="--c:var(--line-naval)">Naval</button>
+        <button class="line-chip" data-line="gas"      style="--c:var(--line-gas)">Gas Transit</button>
+        <button class="line-chip" data-line="cbr"      style="--c:var(--line-cbr)">CBR Freeze</button>
+        <button class="line-chip" data-line="all"      style="--c:var(--ink)">show all</button>
+      </div>
+    </div>
+
+    <div class="canvas-wrap">
+      <svg class="canvas-svg" id="cv" viewBox="0 0 1280 760" preserveAspectRatio="xMidYMid meet"></svg>
+    </div>
+
+    <!-- Lines explainer panel -->
+    <section class="lines-panel" id="panel"></section>
+
+    <footer>
+      <div>caseflows · the subway · v 0.4</div>
+      <div>
+        <a href="../index.html">concept index</a> ·
+        <a href="03-atlas.html">atlas</a> ·
+        <a href="04-timeline.html">timeline</a> ·
+        <a href="05-constellation.html">constellation</a>
+      </div>
+      <div>fraunces · hanken grotesk · ibm plex mono</div>
+    </footer>
+  </div>
+
+  <div id="tt"></div>
+
+  <script src="data.js"></script>
+  <script>
+  (() => {
+    const svg = document.getElementById('cv');
+
+    // ── Station catalog (x,y in 1280×760) ──────────────────
+    const STATIONS = {
+      // The Hague megahub — actually rendered as a cluster
+      'hague-icj':    {x:480, y:360, name:'ICJ',           sub:'World Court',           hub:true, major:true, parent:'The Hague'},
+      'hague-icc':    {x:445, y:380, name:'ICC',           sub:'Criminal Court',        hub:true, parent:'The Hague'},
+      'hague-pca':    {x:480, y:400, name:'PCA',           sub:'Permanent Arbitration', hub:true, parent:'The Hague'},
+      'hague-hr':     {x:445, y:420, name:'Hoge Raad',     sub:'NL Supreme Court',      hub:true, parent:'The Hague'},
+      'hague-jit':    {x:415, y:400, name:'JIT/Schiphol',  sub:'NL Criminal',           hub:true, parent:'The Hague'},
+      // Other European courts
+      'strasbourg':   {x:380, y:500, name:'Strasbourg',    sub:'ECtHR',                 major:true},
+      'stockholm':    {x:680, y:120, name:'Stockholm',     sub:'SCC Arbitration'},
+      'helsinki':     {x:790, y:130, name:'Helsinki',      sub:'Enforcement / FI Trial'},
+      'vilnius':      {x:790, y:280, name:'Vilnius',       sub:'LT Universal Jurisdiction'},
+      'frankfurt':    {x:540, y:480, name:'Frankfurt',     sub:'OLG · DE Universal'},
+      'paris':        {x:300, y:480, name:'Paris',         sub:'Cour de cassation · enforcement'},
+      'london':       {x:230, y:380, name:'London',        sub:'UK High Court'},
+      'hamburg':      {x:560, y:280, name:'Hamburg',       sub:'ITLOS'},
+      'brussels':     {x:430, y:440, name:'Brussels',      sub:'Euroclear'},
+      'geneva':       {x:460, y:610, name:'Geneva',        sub:'PCA · Crimea petrol'},
+      'zurich':       {x:540, y:610, name:'Zürich',        sub:'ICC arb · gas transit'},
+      'bern':         {x:500, y:660, name:'Bern',          sub:'Swiss Federal Tribunal'},
+      'vienna':       {x:680, y:530, name:'Vienna',        sub:'Enforcement'},
+      // Off-canvas indicator for Montreal (ICAO)
+      'icao':         {x:60,  y:110, name:'Montreal',      sub:'ICAO Council',          dotted:true},
+
+      // Harm-site origin stations (in Ukraine)
+      'crimea':       {x:1100, y:580, name:'Crimea',       sub:'occupied 2014',          harm:true, major:true},
+      'donbas':       {x:1110, y:480, name:'Donbas',       sub:'2014– / 2022–',          harm:true, major:true},
+      'mh17-site':    {x:1130, y:520, name:'Hrabove',      sub:'MH17 crash · 17.vii.2014',harm:true},
+      'kerch':        {x:1100, y:600, name:'Kerch Strait', sub:'naval seizure 2018',     harm:true},
+      'sokhranivka':  {x:1090, y:460, name:'Sokhranivka',  sub:'transit force-majeure',  harm:true},
+      'bucha':        {x:1100, y:380, name:'Bucha + Kyiv', sub:'occupation 2022',        harm:true},
+      'kakhovka':     {x:1085, y:540, name:'Kakhovka',     sub:'HPP destroyed 2023',     harm:true},
+      'zaporizhzhia': {x:1085, y:500, name:'Zaporizhzhia', sub:'NPP seized 2022',        harm:true},
+      'ru-fin':       {x:1180, y:330, name:'Russian state', sub:'CBR & sanctions',       harm:true, dotted:true},
+    };
+
+    // ── Lines ──────────────────────────────────────────────
+    const LINES = [
+      {id:'mh17',     name:'MH17 Line',         color:'var(--line-mh17)',
+        stops:['mh17-site','hague-jit','strasbourg','icao','hague-icj'],
+        desc:'The downing of Malaysia 17 follows a long path: from a field in Hrabove to the Schiphol bench, to Strasbourg, to Montreal, to the World Court.',
+        cases:[5,17,33,34,3]},
+      {id:'crimea',   name:'Crimea Awards Line',color:'var(--line-crimea)',
+        stops:['crimea','hague-pca','hague-hr','paris','helsinki','vienna','london'],
+        desc:'A decade of investor-state arbitrations under the 1998 BIT. The awards are upheld at the Hoge Raad, then enforced across five jurisdictions.',
+        cases:[21,22,23,24,25,26,27,28,29,35,36,37,38]},
+      {id:'genocide', name:'Genocide Line',     color:'var(--line-genocide)',
+        stops:['donbas','hague-icj'],
+        desc:'Ukraine asks the World Court to declare that its invocation of the Genocide Convention does not justify the war waged in its name. 32 states intervene.',
+        cases:[1,2]},
+      {id:'children', name:'Children Line',     color:'var(--line-children)',
+        stops:['bucha','hague-icc'],
+        desc:'Two ICC arrest warrants for the deportation of Ukrainian children — Putin and Lvova-Belova. The first warrant against a sitting P5 head of state.',
+        cases:[9,10,11]},
+      {id:'strikes',  name:'Strike Campaign Line',color:'var(--line-strikes)',
+        stops:['zaporizhzhia','hague-icc'],
+        desc:'Four further ICC warrants for the missile campaign against Ukrainian energy: Kobylash, Sokolov, Shoigu, Gerasimov.',
+        cases:[12,13,14,15]},
+      {id:'naval',    name:'Naval Vessels Line',color:'var(--line-naval)',
+        stops:['kerch','hamburg','hague-pca','strasbourg'],
+        desc:'Three Ukrainian naval vessels seized at the Kerch Strait, contested first at ITLOS, then through Annex VII arbitration, then at the ECtHR.',
+        cases:[6,16]},
+      {id:'gas',      name:'Gas Transit Line',  color:'var(--line-gas)',
+        stops:['sokhranivka','stockholm','zurich','bern'],
+        desc:'Three commercial arbitrations between Naftogaz and Gazprom — Stockholm twice, then Zurich after the 2022 force-majeure declaration. Confirmed in Bern, March 2026.',
+        cases:[18,19,20]},
+      {id:'cbr',      name:'CBR Freeze Line',   color:'var(--line-cbr)',
+        stops:['ru-fin','brussels'],
+        desc:'€210 billion of Russian Central Bank reserves immobilised at Euroclear in Brussels. As of December 2025, frozen indefinitely.',
+        cases:[41]},
+    ];
+
+    // ── Render ─────────────────────────────────────────────
+    let isolated = null;
+
+    const render = () => {
+      let out = '';
+
+      // Country label backgrounds
+      out += `<text x="1140" y="710" class="country-label" text-anchor="end">Ukraine</text>`;
+      out += `<text x="450" y="200" class="country-label">European courts</text>`;
+
+      // Country bands (subtle)
+      out += `<rect x="1010" y="340" width="240" height="370" fill="#e8d8c7" opacity=".35"/>`;
+      out += `<line x1="1010" y1="340" x2="1010" y2="710" stroke="var(--rule)" stroke-width=".5" stroke-dasharray="2 4"/>`;
+
+      // ── Draw lines ──
+      const lineThickness = 7;
+      LINES.forEach(line => {
+        const dim = isolated && isolated !== line.id ? ' dim' : '';
+        const path = lineToPath(line);
+        out += `<path d="${path}" class="line${dim}" stroke="${line.color}" stroke-width="${lineThickness}" data-line="${line.id}"/>`;
+      });
+
+      // ── Draw stations ──
+      // First: harm pins (origin sites)
+      Object.entries(STATIONS).forEach(([id, s]) => {
+        if (!s.harm) return;
+        out += `<g class="station harm-pin" data-id="${id}">
+          <circle cx="${s.x}" cy="${s.y}" r="${s.major ? 7 : 5}"/>
+          <text x="${s.x + 10}" y="${s.y + 4}" class="harm-label">${s.name}</text>
+          <text x="${s.x + 10}" y="${s.y + 16}" class="station-sub">${s.sub}</text>
+        </g>`;
+      });
+
+      // Then: court stations
+      Object.entries(STATIONS).forEach(([id, s]) => {
+        if (s.harm) return;
+        const isHub = s.hub;
+        const cls = isHub ? 'station-hub' : 'station-pin';
+        const r = s.major ? 8 : isHub ? 7 : 5;
+        const lblOffset = s.x < 200 ? -10 : 12;
+        const lblAnchor = s.x < 200 ? 'end' : 'start';
+        const dotted = s.dotted ? ' stroke-dasharray="3 3"' : '';
+
+        out += `<g class="station ${cls}${s.major?' major':''}" data-id="${id}">
+          <circle cx="${s.x}" cy="${s.y}" r="${r}"${dotted}/>
+          <text x="${s.x + lblOffset}" y="${s.y + 4}" text-anchor="${lblAnchor}" class="station-label${s.major?' major':''}">${s.name}</text>
+          <text x="${s.x + lblOffset}" y="${s.y + 17}" text-anchor="${lblAnchor}" class="station-sub">${s.sub}</text>
+        </g>`;
+      });
+
+      // Hague hub label
+      out += `<g pointer-events="none">
+        <text x="445" y="332" text-anchor="middle" class="station-label major" style="font-size:15px">The Hague</text>
+        <text x="445" y="346" text-anchor="middle" class="station-sub" style="fill:var(--ink-faint)">megahub · 5 forums</text>
+      </g>`;
+
+      svg.innerHTML = out;
+
+      // Hover handlers
+      svg.querySelectorAll('.station').forEach(el => {
+        el.addEventListener('mouseenter', e => showStTip(e, el.dataset.id));
+        el.addEventListener('mousemove', moveTip);
+        el.addEventListener('mouseleave', hideTip);
+      });
+      svg.querySelectorAll('.line').forEach(el => {
+        el.addEventListener('mouseenter', e => showLineTip(e, el.dataset.line));
+        el.addEventListener('mousemove', moveTip);
+        el.addEventListener('mouseleave', hideTip);
+        el.addEventListener('click', () => {
+          isolated = isolated === el.dataset.line ? null : el.dataset.line;
+          render();
+          syncChips();
+        });
+      });
+    };
+
+    // Build a 45/90° polyline path between stations.
+    // Use ortho-routing: from each station to the next, prefer horizontal-then-vertical
+    const lineToPath = (line) => {
+      const pts = line.stops.map(id => STATIONS[id]).filter(Boolean);
+      if (!pts.length) return '';
+      // Apply small offset per line so parallel lines through same corridor don't fully overlap
+      const offset = (LINES.findIndex(l => l.id === line.id) - 3.5) * 1.2;
+      let path = '';
+      pts.forEach((p, i) => {
+        const px = p.x + offset, py = p.y + offset;
+        if (i === 0) path += `M ${px} ${py}`;
+        else {
+          const prev = pts[i-1];
+          const dx = px - (prev.x + offset), dy = py - (prev.y + offset);
+          // Diagonal allowance: if predominantly diagonal, run direct line
+          if (Math.abs(dx) < 30 || Math.abs(dy) < 30){
+            path += ` L ${px} ${py}`;
+          } else {
+            // L-shape: pick whichever orient looks better
+            const useHFirst = Math.abs(dx) > Math.abs(dy);
+            if (useHFirst){
+              path += ` L ${px} ${prev.y + offset} L ${px} ${py}`;
+            } else {
+              path += ` L ${prev.x + offset} ${py} L ${px} ${py}`;
+            }
+          }
+        }
+      });
+      return path;
+    };
+
+    const tt = document.getElementById('tt');
+    const showStTip = (e, id) => {
+      const s = STATIONS[id];
+      const matching = LINES.filter(l => l.stops.includes(id));
+      tt.style.display = 'block';
+      tt.innerHTML = `<b>${s.name}</b><span class="ti">${s.sub}</span>${
+        matching.map(l => `<div class="l" style="--c:${l.color}">${l.name}</div>`).join('')
+      }`;
+      moveTip(e);
+    };
+    const showLineTip = (e, lineId) => {
+      const l = LINES.find(x => x.id === lineId);
+      if (!l) return;
+      tt.style.display = 'block';
+      tt.innerHTML = `<b>${l.name}</b><span class="ti">${l.cases.length} case${l.cases.length===1?'':'s'} on this line</span><div class="l" style="--c:${l.color}">click to isolate the line</div>`;
+      moveTip(e);
+    };
+    const moveTip = e => {
+      tt.style.left = (e.clientX + 14) + 'px';
+      tt.style.top  = (e.clientY + 14) + 'px';
+    };
+    const hideTip = () => { tt.style.display = 'none' };
+
+    // Lines panel
+    const renderPanel = () => {
+      const wrap = document.getElementById('panel');
+      wrap.innerHTML = LINES.map(l => `
+        <div class="line-row" data-line="${l.id}" style="--c:${l.color}">
+          <div class="name">${l.name}</div>
+          <div class="stops">${l.stops.map(s => STATIONS[s]?.name || s).join(' › ')}</div>
+          <div class="desc">${l.desc}</div>
+          <div class="ct">${l.cases.length} case${l.cases.length===1?'':'s'} · click to isolate ›</div>
+        </div>`).join('');
+      wrap.querySelectorAll('.line-row').forEach(r => {
+        r.addEventListener('click', () => {
+          isolated = isolated === r.dataset.line ? null : r.dataset.line;
+          render();
+          syncChips();
+        });
+      });
+    };
+
+    // Chip wiring
+    const syncChips = () => {
+      document.querySelectorAll('.line-chip').forEach(c => {
+        const t = c.dataset.line;
+        if (t === 'all') c.classList.toggle('dim', !!isolated);
+        else c.classList.toggle('dim', isolated && isolated !== t);
+      });
+    };
+    document.querySelectorAll('.line-chip').forEach(c => {
+      c.addEventListener('click', () => {
+        const t = c.dataset.line;
+        isolated = (t === 'all' || isolated === t) ? null : t;
+        render();
+        syncChips();
+      });
+    });
+
+    render();
+    renderPanel();
+  })();
+  </script>
+</body>
+</html>
