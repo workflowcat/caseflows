@@ -13,17 +13,15 @@
     --paper-deep:#ebe3d0;
     --paper-cream:#f7f1de;
     --paper-grey:#e8e3d2;
-    --paper-blue:#e6e8e0;
     --ink:#1c1814;
     --ink-soft:#4a443a;
     --ink-faint:#8a8270;
     --rule:#c8c0ac;
     --rule-soft:#dad1b9;
     --stamp:#a83426;
-    --stamp-soft:rgba(168,52,38,.85);
+    --stamp-soft:rgba(168,52,38,.78);
     --gilt:#b8893a;
     --sage:#5e7a64;
-    --plum:#7c4256;
     --night:#181410;
     --display:'Fraunces', serif;
     --body:'Newsreader', Georgia, serif;
@@ -65,7 +63,7 @@
 
   /* ── Hero ── */
   .hero{
-    padding:72px 0 36px;border-bottom:1px solid var(--ink);
+    padding:72px 0 44px;border-bottom:1px solid var(--ink);
     display:grid;grid-template-columns:1.5fr 1fr;gap:56px;align-items:end;
   }
   .hero .above{
@@ -85,8 +83,8 @@
   }
   .hero .strap{
     font-family:var(--display);font-style:italic;font-variation-settings:"opsz" 36,"SOFT" 100;
-    font-size:20px;font-weight:300;line-height:1.45;color:var(--ink-soft);
-    margin:0 0 16px;max-width:38ch;
+    font-size:21px;font-weight:300;line-height:1.4;color:var(--ink-soft);
+    margin:0 0 18px;max-width:38ch;
   }
   .hero .strap em{font-style:normal;color:var(--ink)}
   .hero .meta{
@@ -113,91 +111,98 @@
   .rail .chip.on{color:var(--paper);background:var(--ink);border-color:var(--ink)}
   .rail .count{
     font-family:var(--mono);font-size:11px;letter-spacing:.08em;
-    text-transform:uppercase;color:var(--ink-faint);
-    white-space:nowrap;
+    text-transform:uppercase;color:var(--ink-faint);white-space:nowrap;
   }
   .rail .count b{color:var(--ink);font-weight:500;font-variant-numeric:tabular-nums}
 
   /* ── The wall ── */
   .wall{
-    column-count:3;column-gap:28px;column-fill:auto;
-    padding:36px 0 24px;
+    column-count:3;column-gap:28px;
+    padding:32px 0 24px;
   }
   @media(max-width:1100px){.wall{column-count:2}}
-  @media(max-width:680px){.wall{column-count:1}}
+  @media(max-width:680px){.wall{column-count:1;column-gap:0}}
 
   .clip{
+    --tilt:0deg;
     break-inside:avoid;
-    display:block;
-    margin:0 0 28px;padding:24px 26px 18px;
+    page-break-inside:avoid;
+    -webkit-column-break-inside:avoid;
+    display:block;width:100%;
+    margin:0 0 26px;padding:22px 24px 16px;
     background:var(--paper);
     border:1px solid var(--rule);
     position:relative;
     text-decoration:none;color:inherit;
-    transition:box-shadow .25s,transform .25s,border-color .25s;
+    transform:rotate(var(--tilt));
+    transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease;
     box-shadow:0 1px 0 rgba(28,24,20,.04), 0 14px 26px -22px rgba(28,24,20,.18);
   }
   .clip:hover{
     border-color:var(--ink);
-    transform:translateY(-1px) rotate(0deg) !important;
+    transform:translateY(-2px) rotate(0deg);
     box-shadow:0 1px 0 rgba(28,24,20,.06), 0 22px 34px -22px rgba(28,24,20,.28);
     z-index:5;
   }
   .clip.cream{background:var(--paper-cream)}
   .clip.deep{background:var(--paper-deep);border-color:var(--rule-soft)}
   .clip.grey{background:var(--paper-grey)}
-  .clip.blue{background:var(--paper-blue)}
   .clip.dark{background:var(--night);color:#d8d2c0;border-color:#3a342c}
-  .clip.dark .cite{color:#8a8270}
-  .clip.dark .cite em{color:#d8d2c0}
-  .clip.dark .src{color:var(--gilt)}
+  .clip.dark .cite{border-top-color:#3a342c;color:#8a8270}
+  .clip.dark .cite em{color:#e6dec9}
   .clip.dark .pull-q{color:var(--paper)}
   .clip.dark .pull-q::before,.clip.dark .pull-q::after{color:var(--gilt)}
+  .clip.dark .num-clip{color:var(--paper)}
+  .clip.dark .num-clip em{color:var(--gilt)}
+  .clip.dark .num-clip .lbl{color:#9a9282}
+  .clip.dark .disp{color:var(--gilt);border-color:var(--gilt)}
+  .clip.dark .disp .big{color:var(--paper)}
 
-  /* tilts */
-  .clip.tilt-l{transform:rotate(-.55deg)}
-  .clip.tilt-r{transform:rotate(.5deg)}
-  .clip.tilt-l2{transform:rotate(-1.05deg)}
-  .clip.tilt-r2{transform:rotate(.95deg)}
-  .clip.tilt-tiny{transform:rotate(.18deg)}
+  /* tilts via custom property — clean override on hover */
+  .clip.tilt-l{--tilt:-.55deg}
+  .clip.tilt-r{--tilt:.5deg}
+  .clip.tilt-l2{--tilt:-1.1deg}
+  .clip.tilt-r2{--tilt:.95deg}
+  .clip.tilt-tiny{--tilt:.18deg}
 
-  /* ── Clip varieties ─────────────────────────── */
+  /* ── Clip varieties ───────────────────────── */
 
   /* Pull quote — large italic display */
   .pull-q{
     font-family:var(--display);
     font-variation-settings:"opsz" 96,"SOFT" 90,"WONK" 1;
     font-style:italic;font-weight:300;
-    font-size:30px;line-height:1.12;letter-spacing:-.018em;
+    font-size:26px;line-height:1.14;letter-spacing:-.014em;
     color:var(--ink);margin:0;
     quotes:"\201C" "\201D" "\2018" "\2019";
+    hyphens:auto;
   }
   .pull-q::before{content:open-quote;color:var(--stamp);margin-right:.04em}
   .pull-q::after{content:close-quote;color:var(--stamp);margin-left:.02em}
-  .clip.pull.big .pull-q{font-size:38px}
-  .clip.pull.small .pull-q{font-size:24px}
+  .clip.pull-big .pull-q{font-size:34px;line-height:1.08}
+  .clip.pull-sm .pull-q{font-size:22px}
 
   /* Body paragraph excerpt */
   .para{
-    font-family:var(--body);font-size:16.5px;line-height:1.55;color:var(--ink);
-    margin:0;
+    font-family:var(--body);font-size:16px;line-height:1.55;color:var(--ink);
+    margin:0;hyphens:auto;
   }
   .para::first-letter{
     font-family:var(--display);font-variation-settings:"opsz" 96,"SOFT" 30;
-    font-weight:300;font-size:48px;line-height:.85;float:left;
-    margin:6px 8px -2px 0;color:var(--stamp);
+    font-weight:300;font-size:42px;line-height:.85;float:left;
+    margin:5px 7px -2px 0;color:var(--stamp);
   }
   .para em{font-style:italic}
   .para strong{font-weight:500;color:var(--ink)}
-  .clip.para-clip .para{font-size:15.5px}
-  .clip.para-clip.tight .para{font-size:14.5px;line-height:1.5}
+  .clip.tight .para{font-size:14.5px;line-height:1.5}
+  .clip.tight .para::first-letter{font-size:36px;margin:4px 6px -2px 0}
 
-  /* Disposition strip — mono, rules, character-spaced */
+  /* Disposition strip — mono, ruled */
   .disp{
     font-family:var(--mono);font-weight:500;
-    font-size:13px;letter-spacing:.18em;text-transform:uppercase;
+    font-size:12.5px;letter-spacing:.18em;text-transform:uppercase;
     color:var(--ink);text-align:center;
-    padding:22px 8px;
+    padding:18px 6px;
     border-top:1px solid var(--ink);border-bottom:1px solid var(--ink);
     margin:0;line-height:1.6;
   }
@@ -205,126 +210,106 @@
   .disp.crimson{color:var(--stamp);border-color:var(--stamp)}
   .disp .big{
     display:block;font-family:var(--display);
-    font-variation-settings:"opsz" 144,"SOFT" 60;
+    font-variation-settings:"opsz" 144,"SOFT" 80;
     font-weight:300;font-style:italic;
-    font-size:40px;letter-spacing:-.02em;text-transform:none;
-    margin-top:6px;color:var(--ink);
+    font-size:34px;letter-spacing:-.018em;text-transform:none;
+    margin-top:4px;color:var(--ink);line-height:1;
   }
-  .clip.disp-clip{padding:18px 18px 14px}
+  .disp.crimson .big{color:var(--stamp)}
+  .disp.amber .big{color:var(--gilt)}
 
-  /* Marginal note — tiny mono with a tick */
+  /* Marginal note */
   .note{
-    font-family:var(--mono);font-size:12px;letter-spacing:.04em;
-    color:var(--ink-soft);line-height:1.6;
+    font-family:var(--mono);font-size:12px;letter-spacing:.03em;
+    color:var(--ink-soft);line-height:1.65;
     padding-left:18px;position:relative;margin:0;
   }
   .note::before{
-    content:"§";position:absolute;left:0;top:0;
+    content:"§";position:absolute;left:0;top:-2px;
     color:var(--stamp);font-family:var(--display);font-style:italic;
     font-size:18px;line-height:1;
   }
   .note b{color:var(--ink);font-weight:500;font-variant-numeric:tabular-nums}
-  .clip.note-clip{padding:18px 22px 14px;background:var(--paper-deep)}
+  .note em{font-style:italic}
 
-  /* Article chips — for violation lists */
-  .chips-row{
-    display:flex;flex-wrap:wrap;gap:6px;margin:0;
+  /* Article-violation chip row */
+  .arts{display:flex;flex-wrap:wrap;gap:5px;margin:0 0 12px}
+  .arts .a{
+    font-family:var(--mono);font-size:10.5px;letter-spacing:.04em;
+    padding:4px 8px;border:1px solid var(--ink);color:var(--ink);
+    border-radius:2px;background:var(--paper);font-variant-numeric:tabular-nums;
   }
-  .chips-row .a{
-    font-family:var(--mono);font-size:11px;letter-spacing:.06em;
-    padding:5px 10px;border:1px solid var(--ink);color:var(--ink);
-    border-radius:2px;background:var(--paper);
-  }
-  .chips-row .a.crim{border-color:var(--stamp);color:var(--stamp)}
-  .chips-row .a.gilt{border-color:var(--gilt);color:var(--gilt)}
+  .arts .a.crim{border-color:var(--stamp);color:var(--stamp)}
+  .arts .a.gilt{border-color:var(--gilt);color:var(--gilt)}
 
   /* Big-number clip */
   .num-clip{
     font-family:var(--display);
     font-variation-settings:"opsz" 144,"SOFT" 30;
-    font-weight:300;font-size:88px;line-height:.9;
-    letter-spacing:-.035em;color:var(--ink);margin:0;
+    font-weight:300;font-size:78px;line-height:.9;
+    letter-spacing:-.034em;color:var(--ink);margin:0;
   }
   .num-clip em{font-style:italic;font-variation-settings:"opsz" 144,"SOFT" 100;color:var(--stamp)}
   .num-clip .lbl{
     display:block;font-family:var(--mono);font-size:10px;letter-spacing:.16em;
     text-transform:uppercase;color:var(--ink-faint);font-weight:500;
-    margin-top:14px;font-variation-settings:none;letter-spacing:.16em !important;
+    margin-top:14px;font-variation-settings:normal;
   }
-  .clip.num.gilt-clip .num-clip{color:var(--gilt)}
-  .clip.num.gilt-clip .num-clip em{color:var(--gilt)}
-  .clip.num.dark .num-clip{color:var(--paper)}
-  .clip.num.dark .num-clip em{color:var(--gilt)}
-  .clip.num.dark .num-clip .lbl{color:#9a9282}
+  .clip.num-gilt .num-clip{color:var(--gilt)}
+  .clip.num-gilt .num-clip em{color:var(--gilt)}
 
-  /* Stamp — red rubber overlay */
-  .clip .stamp{
-    position:absolute;
+  /* Stamp — red rubber overlay; only top-right, never overlaps cite */
+  .stamp{
+    position:absolute;top:14px;right:14px;
     font-family:var(--mono);font-weight:500;
-    font-size:13px;letter-spacing:.22em;text-transform:uppercase;
+    font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;
     color:var(--stamp-soft);
-    border:2px solid var(--stamp-soft);
-    padding:6px 12px 5px;
+    border:1.5px solid var(--stamp-soft);
+    padding:4px 9px 3px;
     transform:rotate(-7deg);
-    background:transparent;
-    pointer-events:none;
-    opacity:.75;
-    mix-blend-mode:multiply;
+    background:transparent;pointer-events:none;
+    opacity:.8;mix-blend-mode:multiply;
   }
-  .clip .stamp.tr{top:14px;right:14px}
-  .clip .stamp.bl{bottom:48px;left:14px}
-  .clip .stamp.br{bottom:48px;right:14px;transform:rotate(5deg)}
-  .clip .stamp.amber{color:var(--gilt);border-color:var(--gilt)}
-  .clip .stamp.ink{color:var(--ink-soft);border-color:var(--ink-soft)}
+  .stamp.amber{color:var(--gilt);border-color:var(--gilt)}
+  .stamp.ink{color:var(--ink-soft);border-color:var(--ink-soft)}
 
-  /* paper-clip simulated */
-  .clip .pin{
-    position:absolute;top:-9px;left:24px;
-    width:18px;height:34px;
-    background:linear-gradient(180deg,#9aa0a6,#6e747a);
-    border-radius:9px 9px 9px 9px / 14px 14px 6px 6px;
-    box-shadow:1px 0 1px rgba(0,0,0,.2), inset -2px 0 0 rgba(255,255,255,.3);
-    transform:rotate(-4deg);
-  }
-  .clip .pin::after{
-    content:"";position:absolute;top:6px;left:5px;width:8px;height:14px;
-    background:transparent;border:1.5px solid #4a4f54;border-radius:4px;
-  }
-
-  /* Cite footer — small attribution */
+  /* Cite footer */
   .cite{
-    margin-top:18px;padding-top:12px;border-top:1px solid var(--rule);
-    font-family:var(--mono);font-size:10px;letter-spacing:.06em;
+    margin-top:16px;padding-top:11px;border-top:1px solid var(--rule);
+    font-family:var(--mono);font-size:10px;letter-spacing:.05em;
     text-transform:uppercase;color:var(--ink-faint);
     display:flex;justify-content:space-between;gap:10px;align-items:baseline;
     line-height:1.5;
   }
-  .cite .src{color:var(--ink-soft);text-transform:none;letter-spacing:.02em;font-size:11px}
-  .cite .src em{font-family:var(--display);font-style:italic;color:var(--ink);font-size:13px}
-  .cite .arrow{
-    color:var(--ink-faint);transition:color .15s,transform .15s;
-    flex-shrink:0;font-family:var(--display);font-size:14px;
-    border-bottom:1px solid transparent;
+  .cite .src{color:var(--ink-soft);text-transform:none;letter-spacing:.01em;font-size:11.5px;flex:1;min-width:0}
+  .cite .src em{font-family:var(--display);font-style:italic;color:var(--ink);font-size:12.5px}
+  .cite .fol{
+    font-variant-numeric:tabular-nums;color:var(--ink-faint);
+    flex-shrink:0;
   }
-  .clip:hover .cite .arrow{color:var(--stamp);transform:translateX(2px);border-bottom-color:var(--stamp)}
 
-  .cite .fol{font-variant-numeric:tabular-nums;color:var(--ink-faint);}
-
-  /* Section interleaves — quiet titles between clusters */
+  /* Section interleaves — span all columns, act as dividers */
   .interleave{
-    break-inside:avoid;display:block;
-    padding:14px 0 24px;margin:6px 0 28px;
+    column-span:all;
+    -webkit-column-span:all;
+    display:block;
+    padding:36px 0 28px;margin:14px 0 22px 0;
     border-top:2px solid var(--ink);
+  }
+  .interleave .label{
+    font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;
+    color:var(--stamp);font-weight:500;margin-bottom:10px;
+  }
+  .interleave h2{
     font-family:var(--display);font-variation-settings:"opsz" 96,"SOFT" 80;
     font-style:italic;font-weight:400;
-    font-size:34px;line-height:1;letter-spacing:-.018em;
-    color:var(--ink);
+    font-size:42px;line-height:1;letter-spacing:-.018em;
+    color:var(--ink);margin:0;
   }
-  .interleave em{color:var(--stamp);font-variation-settings:"opsz" 96,"SOFT" 100}
+  .interleave h2 em{color:var(--stamp);font-variation-settings:"opsz" 96,"SOFT" 100}
   .interleave .sub{
-    display:block;
-    font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;
-    color:var(--ink-faint);font-style:normal;margin-top:8px;font-weight:500;
+    font-family:var(--body);font-style:italic;font-size:16px;color:var(--ink-soft);
+    margin-top:8px;line-height:1.45;max-width:60ch;
   }
 
   /* ── Endmark / footer ── */
@@ -349,7 +334,11 @@
   @media(max-width:880px){
     .frame{padding:0 22px}
     .hero{grid-template-columns:1fr;gap:24px;padding:48px 0 24px}
-    .clip.tilt-l,.clip.tilt-r,.clip.tilt-l2,.clip.tilt-r2{transform:none}
+    .clip{--tilt:0deg !important}
+    .num-clip{font-size:62px}
+    .pull-q{font-size:23px}
+    .clip.pull-big .pull-q{font-size:28px}
+    .interleave h2{font-size:32px}
   }
 </style>
 </head>
@@ -371,9 +360,9 @@
         <h1>The <em>Voices.</em></h1>
       </div>
       <div>
-        <p class="strap">Pages cut from the casebook — orders, dispositions, dissents, stamps. <em>Each scrap links back to its source.</em></p>
+        <p class="strap">Pages razor-bladed from the casebook — orders, dispositions, dissents, stamps. <em>Every scrap is what a court actually said, and links to its source.</em></p>
         <div class="meta">
-          <b>41</b> voices &nbsp;·&nbsp; <b>11</b> forums &nbsp;·&nbsp; 2014–2026<br>
+          <b>41</b> cases &nbsp;·&nbsp; <b>11</b> forums &nbsp;·&nbsp; 2014–2026<br>
           revised 27.iv.2026
         </div>
       </div>
@@ -389,120 +378,164 @@
         <button class="chip" data-f="ITLOS">ITLOS · ICAO</button>
         <button class="chip" data-f="Domestic">Domestic</button>
       </div>
-      <div class="count"><b id="vis">41</b> &nbsp;of &nbsp;<b>41</b> &nbsp;visible</div>
+      <div class="count"><b id="vis">—</b> &nbsp;voices &nbsp;visible</div>
     </div>
 
     <div class="wall" id="wall">
 
-      <!-- ── ICJ / GENOCIDE ─────────────────────────────────────── -->
+      <!-- ── INTERLEAVE: WORLD COURT ─────────────────────────────────── -->
 
-      <a class="clip pull big tilt-l" href="02-archive.html#fol-1" data-forum="ICJ">
+      <div class="interleave" data-section="ICJ">
+        <div class="label">I &nbsp;·&nbsp; The World Court</div>
+        <h2>From the bench at <em>Peace Palace.</em></h2>
+        <p class="sub">Three proceedings between Ukraine and the Russian Federation, all live in 2026.</p>
+      </div>
+
+      <a class="clip pull-big tilt-l" href="02-archive.html#fol-1" data-forum="ICJ">
         <p class="pull-q">The Russian Federation shall immediately suspend the military operations that it commenced on 24 February 2022 in the territory of Ukraine.</p>
         <div class="cite">
-          <span class="src">— <em>Allegations of Genocide</em> · Provisional Measures, 16.iii.2022</span>
+          <span class="src"><em>Allegations of Genocide</em> · Order on Provisional Measures · ¶86(1)</span>
           <span class="fol">FOL.&nbsp;01</span>
         </div>
       </a>
 
-      <a class="clip disp-clip tilt-r" href="02-archive.html#fol-1" data-forum="ICJ">
-        <p class="disp">Ordered.<span class="big">By thirteen votes to two</span></p>
+      <a class="clip tilt-r" href="02-archive.html#fol-1" data-forum="ICJ">
+        <p class="disp">Ordered<span class="big">By thirteen votes to two</span></p>
         <div class="cite">
-          <span class="src">ICJ &nbsp;·&nbsp; Allegations of Genocide</span>
+          <span class="src">ICJ &nbsp;·&nbsp; 16.iii.2022</span>
           <span class="fol">FOL.&nbsp;01</span>
         </div>
       </a>
 
-      <a class="clip note-clip tilt-tiny" href="02-archive.html#fol-1" data-forum="ICJ">
-        <p class="note">Thirty-two states have intervened. The largest intervention in the Court's history. <b>32 / 33</b> declarations admissible.</p>
+      <a class="clip pull-sm cream" href="02-archive.html#fol-1" data-forum="ICJ">
+        <p class="pull-q">The civilian population affected by the present conflict is extremely vulnerable.</p>
         <div class="cite">
-          <span class="src">ICJ &nbsp;·&nbsp; <em>Allegations of Genocide</em></span>
+          <span class="src">— ICJ Order, reasoning</span>
           <span class="fol">FOL.&nbsp;01</span>
         </div>
       </a>
 
-      <a class="clip para-clip cream" href="02-archive.html#fol-1" data-forum="ICJ">
-        <p class="para">In Ukraine's reading, the Russian Federation invokes the Genocide Convention as pretext for its use of force, and that invocation is itself a violation of the Convention. <em>It is one of the most legally inventive applications ever filed before the Court.</em></p>
+      <a class="clip tight" href="02-archive.html#fol-1" data-forum="ICJ">
+        <p class="para">Any military operation, in particular one on the scale carried out by the Russian Federation on the territory of Ukraine, <em>inevitably causes loss of life, mental and bodily harm, and damage to property and to the environment.</em></p>
         <div class="cite">
-          <span class="src"><em>Ukraine v Russia</em> (Genocide) · ICJ</span>
+          <span class="src">ICJ Order · 16.iii.2022</span>
           <span class="fol">FOL.&nbsp;01</span>
         </div>
       </a>
 
-      <a class="clip pull tilt-r" href="02-archive.html#fol-2" data-forum="ICJ">
-        <p class="pull-q">No compensation is due.</p>
+      <a class="clip tilt-tiny" href="02-archive.html#fol-1" data-forum="ICJ">
+        <p class="note"><b>Thirty-two</b> states have intervened. The largest intervention in the Court's history. <em>32 of 33 declarations admissible.</em></p>
         <div class="cite">
-          <span class="src">— ICJ Merits, 31.i.2024 · CERD &amp; ICSFT</span>
-          <span class="fol">FOL.&nbsp;02</span>
+          <span class="src">Genocide · intervention orders, 5.vi.2023</span>
+          <span class="fol">FOL.&nbsp;01</span>
         </div>
       </a>
 
-      <a class="clip num tilt-l" href="02-archive.html#fol-2" data-forum="ICJ">
+      <a class="clip" href="02-archive.html#fol-2" data-forum="ICJ">
         <p class="num-clip">1<em>st</em><span class="lbl">ICJ merits ruling on the war</span></p>
         <div class="cite">
-          <span class="src"><em>Ukraine v Russia</em> · CERD/ICSFT</span>
+          <span class="src"><em>Ukraine v Russia</em> · CERD &amp; ICSFT, 31.i.2024</span>
           <span class="fol">FOL.&nbsp;02</span>
         </div>
       </a>
 
-      <!-- ── ECTHR ─────────────────────────────────────── -->
+      <a class="clip tight cream tilt-l" href="02-archive.html#fol-2" data-forum="ICJ">
+        <p class="para">Russia is found in violation of <strong>ICSFT Article 9(1)</strong> — failure to investigate plausible terrorism-financing allegations — and of <strong>CERD Articles 2(1)(a) and 5(e)(v)</strong> in relation to its implementation of the educational system in Crimea after 2014. <em>No compensation is awarded.</em></p>
+        <div class="cite">
+          <span class="src">ICJ Merits · 31.i.2024</span>
+          <span class="fol">FOL.&nbsp;02</span>
+        </div>
+      </a>
+
+      <a class="clip pull-sm tilt-r" href="02-archive.html#fol-3" data-forum="ICJ">
+        <p class="pull-q">Appeal lodged. Article 84.</p>
+        <div class="cite">
+          <span class="src">— <em>Russia v Australia &amp; Netherlands</em>, 18.ix.2025</span>
+          <span class="fol">FOL.&nbsp;03</span>
+        </div>
+      </a>
+
+      <!-- ── INTERLEAVE: STRASBOURG ─────────────────────────────────── -->
+
+      <div class="interleave" data-section="ECtHR">
+        <div class="label">II &nbsp;·&nbsp; The European Court of Human Rights</div>
+        <h2>Strasbourg, in <em>full chamber.</em></h2>
+        <p class="sub">Two grand-chamber merits judgments — Crimea and MH17 — and a dismissed counter-application.</p>
+      </div>
 
       <a class="clip" href="02-archive.html#fol-4" data-forum="ECtHR">
-        <div class="chips-row" style="margin-bottom:14px">
+        <div class="arts">
           <span class="a">Art. 2</span><span class="a">3</span><span class="a">5</span><span class="a">6</span>
-          <span class="a">8</span><span class="a">9</span><span class="a">10</span><span class="a">11</span>
-          <span class="a">14</span><span class="a">18</span><span class="a">P1-1</span><span class="a">P1-2</span>
-          <span class="a crim">P4-2</span>
+          <span class="a">7</span><span class="a">8</span><span class="a">9</span><span class="a">10</span>
+          <span class="a">11</span><span class="a">14</span><span class="a">18</span>
+          <span class="a">P1-1</span><span class="a">P1-2</span>
+          <span class="a crim">P4-2</span><span class="a">38</span>
         </div>
-        <p class="note" style="padding-left:0">All violated. <b>Without a single dissent.</b></p>
+        <p class="note" style="padding-left:0">All violated. <b>Without a single dissent</b> among seventeen judges.</p>
         <div class="cite">
-          <span class="src">— <em>Ukraine v Russia (re Crimea)</em> · GC merits, 25.vi.2024</span>
+          <span class="src">— <em>Ukraine v Russia (re Crimea)</em> · GC merits · 25.vi.2024</span>
           <span class="fol">FOL.&nbsp;04</span>
         </div>
       </a>
 
-      <a class="clip pull big deep tilt-l2" href="02-archive.html#fol-5" data-forum="ECtHR">
-        <span class="stamp tr">satisfaction pending</span>
-        <p class="pull-q">Russia is liable for the downing of Malaysia Airlines flight MH17.</p>
+      <a class="clip pull-big tilt-l" href="02-archive.html#fol-4" data-forum="ECtHR">
+        <p class="pull-q">Russian law cannot be regarded as 'law' within the meaning of the Convention.</p>
         <div class="cite">
-          <span class="src">— Grand Chamber, 9.vii.2025</span>
-          <span class="fol">FOL.&nbsp;05</span>
-        </div>
-      </a>
-
-      <a class="clip para-clip" href="02-archive.html#fol-4" data-forum="ECtHR">
-        <p class="para">From <strong>27 February 2014</strong> the Russian Federation has exercised effective control over the territory of the Crimean Peninsula. The protections of the European Convention on Human Rights extended to its inhabitants from that date.</p>
-        <div class="cite">
-          <span class="src">ECtHR · Admissibility, 14.i.2021</span>
+          <span class="src">— ECtHR · Crimea Grand Chamber, 25.vi.2024</span>
           <span class="fol">FOL.&nbsp;04</span>
         </div>
       </a>
 
-      <a class="clip num gilt-clip tilt-r" href="02-archive.html#fol-5" data-forum="ECtHR">
-        <p class="num-clip">298<span class="lbl">souls aboard MH17</span></p>
+      <a class="clip tight" href="02-archive.html#fol-4" data-forum="ECtHR">
+        <p class="para">The judicial system functioning in Crimea after the so-called <em>"Accession Treaty"</em> cannot be regarded as <strong>"established by law"</strong> within the meaning of Article 6 of the Convention.</p>
         <div class="cite">
-          <span class="src">17.vii.2014 &nbsp;·&nbsp; over Pervomaiskyi</span>
+          <span class="src">ECtHR · Crimea GC merits</span>
+          <span class="fol">FOL.&nbsp;04</span>
+        </div>
+      </a>
+
+      <a class="clip tight cream tilt-r" href="02-archive.html#fol-4" data-forum="ECtHR">
+        <p class="para">From <strong>27 February 2014</strong> the Russian Federation has exercised <em>effective control</em> over the territory of the Crimean Peninsula. The protections of the Convention extended to its inhabitants from that date.</p>
+        <div class="cite">
+          <span class="src">ECtHR · admissibility · 14.i.2021</span>
+          <span class="fol">FOL.&nbsp;04</span>
+        </div>
+      </a>
+
+      <a class="clip pull-big deep tilt-r2" href="02-archive.html#fol-5" data-forum="ECtHR">
+        <span class="stamp">satisfaction pending</span>
+        <p class="pull-q">Russia is responsible for the downing of flight MH17 and for the deaths of everyone on board.</p>
+        <div class="cite">
+          <span class="src">— ECtHR Grand Chamber, 9.vii.2025</span>
           <span class="fol">FOL.&nbsp;05</span>
         </div>
       </a>
 
-      <a class="clip disp-clip" href="02-archive.html#fol-5" data-forum="ECtHR">
-        <p class="disp">Grand Chamber<br><span style="display:block;height:6px"></span>Unanimous</p>
+      <a class="clip tight" href="02-archive.html#fol-5" data-forum="ECtHR">
+        <p class="para">The Court found Russia responsible for <em>indiscriminate military attacks; summary executions; torture, notably rape as a weapon of war; unlawful and arbitrary detentions … the organised removal of children to Russia and their adoption there.</em></p>
         <div class="cite">
-          <span class="src">— ECtHR · MH17 merits, 9.vii.2025</span>
+          <span class="src">ECtHR press summary · 9.vii.2025</span>
           <span class="fol">FOL.&nbsp;05</span>
         </div>
       </a>
 
-      <a class="clip note-clip tilt-l" href="02-archive.html#fol-8" data-forum="ECtHR">
-        <span class="stamp ink br">struck out</span>
-        <p class="note">Russia ceased to be a Contracting Party. <b>18.vii.2023.</b> The counter-application is removed from the list.</p>
+      <a class="clip num-gilt tilt-l" href="02-archive.html#fol-5" data-forum="ECtHR">
+        <p class="num-clip">298<span class="lbl">souls aboard MH17 · 17.vii.2014</span></p>
         <div class="cite">
-          <span class="src"><em>Russia v Ukraine</em> · ECtHR</span>
-          <span class="fol">FOL.&nbsp;08</span>
+          <span class="src">A Buk over Pervomaiskyi</span>
+          <span class="fol">FOL.&nbsp;05</span>
         </div>
       </a>
 
-      <a class="clip pull small tilt-r" href="02-archive.html#fol-5" data-forum="ECtHR">
+      <a class="clip tilt-r" href="02-archive.html#fol-5" data-forum="ECtHR">
+        <p class="disp">Grand Chamber<span class="big">Unanimous</span></p>
+        <div class="cite">
+          <span class="src">— ECtHR · MH17 merits</span>
+          <span class="fol">FOL.&nbsp;05</span>
+        </div>
+      </a>
+
+      <a class="clip pull-sm" href="02-archive.html#fol-5" data-forum="ECtHR">
         <p class="pull-q">The largest human-rights case in European history.</p>
         <div class="cite">
           <span class="src">— Court press summary</span>
@@ -510,40 +543,49 @@
         </div>
       </a>
 
-      <!-- INTERLEAVE -->
-      <div class="interleave">
-        On the <em>warrants</em>.
-        <span class="sub">Six issued · 2023 — 2024 · all outstanding</span>
+      <a class="clip tilt-l" href="02-archive.html#fol-8" data-forum="ECtHR">
+        <span class="stamp ink">struck out</span>
+        <p class="note">Russia ceased to be a Contracting Party. <b>18.vii.2023.</b> The counter-application is removed from the list.</p>
+        <div class="cite">
+          <span class="src"><em>Russia v Ukraine</em> · ECtHR</span>
+          <span class="fol">FOL.&nbsp;08</span>
+        </div>
+      </a>
+
+      <!-- ── INTERLEAVE: ICC ─────────────────────────────────── -->
+
+      <div class="interleave" data-section="ICC">
+        <div class="label">III &nbsp;·&nbsp; The International Criminal Court</div>
+        <h2>Six warrants. <em>None served.</em></h2>
+        <p class="sub">From Pre-Trial Chamber II of the ICC, between March 2023 and June 2024.</p>
       </div>
 
-      <!-- ── ICC ─────────────────────────────────────── -->
-
-      <a class="clip pull big" href="02-archive.html#fol-10" data-forum="ICC">
-        <span class="stamp tr">warrant outstanding</span>
-        <p class="pull-q">Issued: 17 March 2023.</p>
+      <a class="clip pull-big tilt-l" href="02-archive.html#fol-10" data-forum="ICC">
+        <span class="stamp">warrant outstanding</span>
+        <p class="pull-q">Reasonable grounds to believe that Mr Putin bears individual criminal responsibility.</p>
         <div class="cite">
-          <span class="src">— <em>Prosecutor v Putin</em> · ICC, PTC II</span>
+          <span class="src">— ICC PTC II · 17.iii.2023</span>
           <span class="fol">FOL.&nbsp;10</span>
         </div>
       </a>
 
-      <a class="clip para-clip cream tilt-l" href="02-archive.html#fol-10" data-forum="ICC">
-        <p class="para">There are <strong>reasonable grounds to believe</strong> that each suspect bears individual criminal responsibility for the war crime of unlawful deportation of population (children) and that of unlawful transfer of population (children) from occupied areas of Ukraine to the Russian Federation.</p>
+      <a class="clip tight cream" href="02-archive.html#fol-10" data-forum="ICC">
+        <p class="para">For (i) <em>committing the acts directly, jointly with others, and/or through others</em> — Article 25(3)(a); and (ii) <em>failure to exercise control properly over civilian and military subordinates who committed the acts, or allowed for their commission, and who were under his effective authority and control</em> — Article 28(b).</p>
         <div class="cite">
-          <span class="src">PTC II · 17.iii.2023</span>
-          <span class="fol">FOL.&nbsp;10–11</span>
+          <span class="src">ICC press release · Putin warrant</span>
+          <span class="fol">FOL.&nbsp;10</span>
         </div>
       </a>
 
-      <a class="clip disp-clip crimson tilt-r" href="02-archive.html#fol-10" data-forum="ICC">
-        <p class="disp">First &middot; warrant<span class="big" style="color:var(--stamp);font-style:italic">against a sitting P5 head of state</span></p>
+      <a class="clip tilt-r" href="02-archive.html#fol-10" data-forum="ICC">
+        <p class="disp crimson">First &middot; warrant<span class="big">against a sitting P5 head of state</span></p>
         <div class="cite">
           <span class="src">ICC · Pre-Trial Chamber II</span>
           <span class="fol">FOL.&nbsp;10</span>
         </div>
       </a>
 
-      <a class="clip num tilt-r2" href="02-archive.html#fol-11" data-forum="ICC">
+      <a class="clip num-gilt tilt-r2" href="02-archive.html#fol-11" data-forum="ICC">
         <p class="num-clip">19,500<em>+</em><span class="lbl">identified deportees · children</span></p>
         <div class="cite">
           <span class="src"><em>Lvova-Belova</em> · ICC PTC II</span>
@@ -551,7 +593,18 @@
         </div>
       </a>
 
-      <a class="clip note-clip" href="02-archive.html#fol-12" data-forum="ICC">
+      <a class="clip" href="02-archive.html#fol-11" data-forum="ICC">
+        <p class="note">
+          War crimes under <b>Art. 8(2)(a)(vii)</b> &mdash; unlawful deportation &mdash; and <b>Art. 8(2)(b)(viii)</b> &mdash; unlawful transfer &mdash; of population.<br>
+          <em>The children of Ukraine.</em>
+        </p>
+        <div class="cite">
+          <span class="src">Rome Statute · ICC warrants</span>
+          <span class="fol">FOL.&nbsp;10–11</span>
+        </div>
+      </a>
+
+      <a class="clip tilt-l" href="02-archive.html#fol-12" data-forum="ICC">
         <p class="note">
           <b>05.iii.2024</b> &nbsp;·&nbsp; Kobylash &middot; Sokolov.<br>
           <b>24.vi.2024</b> &nbsp;·&nbsp; Shoigu &middot; Gerasimov.<br>
@@ -563,73 +616,79 @@
         </div>
       </a>
 
-      <!-- ── PCA / SCC / ARBITRATION ─────────────────────────────────────── -->
+      <!-- ── INTERLEAVE: PCA ─────────────────────────────────── -->
 
-      <a class="clip pull big dark tilt-l" href="02-archive.html#fol-21" data-forum="PCA">
-        <span class="stamp amber tr">enforcing</span>
+      <div class="interleave" data-section="PCA">
+        <div class="label">IV &nbsp;·&nbsp; Investor-state arbitration</div>
+        <h2>Eleven Crimea cases, <em>one BIT.</em></h2>
+        <p class="sub">PCA tribunals at The Hague — and Stockholm, Paris, Geneva — applied the 1998 Russia–Ukraine BIT to investments in occupied territory.</p>
+      </div>
+
+      <a class="clip pull-big dark tilt-l" href="02-archive.html#fol-21" data-forum="PCA">
+        <span class="stamp amber">enforcing</span>
         <p class="pull-q">Five jurisdictions. Five billion.</p>
         <div class="cite">
-          <span class="src">— <em>Naftogaz et al. v Russia</em> · PCA</span>
+          <span class="src">— <em>Naftogaz et al. v Russia</em> · PCA, 12.iv.2023</span>
           <span class="fol">FOL.&nbsp;21</span>
         </div>
       </a>
 
       <a class="clip" href="02-archive.html#fol-21" data-forum="PCA">
-        <div class="chips-row" style="margin-bottom:14px">
+        <div class="arts">
           <span class="a">Paris</span>
           <span class="a">London</span>
           <span class="a">Helsinki</span>
           <span class="a">Vienna</span>
           <span class="a">Washington</span>
         </div>
-        <p class="note" style="padding-left:0">A five-front enforcement campaign for the Crimean expropriation award.</p>
+        <p class="note" style="padding-left:0">Five-front enforcement of the Crimean expropriation award.</p>
         <div class="cite">
-          <span class="src">PCA · final award 12.iv.2023</span>
+          <span class="src">PCA · ongoing</span>
           <span class="fol">FOL.&nbsp;21</span>
         </div>
       </a>
 
-      <a class="clip para-clip" href="02-archive.html#fol-21" data-forum="PCA">
-        <p class="para">The Tribunal finds that, from <strong>21 March 2014</strong>, the Russian Federation has exercised effective control over the territory of the Crimean Peninsula, and that the protections of the 1998 Russia–Ukraine BIT therefore apply to investments located there.</p>
+      <a class="clip tight cream tilt-r" href="02-archive.html#fol-21" data-forum="PCA">
+        <p class="para">From <strong>21 March 2014</strong>, the Russian Federation has exercised <em>effective control</em> over the territory of the Crimean Peninsula. The protections of the 1998 Russia–Ukraine BIT therefore apply to investments located there.</p>
         <div class="cite">
-          <span class="src">PCA · partial award, 22.ii.2019</span>
+          <span class="src">PCA · partial award · 22.ii.2019</span>
           <span class="fol">FOL.&nbsp;21</span>
         </div>
       </a>
 
-      <a class="clip num gilt-clip tilt-r" href="02-archive.html#fol-19" data-forum="PCA">
+      <a class="clip num-gilt" href="02-archive.html#fol-19" data-forum="PCA">
         <p class="num-clip">$4.63<em>bn</em><span class="lbl">Naftogaz v Gazprom · transit</span></p>
         <div class="cite">
-          <span class="src">SCC · final award 28.ii.2018</span>
+          <span class="src">SCC · final award · 28.ii.2018</span>
           <span class="fol">FOL.&nbsp;19</span>
         </div>
       </a>
 
-      <a class="clip disp-clip amber tilt-l2" href="02-archive.html#fol-19" data-forum="PCA">
-        <p class="disp">Final &middot; and &middot; binding<span class="big" style="color:var(--gilt)">net of offset, $2.56 bn</span></p>
+      <a class="clip tilt-l2" href="02-archive.html#fol-19" data-forum="PCA">
+        <p class="disp amber">Final &middot; and &middot; binding<span class="big">net of offset · $2.56 bn</span></p>
         <div class="cite">
-          <span class="src">SCC · settled at Berlin, 20.xii.2019</span>
+          <span class="src">SCC · Berlin trilateral, 20.xii.2019</span>
           <span class="fol">FOL.&nbsp;18–19</span>
         </div>
       </a>
 
-      <a class="clip note-clip tilt-r" href="02-archive.html#fol-20" data-forum="PCA">
-        <p class="note">First major arbitral win <b>triggered by the full-scale invasion.</b><br>Confirmed by Swiss Federal Tribunal, 03.2026.</p>
+      <a class="clip tilt-r" href="02-archive.html#fol-20" data-forum="PCA">
+        <p class="note">First major arbitral win <b>triggered by the full-scale invasion.</b><br><em>Confirmed by the Swiss Federal Tribunal, 03.2026.</em></p>
         <div class="cite">
-          <span class="src"><em>Naftogaz v Gazprom (III)</em> · ICC arb</span>
+          <span class="src"><em>Naftogaz v Gazprom (III)</em> · ICC arb, 20.vi.2025</span>
           <span class="fol">FOL.&nbsp;20</span>
         </div>
       </a>
 
-      <a class="clip para-clip cream" href="02-archive.html#fol-29" data-forum="PCA">
-        <p class="para">The High Court of England and Wales <em>stays</em> enforcement of the DTEK Krymenergo award pending Russia's challenge — the only major Crimea award where a major European court has paused, rather than confirmed.</p>
+      <a class="clip tight" href="02-archive.html#fol-29" data-forum="PCA">
+        <p class="para">The High Court of England and Wales <em>stays</em> enforcement of the DTEK Krymenergo award pending Russia's challenge — the only major Crimea award where a senior European court has paused, rather than confirmed.</p>
         <div class="cite">
           <span class="src">UK High Court · 02.v.2025</span>
           <span class="fol">FOL.&nbsp;29</span>
         </div>
       </a>
 
-      <a class="clip num tilt-l" href="02-archive.html#fol-31" data-forum="PCA">
+      <a class="clip num-gilt tilt-l" href="02-archive.html#fol-31" data-forum="PCA">
         <p class="num-clip">$3<em>bn</em><span class="lbl">Energoatom · Zaporizhzhia NPP</span></p>
         <div class="cite">
           <span class="src">PCA · pre-arbitration · 03.2023</span>
@@ -637,123 +696,159 @@
         </div>
       </a>
 
-      <!-- INTERLEAVE -->
-      <div class="interleave">
-        Six <em>December.</em>
-        <span class="sub">Hoge Raad · 2024 · the day the Crimea awards stood</span>
+      <!-- ── INTERLEAVE: HOGE RAAD ─────────────────────────────────── -->
+
+      <div class="interleave" data-section="Domestic">
+        <div class="label">V &nbsp;·&nbsp; Hoge Raad der Nederlanden</div>
+        <h2>Six December, <em>two thousand twenty-four.</em></h2>
+        <p class="sub">On a single day, the Dutch Supreme Court ruled on Russia's challenges to the four major Crimea BIT awards.</p>
       </div>
 
-      <!-- ── DUTCH SUPREME COURT ─────────────────────────────────────── -->
-
-      <a class="clip pull big tilt-r" href="02-archive.html#fol-35" data-forum="Domestic">
-        <p class="pull-q">Cassatie verworpen.</p>
+      <a class="clip pull-big tilt-r" href="02-archive.html#fol-35" data-forum="Domestic">
+        <p class="pull-q">Verwerpt het beroep.</p>
         <div class="cite">
-          <span class="src">— Hoge Raad · 6.xii.2024</span>
+          <span class="src">— Hoge Raad · 6.xii.2024 · the dispositief</span>
           <span class="fol">FOL.&nbsp;35–37</span>
         </div>
       </a>
 
-      <a class="clip para-clip" href="02-archive.html#fol-35" data-forum="Domestic">
-        <p class="para">On a single day the Hoge Raad confirmed three of the four Crimea BIT awards Russia had challenged. <strong>Naftogaz, PrivatBank, Belbek</strong> stand. Only the Everest case — on a narrow evidentiary point — was remanded to the Court of Appeal in Amsterdam.</p>
+      <a class="clip tight" href="02-archive.html#fol-35" data-forum="Domestic">
+        <p class="para">Three of the four Crimea BIT awards Russia had challenged stand. <strong>Naftogaz, PrivatBank, Belbek.</strong> Only the Everest case — on a narrow evidentiary point — was remanded to the Court of Appeal in Amsterdam.</p>
         <div class="cite">
-          <span class="src">Hoge Raad · HR:2024:1810</span>
+          <span class="src">Hoge Raad · ECLI:NL:HR:2024:1810</span>
           <span class="fol">FOL.&nbsp;35–38</span>
         </div>
       </a>
 
-      <a class="clip disp-clip tilt-l" href="02-archive.html#fol-38" data-forum="Domestic">
+      <a class="clip tilt-l" href="02-archive.html#fol-38" data-forum="Domestic">
         <p class="disp">Remanded<span class="big">to Amsterdam</span></p>
         <div class="cite">
-          <span class="src"><em>Russia v Everest Estate</em> · narrow point</span>
+          <span class="src"><em>Russia v Everest Estate</em></span>
           <span class="fol">FOL.&nbsp;38</span>
         </div>
       </a>
 
-      <!-- ── ICAO / ITLOS ─────────────────────────────────────── -->
+      <!-- ── INTERLEAVE: ICAO / ITLOS ─────────────────────────────────── -->
 
-      <a class="clip pull big cream tilt-r2" href="02-archive.html#fol-17" data-forum="ITLOS">
-        <p class="pull-q">First in eighty years.</p>
+      <div class="interleave" data-section="ITLOS">
+        <div class="label">VI &nbsp;·&nbsp; At sea, in the air</div>
+        <h2>Two specialised <em>tribunals.</em></h2>
+        <p class="sub">ITLOS in Hamburg ordered the release of three vessels. Eighty years on, the ICAO Council made its first merits ruling.</p>
+      </div>
+
+      <a class="clip pull-big cream tilt-l" href="02-archive.html#fol-17" data-forum="ITLOS">
+        <p class="pull-q">Refrain from resorting to the use of weapons against civil aircraft in flight.</p>
         <div class="cite">
-          <span class="src">— Article 84 merits ruling · ICAO Council</span>
+          <span class="src">— Article 3 <em>bis</em>, Chicago Convention</span>
           <span class="fol">FOL.&nbsp;17</span>
         </div>
       </a>
 
-      <a class="clip para-clip" href="02-archive.html#fol-17" data-forum="ITLOS">
-        <p class="para">By a vote of the Council on <strong>12 May 2025</strong>, the Russian Federation was found responsible for the downing of Malaysia Airlines flight MH17, in violation of Article 3 <em>bis</em> of the Chicago Convention. Russia has lodged an appeal under Article 84 to the ICJ.</p>
+      <a class="clip tilt-r" href="02-archive.html#fol-17" data-forum="ITLOS">
+        <p class="disp amber">22 &middot; 3 &middot; 10<span class="big">in favour · against · abstaining</span></p>
         <div class="cite">
-          <span class="src">ICAO Council · formal decision, 30.vi.2025</span>
-          <span class="fol">FOL.&nbsp;17 → 03</span>
+          <span class="src">ICAO Council vote · 12.v.2025</span>
+          <span class="fol">FOL.&nbsp;17</span>
         </div>
       </a>
 
-      <a class="clip note-clip tilt-l" href="02-archive.html#fol-16" data-forum="ITLOS">
-        <p class="note">Russia's <em>"military activities"</em> defence rejected. Vessels and crew released, 09.2019.</p>
+      <a class="clip tight" href="02-archive.html#fol-17" data-forum="ITLOS">
+        <p class="para">The claims of Australia and the Netherlands, <em>as a result of the shooting down of Flight MH17 on 17 July 2014, were well founded in fact and in law.</em> The first merits decision in the ICAO Council's eighty-year history.</p>
         <div class="cite">
-          <span class="src">ITLOS · provisional measures, 25.v.2019</span>
+          <span class="src">ICAO press release · 12.v.2025</span>
+          <span class="fol">FOL.&nbsp;17</span>
+        </div>
+      </a>
+
+      <a class="clip pull-sm" href="02-archive.html#fol-16" data-forum="ITLOS">
+        <p class="pull-q">The Russian Federation shall immediately release the 24 detained Ukrainian servicemen and allow them to return to Ukraine.</p>
+        <div class="cite">
+          <span class="src">— ITLOS · provisional measures · 25.v.2019</span>
           <span class="fol">FOL.&nbsp;16</span>
         </div>
       </a>
 
-      <a class="clip disp-clip" href="02-archive.html#fol-3" data-forum="ICJ">
-        <p class="disp">Appeal lodged<span class="big">to The Hague</span></p>
+      <a class="clip tilt-tiny" href="02-archive.html#fol-16" data-forum="ITLOS">
+        <p class="disp">Nineteen votes to one<span class="big">vessels and crew released, 09.2019</span></p>
         <div class="cite">
-          <span class="src"><em>Russia v Australia &amp; Netherlands</em> · ICJ</span>
-          <span class="fol">FOL.&nbsp;03</span>
+          <span class="src">ITLOS · Kerch Strait</span>
+          <span class="fol">FOL.&nbsp;16</span>
         </div>
       </a>
 
-      <!-- INTERLEAVE -->
-      <div class="interleave">
-        On <em>universal jurisdiction.</em>
-        <span class="sub">Two convictions, two extraditions, three states</span>
+      <!-- ── INTERLEAVE: DOMESTIC / UJ ─────────────────────────────────── -->
+
+      <div class="interleave" data-section="Domestic">
+        <div class="label">VII &nbsp;·&nbsp; National courts</div>
+        <h2>The criminal record. <em>In absentia.</em></h2>
+        <p class="sub">Schiphol, Helsinki, Vilnius — the first verdicts to actually sentence individuals for the war.</p>
       </div>
 
-      <!-- ── DOMESTIC / UJ ─────────────────────────────────────── -->
-
-      <a class="clip pull tilt-r" href="02-archive.html#fol-39" data-forum="Domestic">
-        <p class="pull-q">Helsinki District Court. Life imprisonment.</p>
+      <a class="clip pull-big tilt-r" href="02-archive.html#fol-33" data-forum="Domestic">
+        <p class="pull-q">The Court has established that Flight MH17 was hit by a Buk missile fired from a farm field near Pervomaiskyi in Ukraine.</p>
         <div class="cite">
-          <span class="src">— <em>Finland v Yan Petrovsky</em></span>
+          <span class="src">— Rb. Den Haag · MH17 verdict · 17.xi.2022</span>
+          <span class="fol">FOL.&nbsp;33</span>
+        </div>
+      </a>
+
+      <a class="clip tight cream" href="02-archive.html#fol-33" data-forum="Domestic">
+        <p class="para">Sentenced the accused <strong>Kharchenko, Dubinskiy and Girkin</strong> to <em>life imprisonment</em> for causing Flight MH17 to crash and for the murder of the 298 persons on board. Pulatov acquitted.</p>
+        <div class="cite">
+          <span class="src">Rb. Den Haag · in absentia</span>
+          <span class="fol">FOL.&nbsp;33</span>
+        </div>
+      </a>
+
+      <a class="clip pull-sm tilt-l" href="02-archive.html#fol-34" data-forum="Domestic">
+        <p class="pull-q">Abundant indications reveal that from mid-May 2014, the DPR in fact took directions from the Russian Federation.</p>
+        <div class="cite">
+          <span class="src">— Dutch trial chamber · on overall control</span>
+          <span class="fol">FOL.&nbsp;34</span>
+        </div>
+      </a>
+
+      <a class="clip num-gilt tilt-r" href="02-archive.html#fol-39" data-forum="Domestic">
+        <p class="num-clip">1<em>st</em><span class="lbl">UJ conviction worldwide · Ukraine war</span></p>
+        <div class="cite">
+          <span class="src"><em>Finland v Yan Petrovsky</em></span>
           <span class="fol">FOL.&nbsp;39</span>
         </div>
       </a>
 
-      <a class="clip para-clip cream" href="02-archive.html#fol-39" data-forum="Domestic">
-        <p class="para">The District Court of Helsinki found the defendant guilty of war crimes committed in eastern Ukraine in 2014 as a member of the so-called Rusich group. He was sentenced to <strong>life imprisonment</strong>. The first conviction of a foreign mercenary fighter for crimes committed in Ukraine, in any jurisdiction.</p>
+      <a class="clip pull-big" href="02-archive.html#fol-39" data-forum="Domestic">
+        <p class="pull-q">Murder, mutilation, and publishing degrading images of the dead.</p>
+        <div class="cite">
+          <span class="src">— Helsinki District Court · 14.iii.2025</span>
+          <span class="fol">FOL.&nbsp;39</span>
+        </div>
+      </a>
+
+      <a class="clip tight" href="02-archive.html#fol-39" data-forum="Domestic">
+        <p class="para">Found unanimously guilty of <em>four war crimes</em> in Luhansk in 2014 as deputy commander of the Rusich group. Sentenced to <strong>life imprisonment.</strong> The first conviction of a foreign mercenary fighter for crimes in Ukraine, in any jurisdiction.</p>
         <div class="cite">
           <span class="src">Helsinki · 14.iii.2025</span>
           <span class="fol">FOL.&nbsp;39</span>
         </div>
       </a>
 
-      <a class="clip num tilt-l2" href="02-archive.html#fol-40" data-forum="Domestic">
-        <p class="num-clip">1<em>st</em><span class="lbl">extradition · UA → 3rd state</span></p>
+      <a class="clip tilt-l2" href="02-archive.html#fol-40" data-forum="Domestic">
+        <p class="note">Suspect transferred from Ukrainian custody, <b>28.x.2025</b>. Pre-trial detention in Vilnius. <em>The first such transfer of a Ukrainian-held suspect to a third state.</em></p>
         <div class="cite">
           <span class="src"><em>Lithuania v Gadzhimagomedov</em></span>
           <span class="fol">FOL.&nbsp;40</span>
         </div>
       </a>
 
-      <a class="clip note-clip" href="02-archive.html#fol-40" data-forum="Domestic">
-        <p class="note">Suspect transferred from Ukrainian custody, <b>28.x.2025</b>. Pre-trial detention in Vilnius.</p>
-        <div class="cite">
-          <span class="src">Vilnius · pending</span>
-          <span class="fol">FOL.&nbsp;40</span>
-        </div>
-      </a>
+      <!-- ── INTERLEAVE: REPARATIONS ─────────────────────────────────── -->
 
-      <a class="clip para-clip" href="02-archive.html#fol-33" data-forum="Domestic">
-        <p class="para">Three convicted <em>in absentia.</em> Three sentences of life imprisonment. Approximately <strong>€16 million</strong> in damages joined to the criminal proceedings.</p>
-        <div class="cite">
-          <span class="src">Rb. Den Haag · 17.xi.2022 · MH17</span>
-          <span class="fol">FOL.&nbsp;33</span>
-        </div>
-      </a>
+      <div class="interleave" data-section="Domestic">
+        <div class="label">VIII &nbsp;·&nbsp; The reparations question</div>
+        <h2>Awarded does not mean <em>collected.</em></h2>
+        <p class="sub">€210 billion sit at Euroclear in Brussels. As of December 2025, frozen indefinitely.</p>
+      </div>
 
-      <!-- ── EU / EUROCLEAR — FINALE ─────────────────────────────────────── -->
-
-      <a class="clip num dark gilt-clip tilt-l" href="02-archive.html#fol-41" data-forum="Domestic">
+      <a class="clip dark tilt-l" href="02-archive.html#fol-41" data-forum="Domestic">
         <p class="num-clip">€210<em>bn</em><span class="lbl">immobilised at Euroclear, Brussels</span></p>
         <div class="cite">
           <span class="src">EU Council · 12.xii.2025</span>
@@ -761,15 +856,15 @@
         </div>
       </a>
 
-      <a class="clip disp-clip amber" href="02-archive.html#fol-41" data-forum="Domestic">
-        <p class="disp">Frozen<span class="big" style="color:var(--gilt)">indefinitely</span></p>
+      <a class="clip" href="02-archive.html#fol-41" data-forum="Domestic">
+        <p class="disp amber">Frozen<span class="big">indefinitely</span></p>
         <div class="cite">
           <span class="src">EU/Belgium · reparations-loan pending</span>
           <span class="fol">FOL.&nbsp;41</span>
         </div>
       </a>
 
-      <a class="clip para-clip deep tilt-r" href="02-archive.html#fol-41" data-forum="Domestic">
+      <a class="clip tight deep tilt-r" href="02-archive.html#fol-41" data-forum="Domestic">
         <p class="para">On <strong>12 December 2025</strong> the European Council agreed that the immobilisation of Russian sovereign assets at Euroclear shall continue indefinitely. The reparations-loan structure remains under negotiation. <em>The single largest pool of Russian state money under European control.</em></p>
         <div class="cite">
           <span class="src">EU Council · ongoing</span>
@@ -777,20 +872,20 @@
         </div>
       </a>
 
-      <a class="clip pull small tilt-l" href="02-archive.html#fol-21" data-forum="PCA">
-        <p class="pull-q">Awarded does not mean collected.</p>
+      <a class="clip pull-sm tilt-l" href="02-archive.html#fol-21" data-forum="PCA">
+        <p class="pull-q">Approximately $300 million attached, of $7.5 billion awarded.</p>
         <div class="cite">
-          <span class="src">— Estimated $300m attached, of $7.5bn awarded</span>
+          <span class="src">— Crimea-cluster enforcement · 04.2026</span>
           <span class="fol">FOL.&nbsp;21+</span>
         </div>
       </a>
 
     </div>
 
-    <div class="endmark">forty-one voices, still speaking</div>
+    <div class="endmark">forty-one cases · still speaking</div>
 
     <footer>
-      <div>caseflows · the voices · v 0.1</div>
+      <div>caseflows · the voices · v 0.2</div>
       <div>
         <a href="../index.html">concept index</a> ·
         <a href="08-gallery.html">gallery</a> ·
@@ -806,29 +901,30 @@
   (() => {
     const wall = document.getElementById('wall');
     const chips = document.querySelectorAll('#chips .chip');
-    const vis = document.getElementById('vis');
+    const visEl = document.getElementById('vis');
+    const groups = {ICJ:['ICJ'], ECtHR:['ECtHR'], ICC:['ICC'], PCA:['PCA'], ITLOS:['ITLOS'], Domestic:['Domestic']};
+    const allClips = [...wall.querySelectorAll('.clip')];
+    const allInterleaves = [...wall.querySelectorAll('.interleave')];
 
     const apply = (key) => {
       let n = 0;
-      const groups = {ICJ:['ICJ'], ECtHR:['ECtHR'], ICC:['ICC'], PCA:['PCA'], ITLOS:['ITLOS'], Domestic:['Domestic']};
-      wall.querySelectorAll('.clip').forEach(c => {
+      allClips.forEach(c => {
         const f = c.dataset.forum;
         const show = key === 'all' || (groups[key] || [key]).includes(f);
         c.style.display = show ? '' : 'none';
         if (show) n++;
       });
-      // Hide section interleaves whose neighbours are all hidden
-      wall.querySelectorAll('.interleave').forEach(div => {
-        // Look at the next ~4 .clip siblings; if all hidden, hide the interleave
-        let nxt = div.nextElementSibling, anyVisible = false, count = 0;
-        while (nxt && count < 6) {
-          if (nxt.classList.contains('interleave')) break;
-          if (nxt.classList.contains('clip') && nxt.style.display !== 'none') { anyVisible = true; break; }
-          nxt = nxt.nextElementSibling; count++;
+      // Show an interleave if any clip in its section (until the next interleave) is visible
+      allInterleaves.forEach((iv, idx) => {
+        const next = allInterleaves[idx+1];
+        let cur = iv.nextElementSibling, anyVisible = false;
+        while (cur && cur !== next) {
+          if (cur.classList.contains('clip') && cur.style.display !== 'none') { anyVisible = true; break; }
+          cur = cur.nextElementSibling;
         }
-        div.style.display = anyVisible ? '' : 'none';
+        iv.style.display = anyVisible ? '' : 'none';
       });
-      vis.textContent = n;
+      visEl.textContent = n;
     };
 
     chips.forEach(ch => ch.addEventListener('click', () => {
@@ -836,6 +932,8 @@
       ch.classList.add('on');
       apply(ch.dataset.f);
     }));
+
+    apply('all');
   })();
   </script>
 </body>
