@@ -35,7 +35,6 @@
 
   .frame{max-width:1480px;margin:0 auto;padding:0 32px}
 
-  /* ── Running head ── */
   .runhead{
     border-bottom:1px solid var(--rule);
     padding:14px 0;
@@ -46,38 +45,21 @@
   .runhead a{margin-left:18px;text-decoration:none;border-bottom:1px solid transparent;transition:border-color .15s,color .15s}
   .runhead a:hover{color:var(--stamp);border-bottom-color:var(--stamp)}
 
-  /* ── Title block ── */
-  .title{
-    padding:32px 0 20px;
-    display:grid;grid-template-columns:1fr auto;gap:32px;align-items:end;
-    border-bottom:1px solid var(--ink);
-  }
+  .title{padding:32px 0 20px;display:grid;grid-template-columns:1fr auto;gap:32px;align-items:end;border-bottom:1px solid var(--ink)}
   .title h1{font-family:var(--display);font-variation-settings:"opsz" 144,"SOFT" 60;font-weight:400;font-size:48px;line-height:1;letter-spacing:-.02em;color:var(--ink);margin:0}
   .title h1 em{font-style:italic;font-variation-settings:"opsz" 144,"SOFT" 100;color:var(--stamp)}
   .title .strap{font-family:var(--body);font-style:italic;font-size:16px;color:var(--ink-soft);margin:6px 0 0;max-width:60ch}
 
-  /* ── Filter bar — theme chips + search + reset ── */
+  /* Filter bar */
   .filterbar{
-    display:grid;
-    grid-template-columns: 1fr 280px auto;
-    gap:24px;
-    align-items:center;
-    padding:14px 0;
-    border-bottom:1px solid var(--rule);
+    display:grid;grid-template-columns:1fr 280px auto;gap:24px;align-items:center;
+    padding:14px 0;border-bottom:1px solid var(--rule);
   }
-  .themes{
-    display:flex;gap:0;flex-wrap:wrap;
-    font-family:var(--mono);font-size:11px;letter-spacing:.04em;text-transform:uppercase;
-  }
+  .themes{display:flex;gap:0;flex-wrap:wrap;font-family:var(--mono);font-size:11px;letter-spacing:.04em;text-transform:uppercase}
   .themes .lab{color:var(--ink-faint);margin-right:10px;align-self:center}
   .theme-chip{
-    padding:5px 11px 5px 22px;
-    border:1px solid var(--rule);
-    color:var(--ink);
-    cursor:pointer;
-    position:relative;
-    transition:all .15s;
-    margin-right:6px;margin-bottom:4px;
+    padding:5px 11px 5px 22px;border:1px solid var(--rule);color:var(--ink);cursor:pointer;
+    position:relative;transition:all .15s;margin-right:6px;margin-bottom:4px;
   }
   .theme-chip::before{
     content:"";position:absolute;left:7px;top:50%;transform:translateY(-50%);
@@ -87,28 +69,18 @@
   .theme-chip:hover{background:var(--paper-deep);border-color:var(--ink-faint)}
   .theme-chip.on{background:var(--ink);color:var(--paper);border-color:var(--ink)}
 
-  .search{
-    position:relative;
-    border-bottom:1px solid var(--ink);
-    padding:6px 0 6px 24px;
-  }
+  .search{position:relative;border-bottom:1px solid var(--ink);padding:6px 0 6px 24px}
   .search::before{content:"⌕";position:absolute;left:0;top:5px;font-family:var(--display);font-size:16px;color:var(--ink-soft)}
-  .search input{
-    width:100%;border:none;outline:none;background:transparent;
-    font-family:var(--body);font-size:15px;color:var(--ink);
-    padding:0;
-  }
+  .search input{width:100%;border:none;outline:none;background:transparent;font-family:var(--body);font-size:15px;color:var(--ink);padding:0}
   .search input::placeholder{color:var(--ink-faint);font-style:italic}
 
   .reset-btn{
     font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;
-    padding:6px 14px;border:1px solid var(--ink);color:var(--ink);
-    transition:all .15s;cursor:pointer;
+    padding:6px 14px;border:1px solid var(--ink);color:var(--ink);transition:all .15s;cursor:pointer;
   }
   .reset-btn:hover{background:var(--ink);color:var(--paper)}
   .reset-btn.dim{opacity:.4;cursor:default;pointer-events:none}
 
-  /* ── Breadcrumb ── */
   .breadcrumb{
     padding:14px 0 4px;
     font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-faint);
@@ -119,25 +91,15 @@
   .breadcrumb .clear-x{color:var(--ink-faint);cursor:pointer;border-bottom:1px dotted var(--ink-faint);padding-bottom:1px;margin-left:10px}
   .breadcrumb .clear-x:hover{color:var(--stamp);border-bottom-color:var(--stamp)}
 
-  /* ── Atlas main: 3-column layout ── */
   .atlas{
-    display:grid;
-    grid-template-columns: 240px 1fr 320px;
-    gap:0;
-    border-bottom:1px solid var(--ink);
-    min-height:680px;
+    display:grid;grid-template-columns:240px 1fr 340px;gap:0;
+    border-bottom:1px solid var(--ink);min-height:680px;
   }
 
-  /* ── Left rail: city list ── */
-  .cities{
-    border-right:1px solid var(--ink);
-    background:var(--paper-soft);
-    overflow-y:auto;
-    max-height:80vh;
-  }
+  /* Cities sidebar */
+  .cities{border-right:1px solid var(--ink);background:var(--paper-soft);overflow-y:auto;max-height:80vh}
   .cities-head{
-    padding:14px 18px 10px;
-    border-bottom:1px solid var(--rule);
+    padding:14px 18px 10px;border-bottom:1px solid var(--rule);
     font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-faint);
     display:flex;justify-content:space-between;align-items:baseline;
     position:sticky;top:0;background:var(--paper-soft);z-index:5;
@@ -147,15 +109,10 @@
     border-bottom:1px dotted var(--ink-faint);padding-bottom:1px;cursor:pointer;
   }
   .cities-head .toggle.on{color:var(--stamp);border-bottom-color:var(--stamp)}
-
   .city-row{
-    display:grid;grid-template-columns:1fr auto;
-    gap:8px;
-    padding:11px 18px;
-    border-bottom:1px solid var(--rule-soft);
-    cursor:pointer;
-    transition:background .12s;
-    align-items:baseline;
+    display:grid;grid-template-columns:1fr auto;gap:8px;padding:11px 18px;
+    border-bottom:1px solid var(--rule-soft);cursor:pointer;
+    transition:background .12s;align-items:baseline;
   }
   .city-row:hover{background:var(--paper-deep)}
   .city-row.selected{background:var(--ink);color:var(--paper)}
@@ -164,67 +121,54 @@
   .city-row.dim{opacity:.35}
   .city-row .nm{
     font-family:var(--display);font-variation-settings:"opsz" 24,"SOFT" 50;
-    font-size:15px;font-weight:500;color:var(--ink);
-    line-height:1.2;letter-spacing:-.005em;
+    font-size:15px;font-weight:500;color:var(--ink);line-height:1.2;letter-spacing:-.005em;
   }
   .city-row.selected .nm{color:var(--paper)}
   .city-row .nm em{font-style:italic;font-variation-settings:"opsz" 24,"SOFT" 100;color:var(--stamp)}
   .city-row .sub{
-    display:block;
-    font-family:var(--mono);font-size:9px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-faint);
-    margin-top:2px;
+    display:block;font-family:var(--mono);font-size:9px;letter-spacing:.08em;text-transform:uppercase;
+    color:var(--ink-faint);margin-top:2px;
   }
-  .city-row .ct{
-    font-family:var(--mono);font-size:11px;font-weight:500;color:var(--ink);
-    text-align:right;
-  }
+  .city-row .ct{font-family:var(--mono);font-size:11px;font-weight:500;color:var(--ink);text-align:right}
   .city-row.harm .nm{color:var(--stamp);font-style:italic}
   .city-row.harm.selected .nm{color:var(--gilt)}
 
-  /* ── Map ── */
+  /* Map */
   .map-wrap{
-    position:relative;
-    background:var(--paper);
+    position:relative;background:var(--paper);
     background-image:
       radial-gradient(rgba(28,24,20,.025) 1px, transparent 1px),
       radial-gradient(rgba(28,24,20,.012) 1px, transparent 1px);
     background-size: 4px 4px, 9px 9px;
     background-position: 0 0, 1px 2px;
-    border-right:1px solid var(--ink);
-    padding:8px;
-    min-height:600px;
+    border-right:1px solid var(--ink);padding:8px;min-height:600px;overflow:hidden;
   }
-  .map-svg{display:block;width:100%;height:auto;cursor:default}
+  .map-svg{display:block;width:100%;height:auto;cursor:grab}
+  .map-svg:active{cursor:grabbing}
   .land{fill:var(--paper-deep);stroke:var(--ink-soft);stroke-width:.5}
   .ukraine{fill:#e8d8c7;stroke:var(--ink);stroke-width:.7}
   .grat{fill:none;stroke:var(--rule);stroke-width:.4;stroke-dasharray:2 3;opacity:.6}
 
-  .pin-forum{
-    fill:var(--sage);stroke:var(--ink);stroke-width:1;
-    cursor:pointer;transition:fill .15s,stroke-width .15s,r .25s;
-  }
+  .pin-forum{fill:var(--sage);stroke:var(--ink);stroke-width:1;cursor:pointer;transition:fill .15s,stroke-width .15s}
   .pin-forum:hover{fill:var(--gilt);stroke-width:2}
   .pin-forum.selected{fill:var(--gilt);stroke-width:2.5}
   .pin-forum.dim{opacity:.18}
 
-  .pin-harm{
-    fill:var(--stamp);stroke:var(--paper);stroke-width:1.2;
-    cursor:pointer;transition:fill .15s,r .25s;
-  }
+  .pin-harm{fill:var(--stamp);stroke:var(--paper);stroke-width:1.2;cursor:pointer}
   .pin-harm:hover{fill:var(--gilt)}
   .pin-harm.dim{opacity:.18}
   .pin-harm.selected{fill:var(--gilt)}
-  .harm-ring{fill:none;stroke:var(--stamp);stroke-width:1.2;cursor:pointer;transition:stroke .15s}
+  .harm-ring{fill:none;stroke:var(--stamp);stroke-width:1.2;cursor:pointer}
   .harm-ring.selected{stroke:var(--gilt);stroke-width:2}
   .harm-ring.dim{opacity:.18}
 
-  /* Hague megahub: a single pin with satellite forum dots */
   .hague-hub{cursor:pointer}
-  .hague-hub circle.center{fill:var(--sage);stroke:var(--ink);stroke-width:2;transition:fill .15s,r .25s}
+  .hague-hub circle.center{fill:var(--sage);stroke:var(--ink);stroke-width:2;transition:fill .15s}
   .hague-hub:hover circle.center{fill:var(--gilt)}
   .hague-hub.selected circle.center{fill:var(--gilt);stroke-width:3}
-  .hague-hub circle.satellite{fill:var(--paper);stroke:var(--ink);stroke-width:1.2;transition:fill .15s}
-  .hague-hub.selected circle.satellite{fill:var(--gilt);stroke:var(--ink)}
+  .hague-hub circle.satellite{fill:var(--paper);stroke:var(--ink);stroke-width:1.2;transition:fill .15s,r .15s}
+  .hague-hub.selected circle.satellite{fill:var(--paper-deep);stroke:var(--ink)}
+  .hague-hub circle.satellite.active{fill:var(--gilt);stroke:var(--ink);stroke-width:1.6}
   .hague-hub line.spoke{stroke:var(--ink-faint);stroke-width:.5}
   .hague-hub.selected line.spoke{stroke:var(--ink)}
 
@@ -233,143 +177,177 @@
     fill:var(--ink);font-variation-settings:"opsz" 14,"SOFT" 100;
     pointer-events:none;letter-spacing:.005em;
   }
-  .label.harm{fill:var(--stamp);font-style:italic;font-size:9px;letter-spacing:.06em;text-transform:uppercase;font-family:var(--mono);}
+  .label.harm{fill:var(--stamp);font-style:italic;font-size:9px;letter-spacing:.06em;text-transform:uppercase;font-family:var(--mono)}
   .label.major{font-size:13px;font-weight:500}
   .label.dim{opacity:.3}
   .label.satellite{font-size:9px;font-family:var(--mono);font-style:normal;letter-spacing:.06em;fill:var(--ink-soft);text-transform:uppercase}
 
-  /* Compass rose */
+  /* Connection arc — drawn when selection has both ends */
+  .conn{fill:none;stroke:var(--gilt);stroke-width:.8;stroke-dasharray:3 3;opacity:.7;pointer-events:none}
+
   .compass{font-family:var(--mono);font-size:10px;fill:var(--ink-soft);letter-spacing:.1em}
   .compass-line{stroke:var(--ink);stroke-width:.6;fill:none}
-
-  /* Cartouche */
   .cartouche{font-family:var(--display);fill:var(--ink)}
   .cartouche-frame{fill:var(--paper);stroke:var(--ink);stroke-width:.7}
 
-  /* ── Right panel: detail ── */
-  .panel{
-    padding:24px;
-    overflow-y:auto;
-    max-height:80vh;
-    background:var(--paper);
+  /* ── Zoom controls (top-left of map, fixed) ── */
+  .zoom-controls{
+    position:absolute;top:18px;left:18px;
+    display:flex;flex-direction:column;
+    border:1px solid var(--ink);background:var(--paper);
+    z-index:8;
+    box-shadow:1px 1px 0 var(--ink);
   }
-  .panel .ph{
-    font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;
-    color:var(--ink-faint);font-weight:500;margin:0 0 10px;
+  .zoom-controls button{
+    width:32px;height:32px;
+    display:grid;place-items:center;
+    border:none;background:transparent;cursor:pointer;
+    font-family:var(--display);font-size:16px;color:var(--ink);
+    border-bottom:1px solid var(--rule);transition:background .12s;
   }
-  .panel h2{
-    font-family:var(--display);font-variation-settings:"opsz" 60,"SOFT" 50;
-    font-weight:500;font-size:26px;line-height:1.05;letter-spacing:-.018em;
-    color:var(--ink);margin:0 0 6px;
-  }
-  .panel h2 em{font-style:italic;font-variation-settings:"opsz" 60,"SOFT" 100;color:var(--stamp)}
-  .panel .meta{
-    font-family:var(--body);font-style:italic;font-size:14px;color:var(--ink-soft);
-    margin:0 0 16px;line-height:1.45;
+  .zoom-controls button:last-child{border-bottom:none}
+  .zoom-controls button:hover{background:var(--paper-deep)}
+  .zoom-controls button:disabled{opacity:.4;cursor:default}
+  .zoom-controls .scale{
+    font-family:var(--mono);font-size:9px;letter-spacing:.06em;color:var(--ink-faint);
+    border-bottom:1px solid var(--rule);padding:5px 0;text-align:center;text-transform:uppercase;
   }
 
-  /* Forum tabs (only shown when Hague is selected) */
-  .forum-tabs{
-    display:flex;gap:0;flex-wrap:wrap;
-    margin:0 0 14px;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);
+  /* ── Hague magnification inset ── */
+  .hague-inset{
+    position:absolute;bottom:18px;left:18px;
+    width:230px;
+    border:1px solid var(--ink);
+    background:var(--paper);
+    box-shadow:2px 2px 0 var(--ink-soft);
+    z-index:7;
+    user-select:none;
   }
-  .forum-tabs button{
+  .hague-inset .head{
     padding:8px 12px;
-    font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft);
-    border-right:1px solid var(--rule);
-    transition:all .12s;
+    border-bottom:1px solid var(--ink);
+    font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink);
+    display:flex;justify-content:space-between;align-items:baseline;background:var(--paper-deep);
+  }
+  .hague-inset .head .title-text{font-family:var(--display);font-size:14px;font-style:italic;color:var(--ink);text-transform:none;letter-spacing:-.005em;font-variation-settings:"opsz" 24,"SOFT" 100}
+  .hague-inset .head .glass{color:var(--stamp);font-size:13px}
+  .hague-inset svg{display:block;width:100%;height:160px;background:var(--paper-soft)}
+  .hague-inset .footer-strip{
+    padding:6px 12px;border-top:1px solid var(--rule);
+    font-family:var(--body);font-style:italic;font-size:11px;color:var(--ink-faint);line-height:1.3;
+  }
+  .hague-inset .footer-strip b{color:var(--ink);font-style:normal;font-family:var(--mono);font-size:10px;letter-spacing:.04em}
+  .inset-spoke{stroke:var(--ink-soft);stroke-width:1}
+  .inset-center{fill:var(--sage);stroke:var(--ink);stroke-width:1.5}
+  .inset-sat{fill:var(--paper);stroke:var(--ink);stroke-width:1.2;cursor:pointer;transition:fill .12s}
+  .inset-sat:hover{fill:var(--gilt)}
+  .inset-sat.active{fill:var(--gilt);stroke-width:1.8}
+  .inset-label{font-family:var(--mono);font-size:9px;letter-spacing:.06em;text-transform:uppercase;fill:var(--ink);pointer-events:none}
+  .inset-count{font-family:var(--display);font-size:14px;font-style:italic;fill:var(--ink-soft);pointer-events:none;font-variation-settings:"opsz" 24,"SOFT" 100}
+
+  /* Right panel */
+  .panel{padding:24px;overflow-y:auto;max-height:80vh;background:var(--paper)}
+  .panel .ph{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-faint);font-weight:500;margin:0 0 10px}
+  .panel h2{font-family:var(--display);font-variation-settings:"opsz" 60,"SOFT" 50;font-weight:500;font-size:26px;line-height:1.05;letter-spacing:-.018em;color:var(--ink);margin:0 0 6px}
+  .panel h2 em{font-style:italic;font-variation-settings:"opsz" 60,"SOFT" 100;color:var(--stamp)}
+  .panel .meta{font-family:var(--body);font-style:italic;font-size:14px;color:var(--ink-soft);margin:0 0 16px;line-height:1.45}
+
+  .forum-tabs{display:flex;gap:0;flex-wrap:wrap;margin:0 0 14px;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)}
+  .forum-tabs button{
+    padding:8px 12px;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;
+    color:var(--ink-soft);border-right:1px solid var(--rule);transition:all .12s;
   }
   .forum-tabs button:last-child{border-right:none}
   .forum-tabs button:hover{background:var(--paper-deep);color:var(--ink)}
   .forum-tabs button.on{background:var(--ink);color:var(--paper)}
   .forum-tabs .ct{font-size:9px;color:inherit;opacity:.7;margin-left:4px}
 
-  .panel .stat-strip{
-    display:grid;grid-template-columns:1fr 1fr;gap:0;
-    border-top:1px solid var(--ink);border-bottom:1px solid var(--rule);
-    margin-bottom:18px;
-  }
+  .panel .stat-strip{display:grid;grid-template-columns:1fr 1fr;gap:0;border-top:1px solid var(--ink);border-bottom:1px solid var(--rule);margin-bottom:18px}
   .panel .stat{padding:12px 0;border-right:1px solid var(--rule)}
   .panel .stat:nth-child(even){padding-left:14px;border-right:none}
   .panel .stat:nth-child(odd){padding-right:14px}
-  .panel .stat .v{
-    font-family:var(--display);font-variation-settings:"opsz" 60,"SOFT" 30;font-weight:400;
-    font-size:30px;line-height:1;letter-spacing:-.02em;color:var(--ink);
-  }
-  .panel .stat .l{
-    font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;
-    color:var(--ink-faint);margin-top:4px;
-  }
-  .case-row{
-    padding:12px 0;border-bottom:1px solid var(--rule-soft);
-    cursor:pointer;transition:padding-left .12s;
-  }
+  .panel .stat .v{font-family:var(--display);font-variation-settings:"opsz" 60,"SOFT" 30;font-weight:400;font-size:30px;line-height:1;letter-spacing:-.02em;color:var(--ink)}
+  .panel .stat .l{font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-faint);margin-top:4px}
+
+  .case-row{padding:12px 0;border-bottom:1px solid var(--rule-soft);cursor:pointer;transition:padding-left .12s}
   .case-row:hover{padding-left:8px}
-  .case-row .ttl{
-    font-family:var(--display);font-variation-settings:"opsz" 24,"SOFT" 30;
-    font-weight:500;font-size:15px;line-height:1.25;color:var(--ink);
-  }
+  .case-row .ttl{font-family:var(--display);font-variation-settings:"opsz" 24,"SOFT" 30;font-weight:500;font-size:15px;line-height:1.25;color:var(--ink)}
   .case-row .ttl em{font-style:italic;color:var(--stamp);font-variation-settings:"opsz" 24,"SOFT" 100}
-  .case-row .ital{
-    font-family:var(--body);font-style:italic;font-size:13px;color:var(--ink-soft);
-    line-height:1.4;margin-top:2px;
-  }
-  .case-row .meta-line{
-    font-family:var(--mono);font-size:10px;letter-spacing:.06em;color:var(--ink-faint);
-    margin-top:4px;display:flex;gap:10px;text-transform:uppercase;
-  }
-  .case-row .meta-line .stat::before{
-    content:"";display:inline-block;width:5px;height:5px;border-radius:50%;
-    margin-right:5px;vertical-align:middle;margin-bottom:1px;
-  }
+  .case-row .ital{font-family:var(--body);font-style:italic;font-size:13px;color:var(--ink-soft);line-height:1.4;margin-top:2px}
+  .case-row .meta-line{font-family:var(--mono);font-size:10px;letter-spacing:.06em;color:var(--ink-faint);margin-top:4px;display:flex;gap:10px;text-transform:uppercase}
+  .case-row .meta-line .stat::before{content:"";display:inline-block;width:5px;height:5px;border-radius:50%;margin-right:5px;vertical-align:middle;margin-bottom:1px}
   .case-row .meta-line .stat.pending::before{background:var(--stamp)}
   .case-row .meta-line .stat.decided::before{background:var(--ink)}
   .case-row .meta-line .stat.enforcing::before{background:var(--gilt)}
 
-  .legend{
-    margin-top:20px;padding:14px;
-    border:1px solid var(--ink);background:var(--paper-deep);
+  /* ── Resources block ── */
+  .resources{
+    margin-top:24px;
+    border-top:2px solid var(--ink);padding-top:20px;
   }
-  .legend h4{
-    font-family:var(--display);font-variation-settings:"opsz" 24,"SOFT" 50;font-weight:400;
-    font-size:16px;color:var(--ink);margin:0 0 8px;letter-spacing:-.005em;
+  .resources h3{
+    font-family:var(--display);font-variation-settings:"opsz" 36,"SOFT" 50;font-weight:500;
+    font-size:18px;color:var(--ink);margin:0 0 10px;letter-spacing:-.005em;
   }
+  .resources h3 em{font-style:italic;font-variation-settings:"opsz" 36,"SOFT" 100;color:var(--stamp)}
+  .resources .ph{margin-bottom:10px}
+  .resources .res-row{
+    display:flex;align-items:flex-start;gap:12px;
+    padding:10px 0;border-bottom:1px solid var(--rule-soft);
+    text-decoration:none;color:inherit;transition:padding-left .12s;
+  }
+  .resources .res-row:hover{padding-left:6px;background:transparent}
+  .resources .res-row:hover .lbl{color:var(--stamp)}
+  .resources .res-row:last-child{border-bottom:none}
+  .resources .icon{
+    flex-shrink:0;
+    width:26px;height:26px;
+    display:grid;place-items:center;
+    border:1px solid var(--ink);
+    font-family:var(--display);font-size:13px;color:var(--ink);font-style:normal;
+    background:var(--paper-deep);
+  }
+  .resources .icon.video{background:var(--stamp);color:var(--paper);border-color:var(--stamp)}
+  .resources .icon.wiki{background:var(--paper);color:var(--ink);font-weight:600;font-style:italic}
+  .resources .icon.investigation{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+  .resources .icon.web{background:var(--paper);color:var(--ink-soft)}
+  .resources .icon.document{background:var(--paper-deep);color:var(--ink);font-style:italic}
+  .resources .body{flex:1;min-width:0}
+  .resources .lbl{
+    font-family:var(--display);font-variation-settings:"opsz" 24,"SOFT" 50;font-weight:500;
+    font-size:14px;line-height:1.3;color:var(--ink);transition:color .12s;
+    letter-spacing:-.005em;
+  }
+  .resources .pub{
+    font-family:var(--mono);font-size:9px;letter-spacing:.06em;text-transform:uppercase;
+    color:var(--ink-faint);margin-top:3px;
+  }
+  .resources .ext{
+    font-family:var(--mono);font-size:11px;color:var(--ink-faint);
+    align-self:center;margin-left:auto;flex-shrink:0;
+  }
+
+  .legend{margin-top:20px;padding:14px;border:1px solid var(--ink);background:var(--paper-deep)}
+  .legend h4{font-family:var(--display);font-variation-settings:"opsz" 24,"SOFT" 50;font-weight:400;font-size:16px;color:var(--ink);margin:0 0 8px;letter-spacing:-.005em}
   .legend .row{display:flex;align-items:center;gap:10px;padding:4px 0;color:var(--ink-soft);font-size:13px}
   .legend .swatch{width:12px;height:12px;flex-shrink:0;border-radius:50%}
   .legend .swatch.forum{background:var(--sage);border:1.5px solid var(--ink)}
   .legend .swatch.harm{background:transparent;border:1.5px solid var(--stamp);position:relative}
   .legend .swatch.harm::after{content:"";position:absolute;inset:3px;background:var(--stamp);border-radius:50%}
 
-  /* Tooltip */
-  #tt{
-    position:fixed;pointer-events:none;
-    background:var(--ink);color:var(--paper);
-    padding:8px 12px;
-    font-family:var(--mono);font-size:11px;letter-spacing:.04em;line-height:1.4;
-    z-index:50;display:none;max-width:280px;
-  }
+  #tt{position:fixed;pointer-events:none;background:var(--ink);color:var(--paper);padding:8px 12px;font-family:var(--mono);font-size:11px;letter-spacing:.04em;line-height:1.4;z-index:50;display:none;max-width:280px}
   #tt b{color:var(--gilt);font-weight:500}
   #tt .ti{font-family:var(--body);font-style:italic;color:#e0d5c1;text-transform:none;letter-spacing:0;font-size:12px;display:block;margin-top:2px}
   #tt .cnt{display:block;margin-top:6px;color:#999086}
 
-  footer{
-    margin-top:24px;
-    padding:18px 0 56px;
-    font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;
-    color:var(--ink-faint);display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px;
-  }
+  footer{margin-top:24px;padding:18px 0 56px;font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-faint);display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px}
   footer a{color:var(--ink-soft);text-decoration:none;border-bottom:1px solid var(--rule);transition:color .15s,border-color .15s}
   footer a:hover{color:var(--stamp);border-bottom-color:var(--stamp)}
 
-  /* Keyboard shortcut hint */
-  kbd{
-    background:var(--paper-deep);
-    border:1px solid var(--rule);padding:1px 5px;
-    border-radius:2px;font-family:var(--mono);font-size:10px;color:var(--ink);
-  }
+  kbd{background:var(--paper-deep);border:1px solid var(--rule);padding:1px 5px;border-radius:2px;font-family:var(--mono);font-size:10px;color:var(--ink)}
 
   @media(max-width:1280px){
-    .atlas{grid-template-columns:200px 1fr 280px}
+    .atlas{grid-template-columns:200px 1fr 300px}
     .filterbar{grid-template-columns:1fr 240px auto}
   }
   @media(max-width:1024px){
@@ -378,6 +356,7 @@
     .map-wrap{border-right:none;border-bottom:1px solid var(--ink)}
     .panel{max-height:none}
     .filterbar{grid-template-columns:1fr;gap:14px}
+    .hague-inset{display:none}
   }
 </style>
 </head>
@@ -397,11 +376,10 @@
     <header class="title">
       <div>
         <h1>The <em>Atlas.</em></h1>
-        <p class="strap">A chart of where the cases live and where the harm was done. Filter by theme, browse the city list, or click any pin on the map.</p>
+        <p class="strap">A chart of where the cases live and where the harm was done. Filter, browse, click a pin — or pinch and zoom across Europe. Each place comes with curated reading and viewing.</p>
       </div>
     </header>
 
-    <!-- Filter bar: theme chips + search + reset -->
     <div class="filterbar">
       <div class="themes" id="themes">
         <span class="lab">filter</span>
@@ -415,23 +393,16 @@
         <button class="theme-chip" data-theme="gas"      style="--c:#5e9c3d">Gas <span style="opacity:.6">· 3</span></button>
         <button class="theme-chip" data-theme="cbr"      style="--c:#b8893a">CBR <span style="opacity:.6">· 1</span></button>
       </div>
-      <label class="search">
-        <input id="q" type="search" placeholder="search a city, court, or place…" autocomplete="off">
-      </label>
+      <label class="search"><input id="q" type="search" placeholder="search a city, court, or place…" autocomplete="off"></label>
       <button class="reset-btn dim" id="reset">↻ reset</button>
     </div>
 
     <div class="breadcrumb" id="breadcrumb">
-      <div>
-        <span class="crumb" id="crumb-text">All 41 cases · 13 court cities · 8 harm sites</span>
-        <span class="clear-x" id="clear-sel" style="display:none">clear ✕</span>
-      </div>
-      <div style="color:var(--ink-faint)">↑↓ navigate · <kbd>esc</kbd> reset · <kbd>/</kbd> search</div>
+      <div><span class="crumb" id="crumb-text">All 41 cases · 13 court cities · 8 harm sites</span><span class="clear-x" id="clear-sel" style="display:none">clear ✕</span></div>
+      <div style="color:var(--ink-faint)">↑↓ list · <kbd>esc</kbd> reset · <kbd>/</kbd> search · scroll/pinch to zoom</div>
     </div>
 
-    <!-- 3-column atlas layout -->
     <div class="atlas">
-      <!-- Left rail: city list -->
       <aside class="cities">
         <div class="cities-head">
           <span>by case count</span>
@@ -440,16 +411,34 @@
         <div id="city-list"></div>
       </aside>
 
-      <!-- Map -->
       <div class="map-wrap">
         <svg class="map-svg" id="map" viewBox="0 0 1100 700"></svg>
+
+        <!-- Zoom controls overlay -->
+        <div class="zoom-controls" id="zoom-controls">
+          <button id="z-in" title="Zoom in">+</button>
+          <div class="scale" id="z-scale">1.0×</div>
+          <button id="z-out" title="Zoom out">−</button>
+          <button id="z-reset" title="Reset view" style="font-size:13px">⌂</button>
+        </div>
+
+        <!-- The Hague magnification inset -->
+        <div class="hague-inset" id="hague-inset">
+          <div class="head">
+            <span class="title-text">The Hague <span class="glass">⌕</span></span>
+            <span style="color:var(--ink-faint)">megahub</span>
+          </div>
+          <svg viewBox="0 0 230 160" id="hague-inset-svg"></svg>
+          <div class="footer-strip">
+            <b>5 forums</b> in one city — click any satellite to filter. The world's largest concentration of international jurisdiction.
+          </div>
+        </div>
       </div>
 
-      <!-- Right panel -->
       <aside class="panel" id="panel">
         <div class="ph">at rest</div>
         <h2>Choose a <em>place</em></h2>
-        <p class="meta">Click any city in the list, any pin on the map, or any theme above. The right panel will show the cases connected to your selection.</p>
+        <p class="meta">Click any city in the list, any pin on the map, or any theme above. The right panel will show the cases connected to your selection — with curated reading and video.</p>
 
         <div class="stat-strip">
           <div class="stat"><div class="v">41</div><div class="l">cases</div></div>
@@ -466,7 +455,7 @@
     </div>
 
     <footer>
-      <div>caseflows · the atlas · v 0.5</div>
+      <div>caseflows · the atlas · v 0.6 · zoom + resources</div>
       <div>
         <a href="../index.html">concept index</a> ·
         <a href="02-archive.html">archive</a> ·
@@ -485,50 +474,44 @@
   <script>
   (async () => {
     const W = 1100, H = 700;
-    const svg = d3.select('#map').attr('viewBox', `0 0 ${W} ${H}`);
+    const svgEl = document.getElementById('map');
+    const svg = d3.select(svgEl).attr('viewBox', `0 0 ${W} ${H}`);
 
-    const proj = d3.geoMercator()
-      .center([22, 55])
-      .scale(900)
-      .translate([W/2, H/2]);
+    // ── Zoom group: everything that should pan/zoom goes inside ──
+    const zoomG = svg.append('g').attr('class','zoom-g');
+
+    const proj = d3.geoMercator().center([22, 55]).scale(900).translate([W/2, H/2]);
     const path = d3.geoPath(proj);
 
-    // Load world atlas
     const world = await fetch('https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json').then(r => r.json());
     const land = topojson.feature(world, world.objects.countries);
 
     const grat = d3.geoGraticule10();
-    svg.append('path').attr('class','grat').attr('d', path(grat));
-
-    svg.selectAll('.land')
-      .data(land.features)
-      .enter()
-      .append('path')
+    zoomG.append('path').attr('class','grat').attr('d', path(grat));
+    zoomG.selectAll('.land')
+      .data(land.features).enter().append('path')
       .attr('class', d => d.properties.name === 'Ukraine' ? 'ukraine' : 'land')
       .attr('d', path);
 
-    // Cartouche (top right)
-    const cart = svg.append('g').attr('transform', `translate(${W-260}, 24)`);
+    // ── Cartouche & compass — outside zoom group, fixed ──
+    const overlay = svg.append('g').attr('class','overlay');
+    const cart = overlay.append('g').attr('transform', `translate(${W-260}, 24)`);
     cart.append('rect').attr('class','cartouche-frame').attr('width',236).attr('height',62);
-    cart.append('text').attr('class','cartouche')
-      .attr('x',16).attr('y',26)
+    cart.append('text').attr('class','cartouche').attr('x',16).attr('y',26)
       .style('font-size','22px').style('font-style','italic')
       .style('font-variation-settings','"opsz" 60,"SOFT" 100')
       .text('The Court Atlas');
-    cart.append('text').attr('class','cartouche')
-      .attr('x',16).attr('y',46)
+    cart.append('text').attr('class','cartouche').attr('x',16).attr('y',46)
       .style('font-size','10px').style('font-family','IBM Plex Mono, monospace')
       .style('letter-spacing','.08em').style('text-transform','uppercase')
       .style('fill','var(--ink-soft)')
       .text('Ukraine v Russia · 2014—2026');
-    cart.append('text').attr('class','cartouche')
-      .attr('x',16).attr('y',58)
+    cart.append('text').attr('class','cartouche').attr('x',16).attr('y',58)
       .style('font-size','9px').style('font-family','IBM Plex Mono, monospace')
       .style('letter-spacing','.08em').style('fill','var(--ink-faint)')
       .text('41 cases · 13 forum cities · 8 sites');
 
-    // Compass rose
-    const compass = svg.append('g').attr('transform',`translate(${W-60}, ${H-72})`);
+    const compass = overlay.append('g').attr('transform',`translate(${W-60}, ${H-72})`);
     compass.append('circle').attr('r',28).attr('fill','none').attr('stroke','var(--ink-soft)').attr('stroke-width',.5);
     compass.append('circle').attr('r',20).attr('fill','none').attr('stroke','var(--ink-soft)').attr('stroke-width',.4);
     compass.append('line').attr('x1',0).attr('y1',-26).attr('x2',0).attr('y2',26).attr('class','compass-line');
@@ -539,44 +522,41 @@
     compass.append('text').attr('class','compass').attr('text-anchor','middle').attr('x',-36).attr('y',4).text('W');
     compass.append('text').attr('class','compass').attr('text-anchor','middle').attr('x',36).attr('y',4).text('E');
 
-    // ── Cities catalog ──
+    // ── Forum + Harm catalogs ──
     const FORUMS = [
-      // The Hague megahub (5 forums in one pin)
-      {id:'hague',  name:'The Hague',         coord:[4.31, 52.08], hub:true, major:true,
+      {id:'hague',  name:'The Hague',   coord:[4.31, 52.08], hub:true, major:true,
         sub:'ICJ · ICC · PCA · Hoge Raad · Schiphol',
         forumGroups:{
-          'ICJ':       [1,2,3],
-          'ICC':       [9,10,11,12,13,14,15],
-          'PCA':       [21,22,23,27,28,29],
-          'Hoge Raad': [35,36,37,38],
-          'Schiphol':  [33,34]
+          'ICJ':       {cases:[1,2,3],            kind:'ICJ'},
+          'ICC':       {cases:[9,10,11,12,13,14,15], kind:'ICC'},
+          'PCA':       {cases:[21,22,23,27,28,29], kind:'PCA'},
+          'Hoge Raad': {cases:[35,36,37,38],      kind:'HR'},
+          'Schiphol':  {cases:[33,34],            kind:'Schiphol'}
         }},
-      {id:'strasbourg', name:'Strasbourg',    coord:[7.75,48.58], cases:[4,5,6,7,8], major:true,  sub:'ECtHR'},
-      {id:'paris',      name:'Paris',         coord:[2.35,48.85], cases:[24,30],     major:true,  sub:'PCA seat · Cour de cassation'},
-      {id:'stockholm',  name:'Stockholm',     coord:[18.06,59.33], cases:[18,19],   major:true,  sub:'SCC Arbitration'},
-      {id:'london',     name:'London',        coord:[-0.13,51.51], cases:[29],                    sub:'UK High Court'},
-      {id:'helsinki',   name:'Helsinki',      coord:[24.94,60.17], cases:[39],                    sub:'Helsinki District Court · enforcement'},
-      {id:'vilnius',    name:'Vilnius',       coord:[25.28,54.69], cases:[40],                    sub:'LT universal jurisdiction'},
-      {id:'geneva',     name:'Geneva',        coord:[6.14,46.20], cases:[25,26],                  sub:'PCA seat · Crimea petrol'},
-      {id:'zurich',     name:'Zürich',        coord:[8.54,47.37], cases:[20],                     sub:'ICC arb seat'},
-      {id:'frankfurt',  name:'Frankfurt',     coord:[8.68,50.11], cases:[],                       sub:'OLG Frankfurt'},
-      {id:'hamburg',    name:'Hamburg',       coord:[9.99,53.55], cases:[16],                     sub:'ITLOS'},
-      {id:'vienna',     name:'Vienna',        coord:[16.37,48.21], cases:[],                      sub:'enforcement seat'},
-      {id:'brussels',   name:'Brussels',      coord:[4.35,50.85], cases:[41],                     sub:'EU Council · Euroclear'}
+      {id:'strasbourg', name:'Strasbourg', coord:[7.75,48.58], cases:[4,5,6,7,8], major:true, sub:'ECtHR', kind:'ECtHR'},
+      {id:'paris',      name:'Paris',      coord:[2.35,48.85], cases:[24,30],     major:true, sub:'PCA seat · Cour de cassation', kind:'CdC'},
+      {id:'stockholm',  name:'Stockholm',  coord:[18.06,59.33], cases:[18,19],   major:true, sub:'SCC Arbitration', kind:'SCC'},
+      {id:'london',     name:'London',     coord:[-0.13,51.51], cases:[29], sub:'UK High Court', kind:'UK'},
+      {id:'helsinki',   name:'Helsinki',   coord:[24.94,60.17], cases:[39], sub:'Helsinki District Court · enforcement', kind:'FI'},
+      {id:'vilnius',    name:'Vilnius',    coord:[25.28,54.69], cases:[40], sub:'LT universal jurisdiction', kind:'LT'},
+      {id:'geneva',     name:'Geneva',     coord:[6.14,46.20], cases:[25,26], sub:'PCA seat · Crimea petrol', kind:'PCA'},
+      {id:'zurich',     name:'Zürich',     coord:[8.54,47.37], cases:[20], sub:'ICC arb seat', kind:'ICC arb'},
+      {id:'frankfurt',  name:'Frankfurt',  coord:[8.68,50.11], cases:[],   sub:'OLG Frankfurt', kind:'DE'},
+      {id:'hamburg',    name:'Hamburg',    coord:[9.99,53.55], cases:[16], sub:'ITLOS', kind:'ITLOS'},
+      {id:'vienna',     name:'Vienna',     coord:[16.37,48.21], cases:[],  sub:'enforcement seat', kind:'AT'},
+      {id:'brussels',   name:'Brussels',   coord:[4.35,50.85], cases:[41], sub:'EU Council · Euroclear', kind:'EU'}
     ];
-
     const HARMS = [
-      {id:'crimea',     name:'Crimea',            coord:[34.0,45.0], related:[4,21,22,23,24,25,26,27,28,29,30]},
-      {id:'donbas',     name:'Donbas',            coord:[37.8,48.0], related:[5,7]},
-      {id:'mariupol',   name:'Mariupol',          coord:[37.55,47.10], related:[5,9]},
-      {id:'kerch',      name:'Kerch Strait',      coord:[36.50,45.30], related:[6,16]},
-      {id:'mh17',       name:'MH17 (Hrabove)',    coord:[38.65,48.13], related:[5,17,33,34]},
-      {id:'bucha',      name:'Bucha',             coord:[30.22,50.55], related:[9,10,11]},
-      {id:'kakhovka',   name:'Kakhovka HPP',      coord:[33.37,46.78], related:[32]},
-      {id:'zaporizhzhia',name:'Zaporizhzhia NPP', coord:[34.59,47.51], related:[31]}
+      {id:'crimea',     name:'Crimea',          coord:[34.0,45.0], related:[4,21,22,23,24,25,26,27,28,29,30]},
+      {id:'donbas',     name:'Donbas',          coord:[37.8,48.0], related:[5,7]},
+      {id:'mariupol',   name:'Mariupol',        coord:[37.55,47.10], related:[5,9]},
+      {id:'kerch',      name:'Kerch Strait',    coord:[36.50,45.30], related:[6,16]},
+      {id:'mh17',       name:'MH17 (Hrabove)',  coord:[38.65,48.13], related:[5,17,33,34]},
+      {id:'bucha',      name:'Bucha',           coord:[30.22,50.55], related:[9,10,11]},
+      {id:'kakhovka',   name:'Kakhovka HPP',    coord:[33.37,46.78], related:[32]},
+      {id:'zaporizhzhia',name:'Zaporizhzhia NPP',coord:[34.59,47.51], related:[31]}
     ];
 
-    // ── Theme catalog (mirrors Subway lines) ──
     const THEMES = {
       'all':      {cases: window.CASES.map(c => c.fol)},
       'crimea':   {cases:[4,21,22,23,24,25,26,27,28,29,30,35,36,37,38]},
@@ -589,117 +569,231 @@
       'cbr':      {cases:[41]}
     };
 
-    // ── State ──
-    const state = {
-      theme:'all',
-      sel:null,        // {type:'forum'|'harm', id, hagueForum?}
-      sortAZ:false,
-      q:''
+    // ─────────────────────────────────────────
+    // RESOURCES — curated reading and viewing
+    // Icons: ▶ video · W wiki · § investigation · ⌘ web · ¶ document
+    // ─────────────────────────────────────────
+    const RES_FORUM = {
+      'ICJ': [
+        {label:'ICJ official site', pub:'icj-cij.org', url:'https://www.icj-cij.org', kind:'web', icon:'⌘'},
+        {label:'ICJ multimedia archive — full hearings on video', pub:'icj-cij.org', url:'https://www.icj-cij.org/multimedia', kind:'video', icon:'▶'},
+        {label:'International Court of Justice', pub:'wikipedia', url:'https://en.wikipedia.org/wiki/International_Court_of_Justice', kind:'wiki', icon:'W'},
+        {label:'The Peace Palace — virtual tour', pub:'vredespaleis.nl', url:'https://www.vredespaleis.nl/', kind:'tour', icon:'⌘'}
+      ],
+      'ICC': [
+        {label:'ICC site — Situation in Ukraine', pub:'icc-cpi.int', url:'https://www.icc-cpi.int/situations/ukraine', kind:'web', icon:'⌘'},
+        {label:'Putin & Lvova-Belova arrest warrants', pub:'icc-cpi.int', url:'https://www.icc-cpi.int/news/situation-ukraine-icc-judges-issue-arrest-warrants-against-vladimir-vladimirovich-putin-and', kind:'document', icon:'¶'},
+        {label:'ICC YouTube — official channel', pub:'youtube', url:'https://www.youtube.com/@IntlCriminalCourt', kind:'video', icon:'▶'},
+        {label:'International Criminal Court', pub:'wikipedia', url:'https://en.wikipedia.org/wiki/International_Criminal_Court', kind:'wiki', icon:'W'}
+      ],
+      'PCA': [
+        {label:'Permanent Court of Arbitration', pub:'pca-cpa.org', url:'https://pca-cpa.org', kind:'web', icon:'⌘'},
+        {label:'PCA cases involving Russia', pub:'italaw.com', url:'https://www.italaw.com/search/site?keys=russia', kind:'document', icon:'¶'},
+        {label:'Permanent Court of Arbitration', pub:'wikipedia', url:'https://en.wikipedia.org/wiki/Permanent_Court_of_Arbitration', kind:'wiki', icon:'W'}
+      ],
+      'ECtHR': [
+        {label:'European Court of Human Rights', pub:'echr.coe.int', url:'https://www.echr.coe.int', kind:'web', icon:'⌘'},
+        {label:'Ukraine and the Netherlands v Russia — judgment', pub:'hudoc', url:'https://hudoc.echr.coe.int/fre?i=002-14493', kind:'document', icon:'¶'},
+        {label:'European Court of Human Rights', pub:'wikipedia', url:'https://en.wikipedia.org/wiki/European_Court_of_Human_Rights', kind:'wiki', icon:'W'},
+        {label:'Council of Europe — explainer videos', pub:'youtube', url:'https://www.youtube.com/@coe', kind:'video', icon:'▶'}
+      ],
+      'ITLOS': [
+        {label:'International Tribunal for the Law of the Sea', pub:'itlos.org', url:'https://www.itlos.org', kind:'web', icon:'⌘'},
+        {label:'Detention of Ukrainian Naval Vessels — case page', pub:'itlos.org', url:'https://www.itlos.org/en/main/cases/list-of-cases/case-concerning-the-detention-of-three-ukrainian-naval-vessels-ukraine-v-russian-federation-provisional-measures/', kind:'document', icon:'¶'},
+        {label:'ITLOS', pub:'wikipedia', url:'https://en.wikipedia.org/wiki/International_Tribunal_for_the_Law_of_the_Sea', kind:'wiki', icon:'W'}
+      ],
+      'ICAO': [
+        {label:'ICAO Council MH17 vote', pub:'icao.int', url:'https://www.icao.int/news/icao-council-vote-flight-mh17-case', kind:'document', icon:'¶'},
+        {label:'International Civil Aviation Organization', pub:'wikipedia', url:'https://en.wikipedia.org/wiki/International_Civil_Aviation_Organization', kind:'wiki', icon:'W'}
+      ],
+      'SCC': [
+        {label:'SCC Arbitration Institute', pub:'sccarbitrationinstitute.se', url:'https://sccarbitrationinstitute.se', kind:'web', icon:'⌘'},
+        {label:'SCC Stockholm', pub:'wikipedia', url:'https://en.wikipedia.org/wiki/SCC_Arbitration_Institute', kind:'wiki', icon:'W'}
+      ],
+      'HR': [
+        {label:'Hoge Raad (Dutch Supreme Court)', pub:'hogeraad.nl', url:'https://www.hogeraad.nl', kind:'web', icon:'⌘'},
+        {label:'Naftogaz v Russia — Hoge Raad ruling', pub:'rechtspraak.nl', url:'https://uitspraken.rechtspraak.nl/details?id=ECLI%3ANL%3AHR%3A2024%3A1810', kind:'document', icon:'¶'},
+        {label:'Supreme Court of the Netherlands', pub:'wikipedia', url:'https://en.wikipedia.org/wiki/Supreme_Court_of_the_Netherlands', kind:'wiki', icon:'W'}
+      ],
+      'Schiphol': [
+        {label:'MH17 Trial — official site', pub:'courtmh17.com', url:'https://www.courtmh17.com', kind:'web', icon:'⌘'},
+        {label:'Verdict — 17 November 2022 (livestream archive)', pub:'courtmh17.com', url:'https://www.courtmh17.com/en/judgement-and-livestream/verdict-17-november-2022.htm', kind:'video', icon:'▶'},
+        {label:'Dutch Public Prosecution Service — MH17', pub:'prosecutionservice.nl', url:'https://www.prosecutionservice.nl/topics/mh17-plane-crash', kind:'web', icon:'⌘'}
+      ],
+      'CdC': [
+        {label:'Cour de cassation — Oschadbank arrêt', pub:'courdecassation.fr', url:'https://www.courdecassation.fr', kind:'web', icon:'⌘'},
+        {label:'Cour de cassation', pub:'wikipedia', url:'https://en.wikipedia.org/wiki/Court_of_Cassation_(France)', kind:'wiki', icon:'W'}
+      ],
+      'UK': [
+        {label:'UK Supreme Court', pub:'supremecourt.uk', url:'https://supremecourt.uk', kind:'web', icon:'⌘'},
+        {label:'UniCredit v RusChemAlliance [2024] UKSC 30', pub:'supremecourt.uk', url:'https://supremecourt.uk/cases/judgments/uksc-2024-0015', kind:'document', icon:'¶'}
+      ],
+      'FI': [
+        {label:'Petrovsky verdict — Finnish court', pub:'khpg.org', url:'https://khpg.org/en/1608814496', kind:'document', icon:'¶'},
+        {label:'Russian ultranationalist sentenced to life', pub:'moscow times', url:'https://www.themoscowtimes.com/2025/03/14/finnish-court-sentences-russian-ultranationalist-to-life-in-prison-for-war-crimes-in-ukraine-a88362', kind:'investigation', icon:'§'}
+      ],
+      'LT': [
+        {label:'Ukraine extradites Russian soldier to Lithuania', pub:'moscow times', url:'https://www.themoscowtimes.com/2025/10/31/in-first-ukraine-extradites-captured-russian-soldier-for-war-crimes-trial-a91012', kind:'investigation', icon:'§'},
+        {label:'Ukraine Prosecutor General — extradition note', pub:'gp.gov.ua', url:'https://gp.gov.ua/en/posts/istoricna-podiya-dlya-pravosuddya-ukrayina-peredala-litvi-osobu-pidozryuvanu-u-vojennix-zlocinax', kind:'web', icon:'⌘'}
+      ],
+      'DE': [
+        {label:'Generalbundesanwalt', pub:'generalbundesanwalt.de', url:'https://www.generalbundesanwalt.de', kind:'web', icon:'⌘'},
+        {label:'Russian-spy indictment — 28 May 2025', pub:'generalbundesanwalt.de', url:'https://www.generalbundesanwalt.de/SharedDocs/Pressemitteilungen/EN/2025/Pressemitteilung-vom-28-05-2025-2-engl.html', kind:'document', icon:'¶'}
+      ],
+      'ICC arb': [
+        {label:'Naftogaz wins $1.37bn — ICC arbitration', pub:'naftogaz.com', url:'https://www.naftogaz.com/en/news/naftogaz-ostatochno-vygrav-u-verhovnomu-sudi-shveytsarii-protses-proty-gazpromu-na-1-4-mlrd', kind:'document', icon:'¶'},
+        {label:'Brattle — Naftogaz $1.37bn ICC win', pub:'brattle.com', url:'https://www.brattle.com/insights-events/news/brattle-client-naftogaz-awarded-1-37-billion-in-icc-arbitration-in-transit-dispute-with-gazprom/', kind:'investigation', icon:'§'}
+      ],
+      'AT': [
+        {label:'Naftogaz seizes Russian property in Vienna', pub:'rigzone', url:'https://www.rigzone.com/news/naftogaz_wins_court_order_to_enforce_crimea_claims_in_austria-12-aug-2025-181440-article/', kind:'investigation', icon:'§'}
+      ],
+      'EU': [
+        {label:'Confiscation of Russian central bank funds', pub:'wikipedia', url:'https://en.wikipedia.org/wiki/Confiscation_of_Russian_central_bank_funds', kind:'wiki', icon:'W'},
+        {label:'EU agrees indefinite freeze', pub:'al jazeera', url:'https://www.aljazeera.com/news/2025/12/12/eu-looks-set-to-indefinitely-freeze-hundreds-of-billions-in-russian-funds', kind:'investigation', icon:'§'}
+      ]
     };
 
-    // For the Hague: which sub-forum is currently showing in the panel
+    const RES_HARM = {
+      'crimea': [
+        {label:'Annexation of Crimea by the Russian Federation', pub:'wikipedia', url:'https://en.wikipedia.org/wiki/Annexation_of_Crimea_by_the_Russian_Federation', kind:'wiki', icon:'W'},
+        {label:'Bellingcat — Crimea coverage', pub:'bellingcat.com', url:'https://www.bellingcat.com/tag/crimea/', kind:'investigation', icon:'§'},
+        {label:'Frontline: Putin\'s Way (PBS)', pub:'pbs.org', url:'https://www.pbs.org/wgbh/frontline/documentary/putins-way/', kind:'video', icon:'▶'}
+      ],
+      'donbas': [
+        {label:'War in Donbas (2014–2022)', pub:'wikipedia', url:'https://en.wikipedia.org/wiki/War_in_Donbas', kind:'wiki', icon:'W'}
+      ],
+      'mariupol': [
+        {label:'Siege of Mariupol', pub:'wikipedia', url:'https://en.wikipedia.org/wiki/Siege_of_Mariupol', kind:'wiki', icon:'W'},
+        {label:'20 Days in Mariupol — full documentary (PBS)', pub:'pbs.org', url:'https://www.pbs.org/wgbh/frontline/documentary/20-days-in-mariupol/', kind:'video', icon:'▶'},
+        {label:'AP investigation: Mariupol Drama Theatre', pub:'apnews.com', url:'https://apnews.com/article/Russia-ukraine-war-mariupol-theater-c321a196fbd568899841b506afcac7a1', kind:'investigation', icon:'§'}
+      ],
+      'kerch': [
+        {label:'2018 Kerch Strait incident', pub:'wikipedia', url:'https://en.wikipedia.org/wiki/2018_Kerch_Strait_incident', kind:'wiki', icon:'W'}
+      ],
+      'mh17': [
+        {label:'Malaysia Airlines Flight 17', pub:'wikipedia', url:'https://en.wikipedia.org/wiki/Malaysia_Airlines_Flight_17', kind:'wiki', icon:'W'},
+        {label:'Bellingcat — MH17 investigations', pub:'bellingcat.com', url:'https://www.bellingcat.com/tag/mh17/', kind:'investigation', icon:'§'},
+        {label:'MH17 trial — official livestream', pub:'courtmh17.com', url:'https://www.courtmh17.com', kind:'video', icon:'▶'},
+        {label:'JIT 2023 press conference — leads exhausted', pub:'politie.nl', url:'https://www.politie.nl/en/information/transcript-of-press-conference-jit-mh17-on-8-february-2023.html', kind:'document', icon:'¶'}
+      ],
+      'bucha': [
+        {label:'Bucha massacre', pub:'wikipedia', url:'https://en.wikipedia.org/wiki/Bucha_massacre', kind:'wiki', icon:'W'},
+        {label:'New York Times — How Russian Soldiers Ran a Bunker in Bucha', pub:'nytimes.com', url:'https://www.nytimes.com/2022/12/22/world/europe/russia-ukraine-bucha-killings-evidence.html', kind:'investigation', icon:'§'}
+      ],
+      'kakhovka': [
+        {label:'Destruction of the Kakhovka Dam', pub:'wikipedia', url:'https://en.wikipedia.org/wiki/Destruction_of_the_Kakhovka_Dam', kind:'wiki', icon:'W'},
+        {label:'NYT investigation: Why the dam fell', pub:'nytimes.com', url:'https://www.nytimes.com/interactive/2023/06/16/world/europe/ukraine-kakhovka-dam-collapse.html', kind:'investigation', icon:'§'}
+      ],
+      'zaporizhzhia': [
+        {label:'Zaporizhzhia NPP crisis', pub:'wikipedia', url:'https://en.wikipedia.org/wiki/Zaporizhzhia_Nuclear_Power_Plant_crisis', kind:'wiki', icon:'W'},
+        {label:'IAEA — Zaporizhzhia situation', pub:'iaea.org', url:'https://www.iaea.org/zaporizhzhya', kind:'web', icon:'⌘'}
+      ]
+    };
+
+    // Optional case-specific resources (high-impact only)
+    const RES_CASE = {
+      1: [{label:'ICJ — Case 182 (Genocide) page', pub:'icj-cij.org', url:'https://www.icj-cij.org/case/182', kind:'document', icon:'¶'},
+          {label:'ICJ — provisional measures, 16 March 2022', pub:'icj-cij.org', url:'https://www.icj-cij.org/sites/default/files/case-related/182/182-20220316-ord-01-00-en.pdf', kind:'document', icon:'¶'}],
+      10: [{label:'ICC — arrest warrant against Putin', pub:'icc-cpi.int', url:'https://www.icc-cpi.int/news/situation-ukraine-icc-judges-issue-arrest-warrants-against-vladimir-vladimirovich-putin-and', kind:'document', icon:'¶'}],
+      17: [{label:'ICAO Council vote on MH17 — 12 May 2025', pub:'icao.int', url:'https://www.icao.int/news/icao-council-vote-flight-mh17-case', kind:'document', icon:'¶'}],
+      21: [{label:'Naftogaz Crimea award — $5bn', pub:'naftogaz.com', url:'https://www.naftogaz.com/en/news/russia-pay-5bn-compensation-naftogaz-crimea', kind:'investigation', icon:'§'}],
+      33: [{label:'MH17 Trial — verdict (17 November 2022)', pub:'courtmh17.com', url:'https://www.courtmh17.com/en/judgement-and-livestream/verdict-17-november-2022.htm', kind:'video', icon:'▶'}],
+      41: [{label:'EU CBR freeze — Wikipedia', pub:'wikipedia', url:'https://en.wikipedia.org/wiki/Confiscation_of_Russian_central_bank_funds', kind:'wiki', icon:'W'}]
+    };
+
+    const resourcesFor = (sel) => {
+      if (sel?.type === 'forum'){
+        const f = FORUMS.find(x => x.id === sel.id);
+        if (f.hub){
+          // Hague: combine resources from selected sub-forum or all 5
+          const sub = sel.hagueForum;
+          if (sub && sub !== 'all'){
+            const fg = f.forumGroups[sub];
+            return RES_FORUM[fg.kind] || [];
+          }
+          // all: pick top from each
+          return ['ICJ','ICC','PCA','HR','Schiphol'].flatMap(k => (RES_FORUM[k]||[]).slice(0,1));
+        }
+        return RES_FORUM[f.kind] || [];
+      }
+      if (sel?.type === 'harm'){
+        return RES_HARM[sel.id] || [];
+      }
+      return [];
+    };
+
+    // ── State ──
+    const state = { theme:'all', sel:null, sortAZ:false, q:'' };
     const allHagueCases = () => {
       const h = FORUMS.find(f => f.id === 'hague');
-      const all = [];
-      Object.values(h.forumGroups).forEach(arr => all.push(...arr));
+      const all = []; Object.values(h.forumGroups).forEach(g => all.push(...g.cases));
       return all;
     };
-
-    // Compute case count for a forum based on current theme filter
     const themeCases = () => new Set(THEMES[state.theme].cases);
-
     const forumCases = (f) => {
       const tc = themeCases();
-      if (f.hub) {
-        return allHagueCases().filter(id => tc.has(id));
-      }
+      if (f.hub) return allHagueCases().filter(id => tc.has(id));
       return (f.cases || []).filter(id => tc.has(id));
     };
-
     const harmCases = (h) => (h.related || []).filter(id => themeCases().has(id));
 
-    // ── Render the map pins ──
-    const fGroup = svg.append('g').attr('class','forums');
-    const hGroup = svg.append('g').attr('class','harms');
+    // ── Map pin groups ──
+    const fGroup = zoomG.append('g').attr('class','forums');
+    const hGroup = zoomG.append('g').attr('class','harms');
+    const connG  = zoomG.append('g').attr('class','conns');
 
     const renderForumPins = () => {
       fGroup.selectAll('*').remove();
       FORUMS.forEach(f => {
         const [x,y] = proj(f.coord);
-        const cases = forumCases(f);
-        const ct = cases.length;
+        const cases = forumCases(f); const ct = cases.length;
 
-        if (f.hub) {
-          // Hague megahub: central pin + satellites
+        if (f.hub){
           const g = fGroup.append('g').attr('class','hague-hub').attr('data-id',f.id);
           g.classed('selected', state.sel?.type === 'forum' && state.sel.id === f.id);
-          // satellites positioned in a hex around center
           const subs = Object.keys(f.forumGroups);
           const R = 18;
+          const isSel = state.sel?.type === 'forum' && state.sel.id === f.id;
           subs.forEach((s, i) => {
             const ang = (Math.PI*2 / subs.length) * i - Math.PI/2;
             const sx = x + Math.cos(ang)*R, sy = y + Math.sin(ang)*R;
             g.append('line').attr('class','spoke').attr('x1',x).attr('y1',y).attr('x2',sx).attr('y2',sy);
-            g.append('circle').attr('class','satellite').attr('cx',sx).attr('cy',sy).attr('r',3);
-            // label for satellite (only when selected)
-            if (state.sel?.type === 'forum' && state.sel.id === f.id){
+            const isActive = isSel && state.sel.hagueForum === s;
+            g.append('circle').attr('class','satellite' + (isActive?' active':'')).attr('cx',sx).attr('cy',sy).attr('r',3);
+            if (isSel){
               const lblOff = 7;
               const labelX = sx + Math.cos(ang)*lblOff;
               const labelY = sy + Math.sin(ang)*lblOff + 3;
-              g.append('text')
-                .attr('x', labelX).attr('y', labelY)
-                .attr('class','label satellite')
-                .attr('text-anchor', Math.cos(ang) >= 0 ? 'start' : 'end')
-                .text(s);
+              g.append('text').attr('x',labelX).attr('y',labelY).attr('class','label satellite').attr('text-anchor', Math.cos(ang) >= 0 ? 'start' : 'end').text(s);
             }
           });
-          // central pin
           g.append('circle').attr('class','center').attr('cx',x).attr('cy',y).attr('r', ct ? 14 : 8);
           if (ct){
-            g.append('text')
-              .attr('x',x).attr('y',y+4).attr('text-anchor','middle')
-              .style('fill','var(--paper)').style('font-family','var(--mono)').style('font-size','11px').style('font-weight','500').style('pointer-events','none')
-              .text(ct);
+            g.append('text').attr('x',x).attr('y',y+4).attr('text-anchor','middle')
+              .style('fill','var(--paper)').style('font-family','var(--mono)').style('font-size','11px').style('font-weight','500').style('pointer-events','none').text(ct);
           }
-          g.append('text')
-            .attr('x', x).attr('y', y - R - 8).attr('text-anchor','middle')
-            .attr('class','label major')
-            .text('The Hague');
-          g.append('text')
-            .attr('x', x).attr('y', y + R + 18).attr('text-anchor','middle')
-            .attr('class','label')
-            .style('font-size','10px').style('font-style','italic').style('fill','var(--ink-soft)')
-            .text('5 forums');
+          g.append('text').attr('x', x).attr('y', y - R - 8).attr('text-anchor','middle').attr('class','label major').text('The Hague');
+          g.append('text').attr('x', x).attr('y', y + R + 18).attr('text-anchor','middle').attr('class','label')
+            .style('font-size','10px').style('font-style','italic').style('fill','var(--ink-soft)').text('5 forums');
 
           g.on('mouseenter', e => showFTip(e, f, ct))
            .on('mousemove', moveTip)
            .on('mouseleave', hideTip)
            .on('click', () => selectForum(f));
         } else {
-          // Regular pin
           const r = ct ? Math.max(5, Math.min(20, 4 + Math.sqrt(ct) * 4)) : 4;
           const g = fGroup.append('g').attr('class','forum-pin').attr('data-id',f.id);
           const isSel = state.sel?.type === 'forum' && state.sel.id === f.id;
           const isDim = state.sel && !isSel && !(state.sel.type === 'harm');
 
-          g.append('circle')
-            .attr('cx',x).attr('cy',y).attr('r',r)
-            .attr('class','pin-forum')
-            .classed('selected', isSel)
-            .classed('dim', isDim || ct === 0);
-
+          g.append('circle').attr('cx',x).attr('cy',y).attr('r',r).attr('class','pin-forum')
+            .classed('selected', isSel).classed('dim', isDim || ct === 0);
           if (ct >= 5){
-            g.append('text')
-              .attr('x',x).attr('y',y+4).attr('text-anchor','middle')
-              .style('fill','var(--paper)').style('font-family','var(--mono)')
-              .style('font-size','11px').style('font-weight','500').style('pointer-events','none')
-              .text(ct);
+            g.append('text').attr('x',x).attr('y',y+4).attr('text-anchor','middle')
+              .style('fill','var(--paper)').style('font-family','var(--mono)').style('font-size','11px').style('font-weight','500').style('pointer-events','none').text(ct);
           }
-          g.append('text')
-            .attr('x', x + r + 5).attr('y', y + 3)
-            .attr('class', `label ${f.major ? 'major' : ''}`)
-            .classed('dim', isDim || ct === 0)
-            .text(f.name);
+          g.append('text').attr('x', x + r + 5).attr('y', y + 3).attr('class', `label ${f.major ? 'major' : ''}`)
+            .classed('dim', isDim || ct === 0).text(f.name);
 
           g.on('mouseenter', e => showFTip(e, f, ct))
            .on('mousemove', moveTip)
@@ -716,20 +810,13 @@
         const ct = harmCases(h).length;
         const isSel = state.sel?.type === 'harm' && state.sel.id === h.id;
         const isDim = state.sel && !isSel && !(state.sel.type === 'forum');
-
         const g = hGroup.append('g').attr('data-id',h.id);
-        g.append('circle').attr('class','harm-ring')
-          .attr('cx',x).attr('cy',y).attr('r',7)
+        g.append('circle').attr('class','harm-ring').attr('cx',x).attr('cy',y).attr('r',7)
           .classed('selected', isSel).classed('dim', isDim || ct === 0);
-        g.append('circle').attr('class','pin-harm')
-          .attr('cx',x).attr('cy',y).attr('r', isSel ? 3.5 : 2.5)
+        g.append('circle').attr('class','pin-harm').attr('cx',x).attr('cy',y).attr('r', isSel ? 3.5 : 2.5)
           .classed('selected', isSel).classed('dim', isDim || ct === 0);
-        g.append('text')
-          .attr('x', x + 12).attr('y', y - 4)
-          .attr('class','label harm')
-          .classed('dim', isDim || ct === 0)
-          .text(h.name.toUpperCase());
-
+        g.append('text').attr('x', x + 12).attr('y', y - 4).attr('class','label harm')
+          .classed('dim', isDim || ct === 0).text(h.name.toUpperCase());
         g.on('mouseenter', e => showHTip(e, h, ct))
          .on('mousemove', moveTip)
          .on('mouseleave', hideTip)
@@ -737,9 +824,41 @@
       });
     };
 
-    // ── Cities sidebar ──
+    // Connection arcs from selected city to its related places
+    const renderConnections = () => {
+      connG.selectAll('*').remove();
+      if (!state.sel) return;
+      if (state.sel.type === 'forum'){
+        const f = FORUMS.find(x => x.id === state.sel.id);
+        const cases = forumCases(f);
+        const fxy = proj(f.coord);
+        // For each related harm site that matches the cases shown, draw an arc
+        HARMS.forEach(h => {
+          const overlap = (h.related||[]).filter(id => cases.includes(id));
+          if (!overlap.length) return;
+          const [hx, hy] = proj(h.coord);
+          const mx = (fxy[0] + hx) / 2;
+          const my = (fxy[1] + hy) / 2 - 30; // slight bow
+          connG.append('path').attr('class','conn').attr('d', `M ${fxy[0]} ${fxy[1]} Q ${mx} ${my} ${hx} ${hy}`);
+        });
+      } else if (state.sel.type === 'harm'){
+        const h = HARMS.find(x => x.id === state.sel.id);
+        const cases = harmCases(h);
+        const hxy = proj(h.coord);
+        FORUMS.forEach(f => {
+          const fc = forumCases(f);
+          const overlap = fc.filter(id => cases.includes(id));
+          if (!overlap.length) return;
+          const [fx, fy] = proj(f.coord);
+          const mx = (fx + hxy[0]) / 2;
+          const my = (fy + hxy[1]) / 2 - 30;
+          connG.append('path').attr('class','conn').attr('d', `M ${fx} ${fy} Q ${mx} ${my} ${hxy[0]} ${hxy[1]}`);
+        });
+      }
+    };
+
+    // ── City list ──
     const renderCityList = () => {
-      const tc = themeCases();
       const allCities = [
         ...FORUMS.map(f => ({...f, type:'forum', count: forumCases(f).length})),
         ...HARMS.map(h => ({...h, type:'harm', count: harmCases(h).length}))
@@ -751,7 +870,6 @@
       const sorted = state.sortAZ
         ? filtered.sort((a,b) => a.name.localeCompare(b.name))
         : filtered.sort((a,b) => b.count - a.count || a.name.localeCompare(b.name));
-
       const wrap = document.getElementById('city-list');
       wrap.innerHTML = sorted.map(c => {
         const sel = state.sel?.type === c.type && state.sel.id === c.id;
@@ -760,30 +878,21 @@
           ? `${(c.related||[]).length} concerned${state.theme!=='all' ? ` · ${c.count} in theme` : ''}`
           : (c.sub || '');
         return `
-          <div class="city-row ${c.type==='harm'?'harm':''} ${sel?'selected':''} ${dim?'dim':''}"
-               data-type="${c.type}" data-id="${c.id}">
-            <div>
-              <div class="nm">${c.type==='harm'? '<em>'+c.name+'</em>' : c.name}</div>
-              <span class="sub">${subText}</span>
-            </div>
+          <div class="city-row ${c.type==='harm'?'harm':''} ${sel?'selected':''} ${dim?'dim':''}" data-type="${c.type}" data-id="${c.id}">
+            <div><div class="nm">${c.type==='harm'? '<em>'+c.name+'</em>' : c.name}</div><span class="sub">${subText}</span></div>
             <div class="ct">${c.count > 0 ? c.count : '—'}</div>
           </div>`;
       }).join('');
       wrap.querySelectorAll('.city-row').forEach(r => {
         r.addEventListener('click', () => {
           const id = r.dataset.id;
-          if (r.dataset.type === 'forum') {
-            const f = FORUMS.find(x => x.id === id);
-            selectForum(f);
-          } else {
-            const h = HARMS.find(x => x.id === id);
-            selectHarm(h);
-          }
+          if (r.dataset.type === 'forum') selectForum(FORUMS.find(x => x.id === id));
+          else selectHarm(HARMS.find(x => x.id === id));
         });
       });
     };
 
-    // ── Theme filter chips ──
+    // ── Theme chips ──
     document.querySelectorAll('.theme-chip').forEach(b => {
       b.addEventListener('click', () => {
         document.querySelectorAll('.theme-chip').forEach(x => x.classList.toggle('on', x===b));
@@ -791,8 +900,6 @@
         renderAll();
       });
     });
-
-    // ── Sort toggle ──
     document.getElementById('sort-toggle').addEventListener('click', () => {
       state.sortAZ = !state.sortAZ;
       const t = document.getElementById('sort-toggle');
@@ -800,35 +907,30 @@
       t.classList.toggle('on', state.sortAZ);
       renderCityList();
     });
+    document.getElementById('q').addEventListener('input', e => { state.q = e.target.value.trim(); renderCityList(); });
 
-    // ── Search ──
-    document.getElementById('q').addEventListener('input', e => {
-      state.q = e.target.value.trim();
-      renderCityList();
-    });
-
-    // ── Reset / clear ──
     const reset = () => {
-      state.theme = 'all'; state.sel = null; state.q = '';
+      state.theme='all'; state.sel=null; state.q='';
       document.getElementById('q').value = '';
       document.querySelectorAll('.theme-chip').forEach((c,i) => c.classList.toggle('on', i===0));
+      flyReset();
       renderAll();
     };
     document.getElementById('reset').addEventListener('click', reset);
-    document.getElementById('clear-sel').addEventListener('click', () => {
-      state.sel = null;
-      renderAll();
-    });
+    document.getElementById('clear-sel').addEventListener('click', () => { state.sel = null; flyReset(); renderAll(); });
 
-    // ── Selection actions ──
     const selectForum = (f) => {
       const isSame = state.sel?.type === 'forum' && state.sel.id === f.id;
       state.sel = isSame ? null : {type:'forum', id:f.id, hagueForum:'all'};
+      if (state.sel) flyTo(...proj(f.coord), f.hub ? 2.6 : 2.2);
+      else flyReset();
       renderAll();
     };
     const selectHarm = (h) => {
       const isSame = state.sel?.type === 'harm' && state.sel.id === h.id;
       state.sel = isSame ? null : {type:'harm', id:h.id};
+      if (state.sel) flyTo(...proj(h.coord), 2.4);
+      else flyReset();
       renderAll();
     };
 
@@ -847,8 +949,7 @@
     const moveTip = e => {
       const x = (e.clientX || (e.touches && e.touches[0].clientX) || 0) + 14;
       const y = (e.clientY || (e.touches && e.touches[0].clientY) || 0) + 14;
-      tt.style.left = x + 'px';
-      tt.style.top  = y + 'px';
+      tt.style.left = x + 'px'; tt.style.top  = y + 'px';
     };
     const hideTip = () => { tt.style.display = 'none' };
 
@@ -857,7 +958,7 @@
       const dot = c.status === 'enforcing' ? 'enforcing' : c.status === 'decided' ? 'decided' : 'pending';
       const nm = c.name.replace(/ v /g,' <em>v</em> ');
       return `
-        <div class="case-row">
+        <div class="case-row" data-fol="${c.fol}">
           <div class="ttl">${nm}</div>
           <div class="ital">${c.italic}</div>
           <div class="meta-line">
@@ -868,17 +969,31 @@
         </div>`;
     };
 
+    const resourcesHTML = (resources) => {
+      if (!resources?.length) return '';
+      return `
+        <div class="resources">
+          <h3><em>Read</em> &amp; <em>watch</em></h3>
+          <div class="ph">${resources.length} curated source${resources.length===1?'':'s'}</div>
+          ${resources.map(r => `
+            <a class="res-row" href="${r.url}" target="_blank" rel="noopener">
+              <span class="icon ${r.kind}">${r.icon}</span>
+              <div class="body"><div class="lbl">${r.label}</div><div class="pub">${r.pub} · ${r.kind}</div></div>
+              <span class="ext">↗</span>
+            </a>`).join('')}
+        </div>`;
+    };
+
     const renderPanel = () => {
       const panel = document.getElementById('panel');
       if (!state.sel){
-        // Default panel
         const total = THEMES[state.theme].cases.length;
         const themeName = state.theme === 'all' ? 'All' : state.theme.charAt(0).toUpperCase() + state.theme.slice(1);
         panel.innerHTML = `
           <div class="ph">${state.theme === 'all' ? 'all cases' : 'theme · ' + themeName}</div>
           <h2>${state.theme === 'all' ? 'Choose a <em>place</em>' : `${themeName} <em>cluster</em>`}</h2>
           <p class="meta">${state.theme === 'all'
-            ? 'Click any city in the list, any pin on the map, or any theme above. The right panel will show the cases connected to your selection.'
+            ? 'Click any city or pin. The right panel will show the cases connected to your selection — with curated reading and viewing.'
             : `${total} case${total===1?'':'s'} in this theme. Click any city or harm site to drill in.`}</p>
           <div class="stat-strip">
             <div class="stat"><div class="v">${total}</div><div class="l">${state.theme==='all'?'cases':'in theme'}</div></div>
@@ -897,23 +1012,22 @@
         const f = FORUMS.find(x => x.id === state.sel.id);
         const tc = themeCases();
         if (f.hub){
-          // Hague megahub: tabs for the 5 sub-forums
           const subForums = Object.entries(f.forumGroups);
           const cur = state.sel.hagueForum || 'all';
-          const allCases = subForums.flatMap(([_, ids]) => ids).filter(id => tc.has(id));
+          const allCases = subForums.flatMap(([_, g]) => g.cases).filter(id => tc.has(id));
           const showCases = (cur === 'all'
             ? allCases
-            : (f.forumGroups[cur] || []).filter(id => tc.has(id)))
-            .map(id => window.CASES.find(c => c.fol === id)).filter(Boolean);
+            : (f.forumGroups[cur].cases || []).filter(id => tc.has(id))
+          ).map(id => window.CASES.find(c => c.fol === id)).filter(Boolean);
 
           panel.innerHTML = `
             <div class="ph">megahub</div>
             <h2>The <em>Hague</em></h2>
-            <p class="meta">Five separate forums share the same city — the World Court, the Criminal Court, the Permanent Court of Arbitration, the Dutch Supreme Court, and the Schiphol criminal bench. Filter below.</p>
+            <p class="meta">Five forums share the same city — the World Court, the Criminal Court, the PCA, the Dutch Supreme Court, and the Schiphol criminal bench.</p>
             <div class="forum-tabs">
               <button data-sub="all" class="${cur==='all'?'on':''}">All <span class="ct">${allCases.length}</span></button>
-              ${subForums.map(([k, ids]) => {
-                const filtered = ids.filter(id => tc.has(id));
+              ${subForums.map(([k, g]) => {
+                const filtered = g.cases.filter(id => tc.has(id));
                 return `<button data-sub="${k}" class="${cur===k?'on':''}">${k} <span class="ct">${filtered.length}</span></button>`;
               }).join('')}
             </div>
@@ -921,12 +1035,13 @@
               <div class="stat"><div class="v">${showCases.length}</div><div class="l">cases shown</div></div>
               <div class="stat"><div class="v">${showCases.filter(c => c.status === 'enforcing').length}</div><div class="l">enforcing</div></div>
             </div>
-            ${showCases.map(caseCard).join('')}`;
+            ${showCases.map(caseCard).join('')}
+            ${resourcesHTML(resourcesFor(state.sel))}`;
 
           panel.querySelectorAll('.forum-tabs button').forEach(b => {
             b.addEventListener('click', () => {
               state.sel.hagueForum = b.dataset.sub;
-              renderPanel();
+              renderAll();
             });
           });
         } else {
@@ -939,7 +1054,8 @@
               <div class="stat"><div class="v">${cases.length}</div><div class="l">cases</div></div>
               <div class="stat"><div class="v">${cases.filter(c => c.status==='enforcing').length}</div><div class="l">enforcing</div></div>
             </div>
-            ${cases.length ? cases.map(caseCard).join('') : '<p class="meta" style="color:var(--ink-faint);font-style:italic;padding:24px 0">No cases here under the current filter.</p>'}`;
+            ${cases.length ? cases.map(caseCard).join('') : '<p class="meta" style="color:var(--ink-faint);font-style:italic;padding:24px 0">No cases here under the current filter.</p>'}
+            ${resourcesHTML(resourcesFor(state.sel))}`;
         }
       } else if (state.sel.type === 'harm'){
         const h = HARMS.find(x => x.id === state.sel.id);
@@ -952,7 +1068,8 @@
             <div class="stat"><div class="v">${cases.length}</div><div class="l">cases</div></div>
             <div class="stat"><div class="v">${new Set(cases.map(c => window.forumBucket(c))).size}</div><div class="l">forums</div></div>
           </div>
-          ${cases.length ? cases.map(caseCard).join('') : '<p class="meta" style="color:var(--ink-faint);font-style:italic;padding:24px 0">No cases here under the current filter.</p>'}`;
+          ${cases.length ? cases.map(caseCard).join('') : '<p class="meta" style="color:var(--ink-faint);font-style:italic;padding:24px 0">No cases here under the current filter.</p>'}
+          ${resourcesHTML(resourcesFor(state.sel))}`;
       }
     };
 
@@ -960,7 +1077,7 @@
     const renderBreadcrumb = () => {
       const crumb = document.getElementById('crumb-text');
       const clear = document.getElementById('clear-sel');
-      const reset = document.getElementById('reset');
+      const resetBtn = document.getElementById('reset');
       const themeName = state.theme === 'all' ? 'All' : state.theme.charAt(0).toUpperCase() + state.theme.slice(1);
       let parts = [`<b>${state.theme === 'all' ? 'All themes' : themeName + ' theme'}</b>`];
       if (state.sel){
@@ -978,23 +1095,98 @@
       parts.push(`· <b>${total}</b> case${total===1?'':'s'}`);
       crumb.innerHTML = parts.join(' ');
       clear.style.display = state.sel ? 'inline' : 'none';
-      reset.classList.toggle('dim', state.theme === 'all' && !state.sel && !state.q);
+      resetBtn.classList.toggle('dim', state.theme === 'all' && !state.sel && !state.q);
+    };
+
+    // ── Hague magnification inset ──
+    const renderHagueInset = () => {
+      const insetSvg = d3.select('#hague-inset-svg');
+      insetSvg.selectAll('*').remove();
+      const cx = 115, cy = 80, R = 46;
+      const f = FORUMS.find(x => x.id === 'hague');
+      const subs = Object.keys(f.forumGroups);
+      const isSel = state.sel?.type === 'forum' && state.sel.id === 'hague';
+      const tc = themeCases();
+
+      // central hub
+      insetSvg.append('circle').attr('class','inset-center').attr('cx',cx).attr('cy',cy).attr('r',12);
+      insetSvg.append('text').attr('x',cx).attr('y',cy+4).attr('text-anchor','middle')
+        .style('fill','var(--paper)').style('font-family','var(--mono)').style('font-size','10px').style('font-weight','500').style('pointer-events','none')
+        .text('TH');
+
+      subs.forEach((s, i) => {
+        const ang = (Math.PI*2 / subs.length) * i - Math.PI/2;
+        const sx = cx + Math.cos(ang)*R, sy = cy + Math.sin(ang)*R;
+        const filtered = f.forumGroups[s].cases.filter(id => tc.has(id));
+        const isActive = isSel && state.sel.hagueForum === s;
+
+        insetSvg.append('line').attr('class','inset-spoke').attr('x1',cx).attr('y1',cy).attr('x2',sx).attr('y2',sy);
+        const sat = insetSvg.append('circle').attr('class','inset-sat'+(isActive?' active':'')).attr('cx',sx).attr('cy',sy).attr('r',8);
+        sat.style('cursor','pointer').on('click', () => {
+          if (!isSel){
+            state.sel = {type:'forum', id:'hague', hagueForum:s};
+            flyTo(...proj(f.coord), 2.6);
+          } else {
+            state.sel.hagueForum = s;
+          }
+          renderAll();
+        });
+
+        // count inside satellite
+        if (filtered.length > 0){
+          insetSvg.append('text').attr('x',sx).attr('y',sy+3).attr('text-anchor','middle')
+            .style('fill','var(--ink)').style('font-family','var(--mono)').style('font-size','9px').style('font-weight','500').style('pointer-events','none')
+            .text(filtered.length);
+        }
+
+        // label outside
+        const lblX = cx + Math.cos(ang)*(R+18);
+        const lblY = cy + Math.sin(ang)*(R+18) + 3;
+        insetSvg.append('text').attr('x',lblX).attr('y',lblY).attr('class','inset-label')
+          .attr('text-anchor', Math.cos(ang) > 0.2 ? 'start' : Math.cos(ang) < -0.2 ? 'end' : 'middle').text(s);
+      });
     };
 
     // ── Master render ──
     const renderAll = () => {
       renderForumPins();
       renderHarmPins();
+      renderConnections();
       renderCityList();
       renderPanel();
       renderBreadcrumb();
+      renderHagueInset();
     };
+
+    // ── Zoom & pan ──
+    const zoomBehavior = d3.zoom()
+      .scaleExtent([0.7, 6])
+      .translateExtent([[-200, -200], [W+200, H+200]])
+      .on('zoom', e => {
+        zoomG.attr('transform', e.transform);
+        document.getElementById('z-scale').textContent = e.transform.k.toFixed(1) + '×';
+        document.getElementById('z-in').disabled = e.transform.k >= 6;
+        document.getElementById('z-out').disabled = e.transform.k <= 0.7;
+      });
+    svg.call(zoomBehavior);
+
+    const flyTo = (x, y, scale=2.2) => {
+      const t = d3.zoomIdentity.translate(W/2 - x*scale, H/2 - y*scale).scale(scale);
+      svg.transition().duration(700).call(zoomBehavior.transform, t);
+    };
+    const flyReset = () => {
+      svg.transition().duration(600).call(zoomBehavior.transform, d3.zoomIdentity);
+    };
+
+    document.getElementById('z-in').addEventListener('click', () => svg.transition().duration(250).call(zoomBehavior.scaleBy, 1.5));
+    document.getElementById('z-out').addEventListener('click', () => svg.transition().duration(250).call(zoomBehavior.scaleBy, 1/1.5));
+    document.getElementById('z-reset').addEventListener('click', () => { state.sel = null; flyReset(); renderAll(); });
 
     // ── Keyboard ──
     document.addEventListener('keydown', e => {
       if (e.target === document.getElementById('q') && e.key !== 'Escape') return;
       if (e.key === 'Escape') {
-        if (state.sel){state.sel = null; renderAll(); return}
+        if (state.sel){state.sel = null; flyReset(); renderAll(); return}
         reset();
       }
       if (e.key === '/') {e.preventDefault(); document.getElementById('q').focus()}
@@ -1007,12 +1199,13 @@
         list[next].click();
         list[next].scrollIntoView({block:'nearest'});
       }
+      if (e.key === '+' || e.key === '='){document.getElementById('z-in').click()}
+      if (e.key === '-' || e.key === '_'){document.getElementById('z-out').click()}
     });
 
-    // Click on map background to clear selection
     svg.on('click', e => {
       if (e.target.tagName === 'svg' || e.target.classList.contains('land') || e.target.classList.contains('ukraine')) {
-        if (state.sel){ state.sel = null; renderAll(); }
+        if (state.sel){ state.sel = null; flyReset(); renderAll(); }
       }
     });
 
