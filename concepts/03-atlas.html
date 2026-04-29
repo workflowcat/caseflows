@@ -92,12 +92,14 @@
   .breadcrumb .clear-x:hover{color:var(--stamp);border-bottom-color:var(--stamp)}
 
   .atlas{
-    display:grid;grid-template-columns:240px 1fr 340px;gap:0;
-    border-bottom:1px solid var(--ink);min-height:680px;
+    display:grid;grid-template-columns:220px 1fr 320px;gap:0;
+    align-items:start;
+    border-bottom:1px solid var(--ink);
   }
+  .atlas > *{align-self:stretch}
 
   /* Cities sidebar */
-  .cities{border-right:1px solid var(--ink);background:var(--paper-soft);overflow-y:auto;max-height:80vh}
+  .cities{border-right:1px solid var(--ink);background:var(--paper-soft);overflow-y:auto;max-height:760px}
   .cities-head{
     padding:14px 18px 10px;border-bottom:1px solid var(--rule);
     font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-faint);
@@ -141,8 +143,11 @@
       radial-gradient(rgba(28,24,20,.012) 1px, transparent 1px);
     background-size: 4px 4px, 9px 9px;
     background-position: 0 0, 1px 2px;
-    border-right:1px solid var(--ink);padding:8px;min-height:600px;overflow:hidden;
+    border-right:1px solid var(--ink);padding:8px;
+    overflow:hidden;
+    align-self:start; /* don't stretch vertically — keeps inset overlaid */
   }
+  .map-stage{position:relative;width:100%}
   .map-svg{display:block;width:100%;height:auto;cursor:grab}
   .map-svg:active{cursor:grabbing}
   .land{fill:var(--paper-deep);stroke:var(--ink-soft);stroke-width:.5}
@@ -192,17 +197,15 @@
 
   /* ── Zoom controls (top-left of map, fixed) ── */
   .zoom-controls{
-    position:absolute;top:18px;left:18px;
+    position:absolute;top:14px;left:14px;
     display:flex;flex-direction:column;
     border:1px solid var(--ink);background:var(--paper);
-    z-index:8;
-    box-shadow:1px 1px 0 var(--ink);
+    z-index:8;box-shadow:1px 1px 0 var(--ink);
   }
   .zoom-controls button{
-    width:32px;height:32px;
-    display:grid;place-items:center;
+    width:30px;height:30px;display:grid;place-items:center;
     border:none;background:transparent;cursor:pointer;
-    font-family:var(--display);font-size:16px;color:var(--ink);
+    font-family:var(--display);font-size:15px;color:var(--ink);
     border-bottom:1px solid var(--rule);transition:background .12s;
   }
   .zoom-controls button:last-child{border-bottom:none}
@@ -210,33 +213,42 @@
   .zoom-controls button:disabled{opacity:.4;cursor:default}
   .zoom-controls .scale{
     font-family:var(--mono);font-size:9px;letter-spacing:.06em;color:var(--ink-faint);
-    border-bottom:1px solid var(--rule);padding:5px 0;text-align:center;text-transform:uppercase;
+    border-bottom:1px solid var(--rule);padding:4px 0;text-align:center;text-transform:uppercase;
   }
 
   /* ── Hague magnification inset ── */
   .hague-inset{
-    position:absolute;bottom:18px;left:18px;
-    width:230px;
+    position:absolute;
+    /* Anchored to bottom-LEFT of the SVG (which has aspect 11:7) — stays inside the map area */
+    left:14px;bottom:14px;
+    width:200px;
     border:1px solid var(--ink);
     background:var(--paper);
     box-shadow:2px 2px 0 var(--ink-soft);
-    z-index:7;
-    user-select:none;
+    z-index:7;user-select:none;
   }
   .hague-inset .head{
-    padding:8px 12px;
+    padding:7px 11px;
     border-bottom:1px solid var(--ink);
     font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink);
     display:flex;justify-content:space-between;align-items:baseline;background:var(--paper-deep);
   }
-  .hague-inset .head .title-text{font-family:var(--display);font-size:14px;font-style:italic;color:var(--ink);text-transform:none;letter-spacing:-.005em;font-variation-settings:"opsz" 24,"SOFT" 100}
-  .hague-inset .head .glass{color:var(--stamp);font-size:13px}
-  .hague-inset svg{display:block;width:100%;height:160px;background:var(--paper-soft)}
+  .hague-inset .head .title-text{font-family:var(--display);font-size:13px;font-style:italic;color:var(--ink);text-transform:none;letter-spacing:-.005em;font-variation-settings:"opsz" 24,"SOFT" 100}
+  .hague-inset .head .glass{color:var(--stamp);font-size:12px}
+  .hague-inset svg{display:block;width:100%;height:140px;background:var(--paper-soft)}
   .hague-inset .footer-strip{
-    padding:6px 12px;border-top:1px solid var(--rule);
-    font-family:var(--body);font-style:italic;font-size:11px;color:var(--ink-faint);line-height:1.3;
+    padding:5px 11px;border-top:1px solid var(--rule);
+    font-family:var(--body);font-style:italic;font-size:10.5px;color:var(--ink-faint);line-height:1.3;
   }
-  .hague-inset .footer-strip b{color:var(--ink);font-style:normal;font-family:var(--mono);font-size:10px;letter-spacing:.04em}
+  .hague-inset .footer-strip b{color:var(--ink);font-style:normal;font-family:var(--mono);font-size:9.5px;letter-spacing:.04em}
+  .hague-inset .toggle-btn{
+    position:absolute;top:5px;right:6px;
+    background:transparent;border:none;color:var(--ink-faint);font-family:var(--mono);font-size:11px;cursor:pointer;
+    padding:0 5px;line-height:1;
+  }
+  .hague-inset .toggle-btn:hover{color:var(--stamp)}
+  .hague-inset.collapsed svg,.hague-inset.collapsed .footer-strip{display:none}
+  .hague-inset.collapsed{width:auto}
   .inset-spoke{stroke:var(--ink-soft);stroke-width:1}
   .inset-center{fill:var(--sage);stroke:var(--ink);stroke-width:1.5}
   .inset-sat{fill:var(--paper);stroke:var(--ink);stroke-width:1.2;cursor:pointer;transition:fill .12s}
@@ -246,7 +258,7 @@
   .inset-count{font-family:var(--display);font-size:14px;font-style:italic;fill:var(--ink-soft);pointer-events:none;font-variation-settings:"opsz" 24,"SOFT" 100}
 
   /* Right panel */
-  .panel{padding:24px;overflow-y:auto;max-height:80vh;background:var(--paper)}
+  .panel{padding:24px;overflow-y:auto;max-height:760px;background:var(--paper)}
   .panel .ph{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-faint);font-weight:500;margin:0 0 10px}
   .panel h2{font-family:var(--display);font-variation-settings:"opsz" 60,"SOFT" 50;font-weight:500;font-size:26px;line-height:1.05;letter-spacing:-.018em;color:var(--ink);margin:0 0 6px}
   .panel h2 em{font-style:italic;font-variation-settings:"opsz" 60,"SOFT" 100;color:var(--stamp)}
@@ -347,13 +359,13 @@
   kbd{background:var(--paper-deep);border:1px solid var(--rule);padding:1px 5px;border-radius:2px;font-family:var(--mono);font-size:10px;color:var(--ink)}
 
   @media(max-width:1280px){
-    .atlas{grid-template-columns:200px 1fr 300px}
+    .atlas{grid-template-columns:200px 1fr 280px}
     .filterbar{grid-template-columns:1fr 240px auto}
   }
   @media(max-width:1024px){
     .atlas{grid-template-columns:1fr;grid-template-rows:auto auto auto}
-    .cities{max-height:200px;border-right:none;border-bottom:1px solid var(--ink)}
-    .map-wrap{border-right:none;border-bottom:1px solid var(--ink)}
+    .cities{max-height:240px;border-right:none;border-bottom:1px solid var(--ink)}
+    .map-wrap{border-right:none;border-bottom:1px solid var(--ink);align-self:stretch}
     .panel{max-height:none}
     .filterbar{grid-template-columns:1fr;gap:14px}
     .hague-inset{display:none}
@@ -412,25 +424,28 @@
       </aside>
 
       <div class="map-wrap">
-        <svg class="map-svg" id="map" viewBox="0 0 1100 700"></svg>
+        <div class="map-stage">
+          <svg class="map-svg" id="map" viewBox="0 0 1100 700"></svg>
 
-        <!-- Zoom controls overlay -->
-        <div class="zoom-controls" id="zoom-controls">
-          <button id="z-in" title="Zoom in">+</button>
-          <div class="scale" id="z-scale">1.0×</div>
-          <button id="z-out" title="Zoom out">−</button>
-          <button id="z-reset" title="Reset view" style="font-size:13px">⌂</button>
-        </div>
-
-        <!-- The Hague magnification inset -->
-        <div class="hague-inset" id="hague-inset">
-          <div class="head">
-            <span class="title-text">The Hague <span class="glass">⌕</span></span>
-            <span style="color:var(--ink-faint)">megahub</span>
+          <!-- Zoom controls overlay -->
+          <div class="zoom-controls" id="zoom-controls">
+            <button id="z-in" title="Zoom in">+</button>
+            <div class="scale" id="z-scale">1.0×</div>
+            <button id="z-out" title="Zoom out">−</button>
+            <button id="z-reset" title="Reset view" style="font-size:13px">⌂</button>
           </div>
-          <svg viewBox="0 0 230 160" id="hague-inset-svg"></svg>
-          <div class="footer-strip">
-            <b>5 forums</b> in one city — click any satellite to filter. The world's largest concentration of international jurisdiction.
+
+          <!-- The Hague magnification inset -->
+          <div class="hague-inset" id="hague-inset">
+            <button class="toggle-btn" id="inset-toggle" title="Collapse">—</button>
+            <div class="head">
+              <span class="title-text">The Hague <span class="glass">⌕</span></span>
+              <span style="color:var(--ink-faint)">megahub</span>
+            </div>
+            <svg viewBox="0 0 200 140" id="hague-inset-svg"></svg>
+            <div class="footer-strip">
+              <b>5 forums</b> in one city — click any satellite to filter.
+            </div>
           </div>
         </div>
       </div>
@@ -803,6 +818,18 @@
       });
     };
 
+    // Stagger labels for the eastern Ukraine harm cluster — left, right, above, below
+    const HARM_LABEL_OFFSET = {
+      'crimea':       {dx:  12, dy: 14, anchor:'start'},  // south of pin
+      'donbas':       {dx:-10,  dy:-8,  anchor:'end'},     // NW of pin
+      'mariupol':     {dx: 12,  dy: 14, anchor:'start'},   // SE of pin
+      'kerch':        {dx: 12,  dy: 4,  anchor:'start'},   // east of pin
+      'mh17':         {dx: 12,  dy:-6,  anchor:'start'},   // east-NE
+      'bucha':        {dx:-10,  dy:-6,  anchor:'end'},     // NW
+      'kakhovka':     {dx:-10,  dy: 14, anchor:'end'},     // SW
+      'zaporizhzhia': {dx:-10,  dy:-6,  anchor:'end'}      // NW
+    };
+
     const renderHarmPins = () => {
       hGroup.selectAll('*').remove();
       HARMS.forEach(h => {
@@ -810,13 +837,18 @@
         const ct = harmCases(h).length;
         const isSel = state.sel?.type === 'harm' && state.sel.id === h.id;
         const isDim = state.sel && !isSel && !(state.sel.type === 'forum');
+        const off = HARM_LABEL_OFFSET[h.id] || {dx:12, dy:-4, anchor:'start'};
         const g = hGroup.append('g').attr('data-id',h.id);
         g.append('circle').attr('class','harm-ring').attr('cx',x).attr('cy',y).attr('r',7)
           .classed('selected', isSel).classed('dim', isDim || ct === 0);
         g.append('circle').attr('class','pin-harm').attr('cx',x).attr('cy',y).attr('r', isSel ? 3.5 : 2.5)
           .classed('selected', isSel).classed('dim', isDim || ct === 0);
-        g.append('text').attr('x', x + 12).attr('y', y - 4).attr('class','label harm')
-          .classed('dim', isDim || ct === 0).text(h.name.toUpperCase());
+        g.append('text')
+          .attr('x', x + off.dx).attr('y', y + off.dy)
+          .attr('text-anchor', off.anchor)
+          .attr('class','label harm')
+          .classed('dim', isDim || ct === 0)
+          .text(h.name.toUpperCase());
         g.on('mouseenter', e => showHTip(e, h, ct))
          .on('mousemove', moveTip)
          .on('mouseleave', hideTip)
@@ -1102,16 +1134,16 @@
     const renderHagueInset = () => {
       const insetSvg = d3.select('#hague-inset-svg');
       insetSvg.selectAll('*').remove();
-      const cx = 115, cy = 80, R = 46;
+      const cx = 100, cy = 70, R = 38;
       const f = FORUMS.find(x => x.id === 'hague');
       const subs = Object.keys(f.forumGroups);
       const isSel = state.sel?.type === 'forum' && state.sel.id === 'hague';
       const tc = themeCases();
 
       // central hub
-      insetSvg.append('circle').attr('class','inset-center').attr('cx',cx).attr('cy',cy).attr('r',12);
-      insetSvg.append('text').attr('x',cx).attr('y',cy+4).attr('text-anchor','middle')
-        .style('fill','var(--paper)').style('font-family','var(--mono)').style('font-size','10px').style('font-weight','500').style('pointer-events','none')
+      insetSvg.append('circle').attr('class','inset-center').attr('cx',cx).attr('cy',cy).attr('r',10);
+      insetSvg.append('text').attr('x',cx).attr('y',cy+3).attr('text-anchor','middle')
+        .style('fill','var(--paper)').style('font-family','var(--mono)').style('font-size','9px').style('font-weight','500').style('pointer-events','none')
         .text('TH');
 
       subs.forEach((s, i) => {
@@ -1121,7 +1153,7 @@
         const isActive = isSel && state.sel.hagueForum === s;
 
         insetSvg.append('line').attr('class','inset-spoke').attr('x1',cx).attr('y1',cy).attr('x2',sx).attr('y2',sy);
-        const sat = insetSvg.append('circle').attr('class','inset-sat'+(isActive?' active':'')).attr('cx',sx).attr('cy',sy).attr('r',8);
+        const sat = insetSvg.append('circle').attr('class','inset-sat'+(isActive?' active':'')).attr('cx',sx).attr('cy',sy).attr('r',7);
         sat.style('cursor','pointer').on('click', () => {
           if (!isSel){
             state.sel = {type:'forum', id:'hague', hagueForum:s};
@@ -1135,17 +1167,24 @@
         // count inside satellite
         if (filtered.length > 0){
           insetSvg.append('text').attr('x',sx).attr('y',sy+3).attr('text-anchor','middle')
-            .style('fill','var(--ink)').style('font-family','var(--mono)').style('font-size','9px').style('font-weight','500').style('pointer-events','none')
+            .style('fill','var(--ink)').style('font-family','var(--mono)').style('font-size','8px').style('font-weight','500').style('pointer-events','none')
             .text(filtered.length);
         }
 
         // label outside
-        const lblX = cx + Math.cos(ang)*(R+18);
-        const lblY = cy + Math.sin(ang)*(R+18) + 3;
+        const lblX = cx + Math.cos(ang)*(R+15);
+        const lblY = cy + Math.sin(ang)*(R+15) + 3;
         insetSvg.append('text').attr('x',lblX).attr('y',lblY).attr('class','inset-label')
           .attr('text-anchor', Math.cos(ang) > 0.2 ? 'start' : Math.cos(ang) < -0.2 ? 'end' : 'middle').text(s);
       });
     };
+
+    // Inset collapse toggle
+    document.getElementById('inset-toggle').addEventListener('click', () => {
+      const el = document.getElementById('hague-inset');
+      el.classList.toggle('collapsed');
+      document.getElementById('inset-toggle').textContent = el.classList.contains('collapsed') ? '+' : '—';
+    });
 
     // ── Master render ──
     const renderAll = () => {
