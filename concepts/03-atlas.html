@@ -93,13 +93,13 @@
 
   .atlas{
     display:grid;grid-template-columns:220px 1fr 320px;gap:0;
-    align-items:start;
+    align-items:stretch;
     border-bottom:1px solid var(--ink);
+    max-height:760px;
   }
-  .atlas > *{align-self:stretch}
 
   /* Cities sidebar */
-  .cities{border-right:1px solid var(--ink);background:var(--paper-soft);overflow-y:auto;max-height:760px}
+  .cities{border-right:1px solid var(--ink);background:var(--paper-soft);overflow-y:auto;max-height:760px;height:760px}
   .cities-head{
     padding:14px 18px 10px;border-bottom:1px solid var(--rule);
     font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-faint);
@@ -145,10 +145,15 @@
     background-position: 0 0, 1px 2px;
     border-right:1px solid var(--ink);padding:8px;
     overflow:hidden;
-    align-self:start; /* don't stretch vertically — keeps inset overlaid */
+    height:760px;
   }
-  .map-stage{position:relative;width:100%}
-  .map-svg{display:block;width:100%;height:auto;cursor:grab}
+  /* Map-stage has explicit aspect ratio — inset and zoom controls anchor to its bounds, NOT the stretched wrap */
+  .map-stage{
+    position:relative;width:100%;
+    aspect-ratio: 11 / 7;
+    max-height:100%;
+  }
+  .map-svg{display:block;width:100%;height:100%;cursor:grab}
   .map-svg:active{cursor:grabbing}
   .land{fill:var(--paper-deep);stroke:var(--ink-soft);stroke-width:.5}
   .ukraine{fill:#e8d8c7;stroke:var(--ink);stroke-width:.7}
@@ -219,11 +224,12 @@
   /* ── Hague magnification inset ── */
   .hague-inset{
     position:absolute;
-    /* Anchored to bottom-LEFT of the SVG (which has aspect 11:7) — stays inside the map area */
-    left:14px;bottom:14px;
-    width:200px;
+    /* Bottom-RIGHT of the SVG: in the empty Russia/Atlantic area, away from West-European pins */
+    right:14px;bottom:14px;
+    width:198px;
     border:1px solid var(--ink);
-    background:var(--paper);
+    background:rgba(244,239,229,.96);
+    backdrop-filter:blur(2px);
     box-shadow:2px 2px 0 var(--ink-soft);
     z-index:7;user-select:none;
   }
@@ -258,7 +264,7 @@
   .inset-count{font-family:var(--display);font-size:14px;font-style:italic;fill:var(--ink-soft);pointer-events:none;font-variation-settings:"opsz" 24,"SOFT" 100}
 
   /* Right panel */
-  .panel{padding:24px;overflow-y:auto;max-height:760px;background:var(--paper)}
+  .panel{padding:24px;overflow-y:auto;max-height:760px;height:760px;background:var(--paper)}
   .panel .ph{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-faint);font-weight:500;margin:0 0 10px}
   .panel h2{font-family:var(--display);font-variation-settings:"opsz" 60,"SOFT" 50;font-weight:500;font-size:26px;line-height:1.05;letter-spacing:-.018em;color:var(--ink);margin:0 0 6px}
   .panel h2 em{font-style:italic;font-variation-settings:"opsz" 60,"SOFT" 100;color:var(--stamp)}
@@ -363,10 +369,10 @@
     .filterbar{grid-template-columns:1fr 240px auto}
   }
   @media(max-width:1024px){
-    .atlas{grid-template-columns:1fr;grid-template-rows:auto auto auto}
-    .cities{max-height:240px;border-right:none;border-bottom:1px solid var(--ink)}
-    .map-wrap{border-right:none;border-bottom:1px solid var(--ink);align-self:stretch}
-    .panel{max-height:none}
+    .atlas{grid-template-columns:1fr;grid-template-rows:auto auto auto;max-height:none}
+    .cities{height:auto;max-height:240px;border-right:none;border-bottom:1px solid var(--ink)}
+    .map-wrap{height:auto;border-right:none;border-bottom:1px solid var(--ink)}
+    .panel{height:auto;max-height:none}
     .filterbar{grid-template-columns:1fr;gap:14px}
     .hague-inset{display:none}
   }
@@ -526,7 +532,7 @@
       .style('letter-spacing','.08em').style('fill','var(--ink-faint)')
       .text('41 cases · 13 forum cities · 8 sites');
 
-    const compass = overlay.append('g').attr('transform',`translate(${W-60}, ${H-72})`);
+    const compass = overlay.append('g').attr('transform',`translate(60, ${H-72})`);
     compass.append('circle').attr('r',28).attr('fill','none').attr('stroke','var(--ink-soft)').attr('stroke-width',.5);
     compass.append('circle').attr('r',20).attr('fill','none').attr('stroke','var(--ink-soft)').attr('stroke-width',.4);
     compass.append('line').attr('x1',0).attr('y1',-26).attr('x2',0).attr('y2',26).attr('class','compass-line');
