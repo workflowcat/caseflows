@@ -27,13 +27,21 @@
     --mono:'IBM Plex Mono', ui-monospace, monospace;
   }
   *,*::before,*::after{box-sizing:border-box}
+  html,body{height:100%}
   html{background:var(--paper)}
-  body{margin:0;background:var(--paper);color:var(--ink-soft);font-family:var(--body);font-size:15px;line-height:1.5;-webkit-font-smoothing:antialiased}
+  body{
+    margin:0;background:var(--paper);color:var(--ink-soft);
+    font-family:var(--body);font-size:15px;line-height:1.5;-webkit-font-smoothing:antialiased;
+    display:flex;flex-direction:column;
+  }
   a{color:inherit}
   ::selection{background:var(--stamp);color:var(--paper)}
   button{font:inherit;color:inherit;background:none;border:none;padding:0;cursor:pointer}
 
-  .frame{max-width:1480px;margin:0 auto;padding:0 32px}
+  /* Page chrome (top + bottom) is centered & padded; the atlas itself is full-bleed. */
+  .frame-top{flex:0 0 auto;padding:0 32px;width:100%;max-width:1480px;margin:0 auto}
+  .frame-bot{flex:0 0 auto;padding:0 32px;width:100%;max-width:1480px;margin:0 auto}
+  .atlas-section{flex:1 1 auto;min-height:540px;display:flex;width:100%}
 
   .runhead{
     border-bottom:1px solid var(--rule);
@@ -92,13 +100,16 @@
   .breadcrumb .clear-x:hover{color:var(--stamp);border-bottom-color:var(--stamp)}
 
   .atlas{
-    display:grid;grid-template-columns:220px 1fr 320px;gap:0;
+    flex:1 1 auto;display:grid;
+    grid-template-columns:240px 1fr 340px;gap:0;
     align-items:stretch;
+    border-top:1px solid var(--ink);
     border-bottom:1px solid var(--ink);
+    min-height:0; /* allow grid children to shrink and scroll */
   }
 
-  /* Cities sidebar */
-  .cities{border-right:1px solid var(--ink);background:var(--paper-soft);overflow-y:auto;height:580px}
+  /* Cities sidebar — fills available column height, scrolls internally */
+  .cities{border-right:1px solid var(--ink);background:var(--paper-soft);overflow-y:auto;min-height:0}
   .cities-head{
     padding:14px 18px 10px;border-bottom:1px solid var(--rule);
     font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-faint);
@@ -134,7 +145,7 @@
   .city-row.harm .nm{color:var(--stamp);font-style:italic}
   .city-row.harm.selected .nm{color:var(--gilt)}
 
-  /* Map — column height matches sidebar/panel; SVG fills the column with preserveAspectRatio */
+  /* Map — fills the column completely */
   .map-wrap{
     position:relative;background:var(--paper);
     background-image:
@@ -144,11 +155,9 @@
     background-position: 0 0, 1px 2px;
     border-right:1px solid var(--ink);padding:8px;
     overflow:hidden;
-    height:580px;
+    min-height:0;
   }
-  .map-stage{
-    position:relative;width:100%;height:100%;
-  }
+  .map-stage{position:relative;width:100%;height:100%}
   .map-svg{display:block;width:100%;height:100%;cursor:grab}
   .map-svg:active{cursor:grabbing}
   .land{fill:var(--paper-deep);stroke:var(--ink-soft);stroke-width:.5}
@@ -261,8 +270,8 @@
   .inset-label{font-family:var(--mono);font-size:9px;letter-spacing:.06em;text-transform:uppercase;fill:var(--ink);pointer-events:none}
   .inset-count{font-family:var(--display);font-size:14px;font-style:italic;fill:var(--ink-soft);pointer-events:none;font-variation-settings:"opsz" 24,"SOFT" 100}
 
-  /* Right panel */
-  .panel{padding:24px;overflow-y:auto;height:580px;background:var(--paper)}
+  /* Right panel — fills column, scrolls internally */
+  .panel{padding:24px;overflow-y:auto;background:var(--paper);min-height:0}
   .panel .ph{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-faint);font-weight:500;margin:0 0 10px}
   .panel h2{font-family:var(--display);font-variation-settings:"opsz" 60,"SOFT" 50;font-weight:500;font-size:26px;line-height:1.05;letter-spacing:-.018em;color:var(--ink);margin:0 0 6px}
   .panel h2 em{font-style:italic;font-variation-settings:"opsz" 60,"SOFT" 100;color:var(--stamp)}
@@ -367,17 +376,19 @@
     .filterbar{grid-template-columns:1fr 240px auto}
   }
   @media(max-width:1024px){
-    .atlas{grid-template-columns:1fr;grid-template-rows:auto auto auto;max-height:none}
-    .cities{height:auto;max-height:240px;border-right:none;border-bottom:1px solid var(--ink)}
-    .map-wrap{height:auto;border-right:none;border-bottom:1px solid var(--ink)}
-    .panel{height:auto;max-height:none}
+    body{display:block;height:auto}
+    .atlas-section{display:block;min-height:0}
+    .atlas{grid-template-columns:1fr;grid-template-rows:auto 540px auto;height:auto}
+    .cities{max-height:240px;border-right:none;border-bottom:1px solid var(--ink)}
+    .map-wrap{border-right:none;border-bottom:1px solid var(--ink)}
+    .panel{max-height:none}
     .filterbar{grid-template-columns:1fr;gap:14px}
     .hague-inset{display:none}
   }
 </style>
 </head>
 <body>
-  <div class="frame">
+  <div class="frame-top">
 
     <div class="runhead">
       <div><span class="seal">caseflows</span> &nbsp;·&nbsp; The Atlas · sheet 01</div>
@@ -418,6 +429,9 @@
       <div style="color:var(--ink-faint)">↑↓ list · <kbd>esc</kbd> reset · <kbd>/</kbd> search · scroll/pinch to zoom</div>
     </div>
 
+  </div>
+
+  <section class="atlas-section">
     <div class="atlas">
       <aside class="cities">
         <div class="cities-head">
@@ -472,9 +486,11 @@
         </div>
       </aside>
     </div>
+  </section>
 
+  <div class="frame-bot">
     <footer>
-      <div>caseflows · the atlas · v 0.6 · zoom + resources</div>
+      <div>caseflows · the atlas · v 0.7 · full-page</div>
       <div>
         <a href="../index.html">concept index</a> ·
         <a href="02-archive.html">archive</a> ·
