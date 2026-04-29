@@ -222,11 +222,13 @@
   }
 
   /* ── Hague magnification inset ── */
+  /* The inset sits at the bottom of the SVG (the map-stage), over empty Atlantic water.
+     It does NOT overlap the eastern-Ukraine harm cluster on the right.
+     map-stage has aspect-ratio 11/7 → its bottom is at the SVG's bottom, regardless of column height. */
   .hague-inset{
     position:absolute;
-    /* Bottom-RIGHT of the SVG: in the empty Russia/Atlantic area, away from West-European pins */
-    right:14px;bottom:14px;
-    width:198px;
+    left:14px;bottom:14px;
+    width:180px;
     border:1px solid var(--ink);
     background:rgba(244,239,229,.96);
     backdrop-filter:blur(2px);
@@ -241,7 +243,7 @@
   }
   .hague-inset .head .title-text{font-family:var(--display);font-size:13px;font-style:italic;color:var(--ink);text-transform:none;letter-spacing:-.005em;font-variation-settings:"opsz" 24,"SOFT" 100}
   .hague-inset .head .glass{color:var(--stamp);font-size:12px}
-  .hague-inset svg{display:block;width:100%;height:140px;background:var(--paper-soft)}
+  .hague-inset svg{display:block;width:100%;height:124px;background:var(--paper-soft)}
   .hague-inset .footer-strip{
     padding:5px 11px;border-top:1px solid var(--rule);
     font-family:var(--body);font-style:italic;font-size:10.5px;color:var(--ink-faint);line-height:1.3;
@@ -446,11 +448,11 @@
             <button class="toggle-btn" id="inset-toggle" title="Collapse">—</button>
             <div class="head">
               <span class="title-text">The Hague <span class="glass">⌕</span></span>
-              <span style="color:var(--ink-faint)">megahub</span>
+              <span style="color:var(--ink-faint)">5 forums</span>
             </div>
-            <svg viewBox="0 0 200 140" id="hague-inset-svg"></svg>
+            <svg viewBox="0 0 180 124" id="hague-inset-svg"></svg>
             <div class="footer-strip">
-              <b>5 forums</b> in one city — click any satellite to filter.
+              click a satellite to filter
             </div>
           </div>
         </div>
@@ -532,7 +534,7 @@
       .style('letter-spacing','.08em').style('fill','var(--ink-faint)')
       .text('41 cases · 13 forum cities · 8 sites');
 
-    const compass = overlay.append('g').attr('transform',`translate(60, ${H-72})`);
+    const compass = overlay.append('g').attr('transform',`translate(${W-60}, ${H-72})`);
     compass.append('circle').attr('r',28).attr('fill','none').attr('stroke','var(--ink-soft)').attr('stroke-width',.5);
     compass.append('circle').attr('r',20).attr('fill','none').attr('stroke','var(--ink-soft)').attr('stroke-width',.4);
     compass.append('line').attr('x1',0).attr('y1',-26).attr('x2',0).attr('y2',26).attr('class','compass-line');
@@ -1140,7 +1142,7 @@
     const renderHagueInset = () => {
       const insetSvg = d3.select('#hague-inset-svg');
       insetSvg.selectAll('*').remove();
-      const cx = 100, cy = 70, R = 38;
+      const cx = 90, cy = 62, R = 34;
       const f = FORUMS.find(x => x.id === 'hague');
       const subs = Object.keys(f.forumGroups);
       const isSel = state.sel?.type === 'forum' && state.sel.id === 'hague';
